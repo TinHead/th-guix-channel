@@ -1,7 +1,7 @@
 (channel
  (version 0)
  (directory "my-packages"))
-(dependencies
+ (dependencies
   (channel
    (name nonguix)
    (url "https://gitlab.com/nonguix/nonguix")
