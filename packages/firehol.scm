@@ -3,7 +3,7 @@
 #:use-module (gnu packages linux)
 #:use-module (gnu packages admin)
 #:use-module (guix download)
-#:use-module (iprange)	
+#:use-module (packages iprange)	
 #:use-module (gnu packages curl)
 #:use-module (guix build-system gnu)
 #:use-module (guix licenses))
