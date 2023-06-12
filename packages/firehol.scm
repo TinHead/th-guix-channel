@@ -23,8 +23,8 @@
               )
 
             (patches 
-             (search-patches "firehol-sysconfdir.patch")
-             (search-patches "firehol-uname.patch"))))  
+             (search-patches "firehol-sysconfdir.patch"
+                             "firehol-uname.patch")))  
   (build-system gnu-build-system)
   (arguments
   `(#:configure-flags '("--localstatedir=/var")))
