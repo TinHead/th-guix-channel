@@ -1,4 +1,4 @@
-(define-module (my-packages starship)
+(define-module (packages starship)
   #:use-module (gnu packages base)
   #:use-module (gnu packages compression)
   #:use-module (gnu packages gcc)

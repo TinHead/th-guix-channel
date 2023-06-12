@@ -1,4 +1,4 @@
-(define-module (my-packages helix-editor)
+(define-module (packages helix-editor)
   #:use-module (gnu packages base)
   #:use-module (gnu packages compression)
   #:use-module (gnu packages gcc)
