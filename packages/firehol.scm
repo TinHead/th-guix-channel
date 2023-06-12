@@ -1,13 +1,14 @@
-(use-modules (guix packages)
-	     (gnu packages linux)
-	     (gnu packages admin)
-             (guix download)
-	     (th-guix-channel packages)	
-	     (wg-peers\test_peer)
-	     (gnu packages curl)
-             (guix build-system gnu)
-             (guix licenses))
+(define-module (packages firehol) 
+#:use-module (guix packages)
+#:use-module (gnu packages linux)
+#:use-module (gnu packages admin)
+#:use-module (guix download)
+#:use-module (th-guix-channel packages)	
+#:use-module (gnu packages curl)
+#:use-module (guix build-system gnu)
+#:use-module (guix licenses))
 
+(define-public firehol
 (package
   (name "firehol")
   (version "3.1.7")
@@ -35,3 +36,4 @@
    "Firehol")
   (home-page "https://firehol.org/")
   (license gpl2))
+)
