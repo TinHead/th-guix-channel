@@ -20,6 +20,8 @@
              (base32
               "1xd8h8bnvybiarvpcxv1f3ijvhp5h8i5aarzcdlpgxy8chpwxlag"))))
   (build-system gnu-build-system)
+  (arguments
+  `(#:configure-flags '("--localstatedir=/var")))
   (propagated-inputs 
 	(list util-linux 
 	      iproute
