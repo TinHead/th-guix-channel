@@ -1,4 +1,4 @@
-(define-module (firehol)
+(define-module (packages firehol)
 #:use-module (gnu packages)
 #:use-module (guix packages)
 #:use-module (gnu packages linux)
@@ -43,4 +43,3 @@
   (home-page "https://firehol.org/")
   (license gpl2))
 )
-firehol
