@@ -1,4 +1,4 @@
-(define-module (starship)
+(define-module (my-packages starship)
   #:use-module (gnu packages base)
   #:use-module (gnu packages compression)
   #:use-module (gnu packages gcc)
@@ -41,4 +41,3 @@
     (description "Starship is the minimal, blazing fast, and extremely customizable prompt for any shell!")
     (home-page "https://github.com/starship/starship")
     (license isc)))
-starship

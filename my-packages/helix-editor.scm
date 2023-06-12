@@ -1,4 +1,4 @@
-(define-module (helix-editor)
+(define-module (my-packages helix-editor)
   #:use-module (gnu packages base)
   #:use-module (gnu packages compression)
   #:use-module (gnu packages gcc)
@@ -72,4 +72,4 @@
     (home-page "https://helix-editor.com/")
     (license mpl2.0)
 ))
-helix-editor
+
