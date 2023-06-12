@@ -1,4 +1,4 @@
-(define-module (iprange)
+(define-module (packages iprange)
   #:use-module (guix licenses)
   #:use-module (guix packages)
   #:use-module (guix build-system gnu)

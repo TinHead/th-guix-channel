@@ -1,4 +1,4 @@
-(define-module (firehol)
+(define-module (packages firehol)
 #:use-module (guix packages)
 #:use-module (gnu packages linux)
 #:use-module (gnu packages admin)
@@ -20,7 +20,7 @@
              (base32
               "1xd8h8bnvybiarvpcxv1f3ijvhp5h8i5aarzcdlpgxy8chpwxlag"))))
   (build-system gnu-build-system)
-  (inputs 
+  (propagated-inputs 
 	(list util-linux 
 	      iproute
 	      iptables
