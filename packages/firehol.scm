@@ -18,7 +18,10 @@
                                 ".tar.gz"))
             (sha256
              (base32
-              "1xd8h8bnvybiarvpcxv1f3ijvhp5h8i5aarzcdlpgxy8chpwxlag"))))
+              "1xd8h8bnvybiarvpcxv1f3ijvhp5h8i5aarzcdlpgxy8chpwxlag")
+              ))
+
+            (patches (search-patches "firehol-sysconfdir.patch")))  
   (build-system gnu-build-system)
   (arguments
   `(#:configure-flags '("--localstatedir=/var")
