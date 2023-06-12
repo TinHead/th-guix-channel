@@ -21,7 +21,18 @@
               "1xd8h8bnvybiarvpcxv1f3ijvhp5h8i5aarzcdlpgxy8chpwxlag"))))
   (build-system gnu-build-system)
   (arguments
-  `(#:configure-flags '("--localstatedir=/var")))
+  `(#:configure-flags '("--localstatedir=/var")
+    #:phases
+    (modify-phases %standard-phases
+     (add-after 'unpack 'fix-hardcoded-paths 
+      (lambda _
+        (substitute* "sbin/install.config.in.in"
+        (("SYSCONFDIR=\"@sysconfdir_POST@\"") ("SYSCONFDIR=\"/etc\""))
+        )
+      )
+    ) 
+    )
+    ))
   (propagated-inputs 
 	(list util-linux 
 	      iproute
