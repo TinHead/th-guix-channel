@@ -2,7 +2,7 @@
 	     (gnu packages linux)
 	     (gnu packages admin)
              (guix download)
-	     (th-guix-channel iprange)	
+	     (th-guix-channel packages)	
 	     (wg-peers\test_peer)
 	     (gnu packages curl)
              (guix build-system gnu)
