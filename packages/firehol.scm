@@ -39,7 +39,7 @@
 	      iprange
 	      curl)
   )
-  (synopsis "Firhol - firewall for humans")
+  (synopsis "Firehol - firewall for humans")
   (description
    "Firehol")
   (home-page "https://firehol.org/")
