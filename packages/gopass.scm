@@ -1,7 +1,7 @@
 (define-module (packages gopass)
   #:use-module (gnu packages base)
   #:use-module (gnu packages compression)
-  #:use-module (gnu packages gcc)
+  #:use-module (gnu packages gnupg)
   #:use-module (guix download)
   #:use-module (guix packages)
   #:use-module (nonguix licenses)
@@ -25,6 +25,7 @@
         (base32
          "1r04pr6v64rh1q25dlvhp9nall318kakkvjnipx80wh3qjwi00af"))))
     (build-system binary-build-system)
+    (inputs (list gnupg))
     (arguments
      `(#:install-plan
       `(("gopass" "/bin/"))
