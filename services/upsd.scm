@@ -3,7 +3,7 @@
   #:use-module (gnu services shepherd)
   #:use-module (guix records)
   #:use-module (guix modules)
-  #:use-module (packages nut)
+  #:use-module (packages upsd)
   #:use-module (srfi srfi-1)
   #:export (upsd-configuration
             upsd-configuration?
@@ -14,7 +14,7 @@
     upsd-configuration make-upsd-configuration
     upsd-configuration?
     (upsd           upsd-configuration-upsd
-                    (default nut))
+                    (default upsd))
     (pid-file       upsd-configuration-pid-file
                     (default "/var/run/upsd.pid"))
     (port-number    upsd-configuration-port-number

@@ -1,4 +1,4 @@
-(define-module (packages nut)
+(define-module (packages upsd)
  #:use-module (guix packages)
  #:use-module (gnu packages avahi)
  #:use-module (gnu packages freeipmi)
@@ -16,9 +16,9 @@
  #:use-module (guix build-system gnu)
  #:use-module (guix licenses))
             
-(define-public nut
+(define-public upsd
   (package
-    (name "nut")
+    (name "upsd")
     (version "2.8.0")
     (source
      (origin
@@ -69,7 +69,7 @@
      `(("autoconf" ,autoconf)
        ("cppunit" ,cppunit)
        ("pkg-config" ,pkg-config)
-       ("openssl" ,openssl)))
+       ("openssl" ,openssl-1.1)))
     (inputs
      `(("avahi" ,avahi)
        ("libusb" ,libusb-compat)
