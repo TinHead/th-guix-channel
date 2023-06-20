@@ -62,14 +62,14 @@
     (define config-file
       (upsd-config-file config))
     (define upsd-command
-      #~(list (string-append #$upcd "/sbin/upcd")
+      #~(list (string-append #$upsd "/sbin/upsd")
               "-P" #$pid-file
               "-B"))
     (define requires '(networking))
     (list (shepperd-service
           (documentation "Upsd UPS daemon.")
           (requirement requires)
-          (provision '(upcd))
+          (provision '(upsd))
           (start #~(make-forkexec-condtructor #$upsd-command
                                               #:pid-file #$Pid-file))
           (stop #~(make-kill-destructor))
