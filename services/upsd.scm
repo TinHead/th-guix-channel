@@ -7,7 +7,7 @@
   #:use-module (srfi srfi-1)
   #:export (upsd-configuration
             upsd-configuration?
-            ;nut-configuration
+            upsd-service-type
             ))
 
   (define-record-type* <upsd-configuration>
