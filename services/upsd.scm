@@ -66,7 +66,7 @@
               "-P" #$pid-file
               "-B"))
     (define requires '(networking))
-    (list (shepperd-service
+    (list (shepherd-service
           (documentation "Upsd UPS daemon.")
           (requirement requires)
           (provision '(upsd))
