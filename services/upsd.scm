@@ -3,6 +3,7 @@
   #:use-module (gnu services shepherd)
   #:use-module (guix records)
   #:use-module (guix modules)
+  #:use-module (guix gexp)
   #:use-module (packages upsd)
   #:use-module (srfi srfi-1)
   #:export (upsd-configuration
