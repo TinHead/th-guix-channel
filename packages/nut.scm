@@ -14,7 +14,7 @@
  #:use-module (guix download)
  #:use-module (guix utils)
  #:use-module (guix build-system gnu)
- #:use-module ((guix licenses)  #:prefix license:)))
+ #:use-module (guix licenses))
             
 (define-public nut
   (package
@@ -86,11 +86,12 @@
     (license
      (list
       ;; - most files under gpl2+
-      license:gpl2+
+      gpl2+
       ;; - scripts/python/ under gpl3+
-      license:gpl3+
+      gpl3+
       ;; - scripts/perl/Nut.pm same as perl (either gpl1+ or artistic)
-      license:gpl1+ license:artistic2.0))
+      gpl1+ 
+      artistic2.0))
     (synopsis "Collection of programs for monitoring and administering UPS")
     (description "Network @acronym{UPS, Uninterruptible Power Supply} Tools is
 a collection of programs which provide a common interface for monitoring and
@@ -98,5 +99,3 @@ administering @acronym{UPS} @acronym{PDU,Power Distribution Unit} and
 @acronym{SCD, Solar Controller Device} hardware.  It uses a layered approach
 to connect all of the parts.  Drivers are provided for a wide assortment of
 +equipment.")))
-
-nut
