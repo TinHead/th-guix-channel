@@ -50,7 +50,7 @@
                   (upsd-configuration-tracking-delay config)))
         (format port "LISTEN ~a ~a\n"
                 #$(number->string (upsd-configuration-listen config))
-                #$(number->string (upsd-configuration-port config))))))))
+                #$(number->string (upsd-configuration-port-number config))))))))
                 
   (define (upsd-shepherd-service config)
     "Return a <shepherd-service> for upsd with CONFIG"
