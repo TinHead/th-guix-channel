@@ -87,4 +87,4 @@
                   (compose concatenate)
                   (default-value (upsd-configuration))))
   
-  upsd-service-type 
+   
