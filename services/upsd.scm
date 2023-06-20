@@ -71,7 +71,7 @@
           (requirement requires)
           (provision '(upsd))
           (start #~(make-forkexec-condtructor #$upsd-command
-                                              #:pid-file #$Pid-file))
+                                              #:pid-file #$pid-file))
           (stop #~(make-kill-destructor))
           (actions (list (shepherd-configuration-action config-file))))))
             
