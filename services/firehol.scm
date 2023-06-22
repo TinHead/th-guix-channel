@@ -56,7 +56,7 @@
 (define firehol-service-type
   (service-type
     (name "firehol")
-    (description "Firhol")
+    (description "Firehol")
     (extensions
       (list
         (service-extension shepherd-root-service-type firehol-shepherd-service)))
