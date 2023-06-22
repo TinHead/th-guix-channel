@@ -2,7 +2,7 @@
   #:use-module (gnu services)
   #:use-module (gnu services shepherd)
   #:use-module (packages firehol)
-  #:use-module (gnu records)
+  #:use-module (guix records)
   #:export (firehol-configuration))
 
 (define-record-type* <firhol-configuration>
