@@ -47,7 +47,7 @@
   (shepherd-service
     (documentation "Runf firehol")
     (provision '(firehol))
-    (requirement '(networking)')
+    (requirement '(networking))
     (start #~(make-forkexec-constructor 
               (list "firehol" "--start" "--debug" "/etc/firehol/firehol.conf")))
     (stop  #~(make-kill-destructor))
