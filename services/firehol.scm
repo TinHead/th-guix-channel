@@ -30,7 +30,7 @@
   firehol-configuration make-firehol-configuration
   firehol-configuration?
   (version firehol-configuration-version (default 6))
-  (interfaces firehol-configuration-interfaces (default '()))
+  (interfaces firehol-configuration-interfaces (default '((firehol-interface))))
   )
   
 (define* (configuration-file config)
