@@ -1,6 +1,6 @@
 (define-module (services firehol)
   #:use-module (gnu services)
-  #:use-module (gnu services shephard)
+  #:use-module (gnu services shepherd)
   #:use-module (packages firehol)
   #:use-module (gnu records)
   #:export (firehol-configuration))
