@@ -49,10 +49,10 @@
     (provision '(firehol))
     (requirement '(networking))
     (start #~(make-forkexec-constructor 
-              (list "firehol" "--start" "--debug" "/etc/firehol/firehol.conf")))
+              (list "firehol" "--start" "/etc/firehol/firehol.conf")))
     (stop  #~(make-kill-destructor))
-    (actions (list (shepherd-configuration-action config)))))))
-    ))))
+    ; (actions (list (shepherd-configuration-action config)))))))
+    ))
 (define firehol-service-type
   (service-type
     (name "firehol")
