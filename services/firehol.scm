@@ -43,7 +43,7 @@
 
 
 (define (firehol-shepherd-service config)
- (match-record config <firehole-configuration>
+ (match-record config <firehol-configuration>
     (version interfaces)
   (list (shepherd-service
     (documentation "Runf firehol")
