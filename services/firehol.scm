@@ -31,6 +31,7 @@
   firehol-configuration?
   (version firehol-configuration-version (default 6))
   (interfaces firehol-configuration-interfaces (default '((firehol-interface))))
+  (conffile firehole-configuration-file (default configuration-file))
   )
   
 (define* (configuration-file config)
@@ -44,13 +45,13 @@
 
 (define (firehol-shepherd-service config)
  (match-record config <firehol-configuration>
-    (version interfaces)
+    (version interfaces conffile)
   (list (shepherd-service
     (documentation "Runf firehol")
     (provision '(firehol))
     (requirement '(networking))
     (start #~(make-forkexec-constructor 
-              (list (string-append firehol "/sbin/firehol") "--start" "/etc/firehol/firehol.conf")))
+              (list (file-append firehol "/sbin/firehol") "--start" "/etc/firehol/firehol.conf")))
     (stop  #~(make-kill-destructor))
     ; (actions (list (shepherd-configuration-action config)))))))
     ))))
