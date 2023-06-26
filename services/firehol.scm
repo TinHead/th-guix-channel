@@ -51,7 +51,7 @@
     (provision '(firehol))
     (requirement '(networking))
     (start #~(make-forkexec-constructor 
-              (list (file-append firehol "/sbin/firehol") "--start" "/etc/firehol/firehol.conf")))
+              (list #$(file-append firehol "/sbin/firehol") "--start")))
     (stop  #~(make-kill-destructor))
     ; (actions (list (shepherd-configuration-action config)))))))
     ))))
