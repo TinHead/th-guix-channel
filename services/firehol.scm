@@ -43,8 +43,9 @@
 
 
 (define (firehol-shepherd-service config)
-  "Return as service"
-  (shepherd-service
+ (match-record config <firehole-configuration>
+    (version interfaces)
+  (list (shepherd-service
     (documentation "Runf firehol")
     (provision '(firehol))
     (requirement '(networking))
@@ -52,7 +53,8 @@
               (list "firehol" "--start" "/etc/firehol/firehol.conf")))
     (stop  #~(make-kill-destructor))
     ; (actions (list (shepherd-configuration-action config)))))))
-    ))
+    ))))
+    
 (define firehol-service-type
   (service-type
     (name "firehol")
