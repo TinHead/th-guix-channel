@@ -62,5 +62,5 @@
     (description "Firehol")
     (extensions
       (list
-        (service-extension shepherd-root-service-type firehol-shepherd-service)))
-    (default-value (firehol-configuration))))
+        (service-extension shepherd-root-service-type firehol-shepherd-service)))))
+    ;(default-value (firehol-configuration))))
