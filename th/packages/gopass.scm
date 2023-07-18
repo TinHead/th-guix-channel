@@ -1,4 +1,4 @@
-(define-module (packages gopass)
+(define-module (th packages gopass-bin)
   #:use-module (gnu packages base)
   #:use-module (gnu packages compression)
   #:use-module (gnu packages gnupg)
@@ -8,9 +8,9 @@
   #:use-module (guix gexp)
   #:use-module (nonguix build-system binary))
 
-(define-public gopass
+(define-public gopass-bin
   (package
-    (name "gopass")
+    (name "gopass-bin")
     (version "1.15.5")
     (source
      (origin

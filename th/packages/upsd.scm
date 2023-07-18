@@ -1,4 +1,4 @@
-(define-module (packages upsd)
+(define-module (th packages upsd)
  #:use-module (guix packages)
  #:use-module (gnu packages avahi)
  #:use-module (gnu packages freeipmi)

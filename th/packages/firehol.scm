@@ -1,4 +1,4 @@
-(define-module (packages firehol)
+(define-module (th packages firehol)
 #:use-module (gnu packages)
 #:use-module (guix packages)
 #:use-module (gnu packages linux)

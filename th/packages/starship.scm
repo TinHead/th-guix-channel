@@ -1,4 +1,4 @@
-(define-module (packages starship)
+(define-module (th packages starship)
   #:use-module (gnu packages base)
   #:use-module (gnu packages compression)
   #:use-module (gnu packages gcc)
@@ -7,7 +7,7 @@
   #:use-module (guix licenses)
   #:use-module (nonguix build-system binary))
 
-(define-public starship
+(define-public starship-bin
   (package
     (name "starship-bin")
     (version "1.12.0")
