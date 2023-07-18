@@ -1,4 +1,4 @@
-(define-module (th packages helix-editor-bin)
+(define-module (th packages helix-editor)
   #:use-module (gnu packages base)
   #:use-module (gnu packages compression)
   #:use-module (gnu packages gcc)
@@ -10,7 +10,7 @@
 
 (define-public helix-editor-bin
   (package
-    (name "helix-editor-bin")
+    (name "helix-editor")
     (version "23.05")
     (source
      (origin
