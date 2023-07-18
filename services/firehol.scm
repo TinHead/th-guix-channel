@@ -31,33 +31,34 @@
   firehol-configuration?
   (version firehol-configuration-version (default 6))
   (interfaces firehol-configuration-interfaces (default '()))
-  (conffile firehole-configuration-file (default configuration-file))
+  ; (conffile firehole-configuration-file (default configuration-file))
   )
   
-(define* (firehol-configuration-file config)
+(define (firehol-configuration-file config)
   "Return a firehol configuration"
-  (define (src->config src)
-    (let ((ip (firehol-src-ip))
-          (deny (firehol-src-deny)))
-        (format #f "src ~a \n"
-          (if deny
-            (format #f "!~a" ip)
-            ip))))
+  ; (define (src->config src)
+  ;   (let ((ip (firehol-src-ip))
+  ;         (deny (firehol-src-deny)))
+  ;       (format #f "src ~a \n"
+  ;         (if deny
+  ;           (format #f "!~a" ip)
+  ;           ip))))
   (define (interface->config interface)
     (let ((name (firehol-interface-name interface))
           (myname (firehol-interface-myname interface))
-          (src (firehol-interface-src interface)))
+          ; (src (firehol-src interface))
+          )
         (format #f "interface ~a ~a ~a "
           name
           myname
-          (if src
-            (format #f "~a" src)
-            "" )
+          ; (if src
+          ;   (format #f "~a" src)
+          ;   "" )
           )))
   (match-record config <firehol-configuration>
-    (interfaces src)
-    (let* (interfaces (map interface->config interfaces))
-          (src (map src->config src))
+    (interfaces)
+    (let* ((interfaces (map interface->config interfaces))
+          ;(src (map src->config src))
           (config-file "firehol.conf")
           (config
             (computed-file
@@ -69,7 +70,7 @@
               (lambda (port)
                      (let ((format (@ (ice-9 format) format)))
                        (format port 
-                        (list #$interfaces))))))))))
+                        (list #$interfaces)))))))))))
  ;(plain-file "firehol.conf"
  ; (string-append
  ;   "version" firehol-configuration-version "\n"
