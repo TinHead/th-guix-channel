@@ -1,7 +1,7 @@
-(define-module (services firehol)
+(define-module (th services firehol)
   #:use-module (gnu services)
   #:use-module (gnu services shepherd)
-  #:use-module (packages firehol)
+  #:use-module (th packages firehol)
   #:use-module (guix records)
   #:use-module (guix gexp)
   #:export (firehol-configuration
