@@ -10,7 +10,7 @@
 
 (define-public helix-editor-bin
   (package
-    (name "helix-editor")
+    (name "helix-editor-bin")
     (version "23.05")
     (source
      (origin

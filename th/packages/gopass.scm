@@ -10,7 +10,7 @@
 
 (define-public gopass-bin
   (package
-    (name "gopass")
+    (name "gopass-bin")
     (version "1.15.5")
     (source
      (origin
