@@ -1,4 +1,4 @@
-(define-module (th packages helix-editor-bin)
+(define-module (th packages helix-editor)
   #:use-module (gnu packages base)
   #:use-module (gnu packages compression)
   #:use-module (gnu packages gcc)

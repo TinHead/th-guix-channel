@@ -1,4 +1,4 @@
-(define-module (th packages gopass-bin)
+(define-module (th packages gopass)
   #:use-module (gnu packages base)
   #:use-module (gnu packages compression)
   #:use-module (gnu packages gnupg)
