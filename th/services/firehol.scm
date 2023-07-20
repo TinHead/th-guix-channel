@@ -23,7 +23,7 @@
   firehol-interface?
   (name firehol-interface-name (default "eth0"))
   (myname firehol-interface-myname (default "wan"))
-  (src firehol-interface-src)
+  (src <firehol-src>)
 )
 
 (define-record-type* <firehol-configuration>
