@@ -23,7 +23,7 @@
   firehol-interface?
   (name firehol-interface-name (default "eth0"))
   (myname firehol-interface-myname (default "wan"))
-  (src <firehol-src>)
+  ; (src <firehol-src>)
 )
 
 (define-record-type* <firehol-configuration>
@@ -48,7 +48,7 @@
           (myname (firehol-interface-myname interface))
           ; (src (firehol-src interface))
           )
-        (format #f "interface ~a ~a ~a "
+        (format #f "interface ~a ~a \n"
           name
           myname
           ; (if src
@@ -56,7 +56,7 @@
           ;   "" )
           )))
   (match-record config <firehol-configuration>
-    (interfaces)
+    (version interfaces)
     (let* ((interfaces (map interface->config interfaces))
           ;(src (map src->config src))
           (config-file "firehol.conf")
@@ -70,19 +70,22 @@
               (lambda (port)
                      (let ((format (@ (ice-9 format) format)))
                        (format port 
-                        (list #$interfaces)))))))))))
+                        (list #$interfaces)))))))))
+                            
+          (file-append config)    
+                        ))
  ;(plain-file "firehol.conf"
  ; (string-append
  ;   "version" firehol-configuration-version "\n"
- ;   (string-join (firehol-configuration-interfaces config))    
+ ;   (string-join (firehol-configuration-interfaces config))
   )
 
 
 (define (firehol-shepherd-service config)
  (match-record config <firehol-configuration>
-    (version interfaces conffile)
+    (version interfaces)
   (list (shepherd-service
-    (documentation "Runf firehol")
+    (documentation "Run firehol")
     (provision '(firehol))
     (requirement '(networking))
     (start #~(make-forkexec-constructor 
