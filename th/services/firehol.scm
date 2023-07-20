@@ -63,7 +63,7 @@
           (config-file "firehol.conf")
           (config
             (computed-file
-              "firehol-confg"
+              "firehol.conf"
               #~(begin
               (mkdir #$output)
               (chdir #$output)
@@ -101,5 +101,5 @@
     (description "Firehol")
     (extensions
       (list
-        (service-extension shepherd-root-service-type firehol-shepherd-service)))))
-    ;(default-value (firehol-configuration))))
+        (service-extension shepherd-root-service-type firehol-shepherd-service)))
+    (default-value (firehol-configuration)))))
