@@ -3,6 +3,7 @@
   #:use-module (gnu services shepherd)
   #:use-module (th packages firehol)
   #:use-module (guix records)
+  #:use-module (gnu services configuration)
   #:use-module (guix gexp)
   #:export (firehol-configuration
             firehol-configuration?
