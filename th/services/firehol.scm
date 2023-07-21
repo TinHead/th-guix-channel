@@ -79,7 +79,8 @@
   (src
     (maybe-firehol-interface-src)
     "If specified set a source IP to allow or deny from"
-    (serializer no-serialization))
+    ; (serializer no-serialization))
+    )
 )
 
 (define (list-of-interfaces? lst)
