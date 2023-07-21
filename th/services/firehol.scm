@@ -53,6 +53,7 @@
 
 (define-maybe string)
 (define-maybe boolean)
+(define-maybe/no-serialization firehol-interface-src)
 
 (define-configuration firehol-interface-src
   (ip
@@ -76,7 +77,7 @@
     "Interface friendly name"
     (serializer serialize-interface-custom-name))
   (src
-    (firehol-interface-src)
+    (maybe-firehol-interface-src)
     "If specified set a source IP to allow or deny from"
     (serializer no-serialization))
 )
