@@ -12,86 +12,109 @@
             ))
 
 
-(define-record-type* <firehol-src>
-  firehol-src make-firehol-src 
-  firehol-src?
-  (ip firehol-src-ip (default "10.0.0.1"))
-  (deny firehol-src-deny (default #f))
-)
+; (define-record-type* <firehol-src>
+;   firehol-src make-firehol-src 
+;   firehol-src?
+;   (ip firehol-src-ip (default "10.0.0.1"))
+;   (deny firehol-src-deny (default #f))
+; )
 
-(define-record-type* <firehol-interface>
-  firehol-interface make-firehol-interface
-  firehol-interface?
-  (name firehol-interface-name (default "eth0"))
-  (myname firehol-interface-myname (default "wan"))
-  ; (src <firehol-src>)
-)
+; (define-record-type* <firehol-interface>
+;   firehol-interface make-firehol-interface
+;   firehol-interface?
+;   (name firehol-interface-name (default "eth0"))
+;   (myname firehol-interface-myname (default "wan"))
+;   ; (src <firehol-src>)
+; )
 
-(define-record-type* <firehol-configuration>
-  firehol-configuration make-firehol-configuration
-  firehol-configuration?
-  (version firehol-configuration-version (default 6))
-  (interfaces firehol-configuration-interfaces (default '()))
-  ; (conffile firehole-configuration-file (default configuration-file))
-  )
+; (define-record-type* <firehol-configuration>
+;   firehol-configuration make-firehol-configuration
+;   firehol-configuration?
+;   (version firehol-configuration-version (default 6))
+;   (interfaces firehol-configuration-interfaces (default '()))
+;   ; (conffile firehole-configuration-file (default configuration-file))
+;   )
   
-(define (firehol-configuration-file config)
-  "Return a firehol configuration"
-  ; (define (src->config src)
-  ;   (let ((ip (firehol-src-ip))
-  ;         (deny (firehol-src-deny)))
-  ;       (format #f "src ~a \n"
-  ;         (if deny
-  ;           (format #f "!~a" ip)
-  ;           ip))))
-  (define (interface->config interface)
-    (let ((name (firehol-interface-name interface))
-          (myname (firehol-interface-myname interface))
-          ; (src (firehol-src interface))
-          )
-        (format #f "interface ~a ~a \n"
-          name
-          myname
-          ; (if src
-          ;   (format #f "~a" src)
-          ;   "" )
-          )))
-  (match-record config <firehol-configuration>
-    (version interfaces)
-    (let* ((interfaces (map interface->config interfaces))
-          ;(src (map src->config src))
-          (config-file "firehol.conf")
-          (config
-            (computed-file
-              "firehol.conf"
-              #~(begin
-              (mkdir #$output)
-              (chdir #$output)
-              (call-with-output-file #$config-file
-              (lambda (port)
-                     (let ((format (@ (ice-9 format) format)))
-                       (format port 
-                        (list #$interfaces)))))))))
+; (define (firehol-configuration-file config)
+;   "Return a firehol configuration"
+;   ; (define (src->config src)
+;   ;   (let ((ip (firehol-src-ip))
+;   ;         (deny (firehol-src-deny)))
+;   ;       (format #f "src ~a \n"
+;   ;         (if deny
+;   ;           (format #f "!~a" ip)
+;   ;           ip))))
+;   (define (interface->config interface)
+;     (let ((name (firehol-interface-name interface))
+;           (myname (firehol-interface-myname interface))
+;           ; (src (firehol-src interface))
+;           )
+;         (format #f "interface ~a ~a \n"
+;           name
+;           myname
+;           ; (if src
+;           ;   (format #f "~a" src)
+;           ;   "" )
+;           )))
+;   (match-record config <firehol-configuration>
+;     (version interfaces)
+;     (let* ((interfaces (map interface->config interfaces))
+;           ;(src (map src->config src))
+;           (config-file "firehol.conf")
+;           (config
+;             (computed-file
+;               "firehol.conf"
+;               #~(begin
+;               (mkdir #$output)
+;               (chdir #$output)
+;               (call-with-output-file #$config-file
+;               (lambda (port)
+;                      (let ((format (@ (ice-9 format) format)))
+;                        (format port 
+;                         (list #$interfaces)))))))))
                             
-          (file-append config)    
-                        ))
- ;(plain-file "firehol.conf"
- ; (string-append
- ;   "version" firehol-configuration-version "\n"
- ;   (string-join (firehol-configuration-interfaces config))
-  )
+;           (file-append config)    
+;                         ))
+;  ;(plain-file "firehol.conf"
+;  ; (string-append
+;  ;   "version" firehol-configuration-version "\n"
+;  ;   (string-join (firehol-configuration-interfaces config))
+;   )
+
+(define (uglify-field-name field-name)
+  (let ((str (symbol->string field-name)))
+    ;; field? -> is-field
+    (if (string-suffix? "?" str)
+        (string-append "is-" (string-drop-right str 1))
+        str)))
+
+(define (serialize-version field value)
+  #~(string-append #$(uglify-field-name field) " = " #$value "\n"))
+)
+
+(define (serialize-firehol-config config)
+  (mixed-text-file
+  "firehol.conf"
+  #~(string-append #$(serialize-configuration config firehol-configuration-fields)))
+)
+
+(define-configuration firehol-configuration
+  (version
+    (string "5")
+    (serializer (serialize-version)))
+)
 
 
 (define (firehol-shepherd-service config)
  (match-record config <firehol-configuration>
-    (version interfaces)
+    (version)
     ; (let* ((config-file (firehol-configuration-file config))))
   (list (shepherd-service
     (documentation "Run firehol")
     (provision '(firehol))
     (requirement '(networking))
     (start #~(make-forkexec-constructor 
-              (list #$(file-append firehol "/sbin/firehol") #$(firehol-configuration-file config) "start")))
+              (list #$(file-append firehol "/sbin/firehol") #$(serialize-firehol-configuration config) "start")))
     (stop  #~(make-kill-destructor))
     ; (actions (list (shepherd-configuration-action config)))))))
     ))))
