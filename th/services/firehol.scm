@@ -60,7 +60,7 @@
   (interfaces
     (list-of-interfaces '())
     "List of interface definitions"
-    (serializer serialize-interfaces))
+    (serializer serialize-list-of-interfaces))
 )
 
 
