@@ -76,7 +76,7 @@
     "Interface friendly name"
     (serializer serialize-interface-custom-name))
   (src
-    (firehol-interface-src "")
+    (firehol-interface-src)
     "If specified set a source IP to allow or deny from"
     (serializer no-serialization))
 )
