@@ -102,7 +102,7 @@
   (version
     (string "5")
     "File version"
-    (serialize serialize-version))
+    (serializer serialize-version))
 )
 
 
