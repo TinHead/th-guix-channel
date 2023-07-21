@@ -90,7 +90,7 @@
 
 (define (serialize-version field value)
   #~(string-append #$(uglify-field-name field) " = " #$value "\n"))
-)
+
 
 (define (serialize-firehol-config config)
   (mixed-text-file
