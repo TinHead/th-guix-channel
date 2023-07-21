@@ -89,7 +89,7 @@
         str)))
 
 (define (serialize-version field value)
-  #~(string-append #$(uglify-field-name field) " = " #$value "\n"))
+  #~(string-append #$(uglify-field-name field) " " #$value "\n"))
 
 
 (define (serialize-firehol-config config)
@@ -101,7 +101,8 @@
 (define-configuration firehol-configuration
   (version
     (string "5")
-    (serializer (serialize-version)))
+    "File version"
+    (serialize serialize-version))
 )
 
 
