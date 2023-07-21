@@ -25,7 +25,11 @@
   #~(string-append #$(uglify-field-name field) " " #$value "\n"))
 
 (define (serialize-interface-name field value)
-  #~(string-append "interface " #$value "\n")
+  #~(string-append "interface " #$value )
+)
+
+(define (serialize-interface-custom-name field value)
+  #~(string-append " " #$value)
 )
 
 ;(define (serialize-list-of-interfaces field value))
@@ -39,11 +43,42 @@
   #~(string-append #$(serialize-configuration config firehol-configuration-fields)))
 )
 
+(define (serialize-ip field value)
+   (let ((str (symbol->string field)))
+      (if (string= "deny" str)
+        (string-append "not" )
+          (if (string= "ip" str)
+            (string-append #$value)))))
+
+
+(define-maybe string)
+(define-maybe boolean)
+
+(define-configuration firehol-interface-src
+  (ip
+    (maybe-string "192.168.1.0/24")
+    "Source IP address(es)"
+    (serializer serialize-ip))
+  (deny
+    (maybe-boolean #f)
+    "Deny source ip(s) if true"
+    (serializer serialize-ip)
+    )
+)
+
 (define-configuration firehol-interface
   (name
-  (string "eth0")
-  "Interface name"
-  (serializer serialize-interface-name))
+    (string "eth0")
+    "Interface device name"
+    (serializer serialize-interface-name))
+  (custom-name
+    (string "lan")
+    "Interface friendly name"
+    (serializer serialize-interface-custom-name))
+  (src
+    (firehol-interface-src "")
+    "If specified set a source IP to allow or deny from"
+    (no-serialization))
 )
 
 (define (list-of-interfaces? lst)
