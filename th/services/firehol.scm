@@ -85,12 +85,13 @@
 (define (firehol-shepherd-service config)
  (match-record config <firehol-configuration>
     (version interfaces)
+    (config-file (firehol-configuration-file config))
   (list (shepherd-service
     (documentation "Run firehol")
     (provision '(firehol))
     (requirement '(networking))
     (start #~(make-forkexec-constructor 
-              (list #$(file-append firehol "/sbin/firehol") "start")))
+              (list #$(file-append firehol "/sbin/firehol") #%config-file "start")))
     (stop  #~(make-kill-destructor))
     ; (actions (list (shepherd-configuration-action config)))))))
     ))))
