@@ -116,7 +116,7 @@
     (provision '(firehol))
     (requirement '(networking))
     (start #~(make-forkexec-constructor 
-              (list #$(file-append firehol "/sbin/firehol") #$(serialize-firehol-configu config) "start")))
+              (list #$(file-append firehol "/sbin/firehol") #$(serialize-firehol-config config) "start")))
     (stop  #~(make-kill-destructor))
     ; (actions (list (shepherd-configuration-action config)))))))
     ))))
