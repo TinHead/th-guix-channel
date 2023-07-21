@@ -33,12 +33,6 @@
   #~(string-append #$@(map (cut serialize-configuration <>
                                 firehol-interface-fields)
                            value)))
-
-(define (list-of-interfaces? lst)
-  (every firehol-interface? lst)
-  
-)
-
 (define (serialize-firehol-config config)
   (mixed-text-file
   "firehol.conf"
@@ -50,6 +44,10 @@
   (string "eth0")
   "Interface name"
   (serializer serialize-interface-name))
+)
+
+(define (list-of-interfaces? lst)
+  (every firehol-interface? lst) 
 )
 
 (define-configuration firehol-configuration
