@@ -9,6 +9,7 @@
             firehol-configuration?
             firehol-interface
             firehol-service-type
+            serialize-firehol-config
             ))
 
 
