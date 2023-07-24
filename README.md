@@ -1,6 +1,12 @@
 # th-guix-channel
 My guix channel adding:
-helix-editor (from binary)
-starship (from binary)
-firhol
-iprange
+
+## Packages
+- helix-editor (from binary)
+- starship (from binary)
+- firehol
+- iprange
+- gopass (from binary)
+
+## Services (TBD) 
+...
