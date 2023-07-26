@@ -11,6 +11,7 @@
             firehol-configuration?
             firehol-interface
             firehol-service-type
+            serialize-firehol-config
             ))
 
 
@@ -44,11 +45,8 @@
 )
 
 (define (serialize-ip field value)
-   (let ((str (symbol->string field)))
-      (if (string= "deny" str)
-        (string-append "not" )
-          (if (string= "ip" str)
-            (string-append #$value)))))
+  (if (eq? field (quote ip))
+          (string-append value )))
 
 
 (define-maybe string)
@@ -77,14 +75,14 @@
     "Interface friendly name"
     (serializer serialize-interface-custom-name))
   (ip
-    (maybe-string "192.168.1.0/24")
+    (maybe-string "")
     "Source IP address(es)"
     (serializer serialize-ip))
   (deny
     (maybe-boolean #f)
     "Deny source ip(s) if true"
-    (serializer serialize-ip)
-    )
+    (serializer serialize-ip))
+    
   ; (src
     ; (maybe-firehol-interface-src)
     ; "If specified set a source IP to allow or deny from"
