@@ -44,13 +44,22 @@
   #~(string-append #$(serialize-configuration config firehol-configuration-fields)))
 )
 
-(define (serialize-ip field value)
-  (if (eq? field (quote ip))
-          (string-append value )))
+(define (ip-add? obj)
+  (string? obj)
+)
 
-
-(define-maybe string)
+(define-maybe ip-add)
 (define-maybe boolean)
+
+(define (serialize-ip-add field value)
+  #~((if (equal? #$(uglify-field-name field) "ip")
+          (string-append #$value ))))
+
+(define (serialize-boolean field value)
+  #~((if (equal? #$(uglify-field-name field) "deny")
+          (string-append #$value ))))
+
+
 ; (define-maybe/no-serialization firehol-interface-src)
 
 ; (define-configuration firehol-interface-src
@@ -75,13 +84,13 @@
     "Interface friendly name"
     (serializer serialize-interface-custom-name))
   (ip
-    maybe-string
+    (maybe-ip-add "")
     "Source IP address(es)"
-    (serializer serialize-ip))
+    )
   (deny
     maybe-boolean
     "Deny source ip(s) if true"
-    (serializer serialize-ip))
+    )
     
   ; (src
     ; (maybe-firehol-interface-src)
