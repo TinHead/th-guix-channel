@@ -44,43 +44,62 @@
   #~(string-append #$(serialize-configuration config firehol-configuration-fields)))
 )
 
-(define (ip-add? obj)
+(define (src-ip-add? obj)
    (string? obj)
 )
 
-(define (ip-deny? obj)
+(define (src-ip-deny? obj)
    (boolean? obj)
 )
 
-(define-maybe ip-add)
-(define-maybe ip-deny)
+(define-maybe src-ip-add)
+(define-maybe src-ip-deny)
 
-(define (serialize-ip-add field value)
-  #~(if (equal? #$(uglify-field-name field) "ip")
+;(define (serialize-src-ip-add field value)
+;  #~(if (equal? #$(uglify-field-name field) "src-ip")
+;          (string-append " " #$value "\n")))
+
+(define (serialize-src-ip-add field value)
+  (cond (
+      (equal? (uglify-field-name field) "src-deny")(if (maybe-value-set? value)(string-append " src not")(string-append "src"))
+      (equal? (uglify-field-name field) "src-ip")(string-append " " value)
+    )
+  ))
+
+
+(define (serialize-src-ip-deny field value)
+   (if (maybe-value-set? value)
+           (string-append " src not")(string-append "src")))
+
+(define (dst-ip-add? obj)
+   (string? obj)
+)
+
+(define (dst-ip-deny? obj)
+   (boolean? obj)
+)
+
+(define-maybe dst-ip-add)
+(define-maybe dst-ip-deny)
+
+(define (serialize-dst-ip-add field value)
+  #~(if (equal? #$(uglify-field-name field) "dst-ip")
           (string-append " " #$value "\n")))
 
-(define (serialize-ip-deny field value)
+(define (serialize-dst-ip-deny field value)
    (if (maybe-value-set? value)
-           (string-append " not")))
+           (string-append " dst not")(string-append " dst")))
 
+(define (serialize-policy field value)
+   (string-append "    policy " value "\n"))
 
-; (define-maybe/no-serialization firehol-interface-src)
+(define (list-of-string? lst)
+  (every string? lst)
+)
 
-; (define-configuration firehol-interface-src
-;   (ip
-;     (maybe-string "192.168.1.0/24")
-;     "Source IP address(es)":
-;     (serializer serialize-ip))
-;   (deny
-;     (maybe-boolean #f)
-;     "Deny source ip(s) if true"
-;     (serializer serialize-ip)
-;     )
-; )
-
-(define myconf (firehol-configuration (version "6")(interfaces 
-(list(firehol-interface (name "rth0")(custom-name "dssd")(ip "1234"))(firehol-interface(name "eth2")(custom-name "int")(deny #t)(ip "1234"))))))
-
+(define (serialize-list-of-string field lst)
+  (string-append "    " (string-join lst "\n") "\n")
+)
 
 (define-configuration firehol-interface
   (name
@@ -91,20 +110,30 @@
     (string "lan")
     "Interface friendly name"
     (serializer serialize-interface-custom-name))
-  (deny
-    maybe-ip-deny
+  (src-deny
+    maybe-src-ip-add
     "Deny source ip(s) if true"
     )
-  (ip
-    maybe-ip-add
+  (src-ip
+    maybe-src-ip-add
     "Source IP address(es)"
     )
-    
-  ; (src
-    ; (maybe-firehol-interface-src)
-    ; "If specified set a source IP to allow or deny from"
-    ; (serializer no-serialization))
-    ; )
+  (dst-deny
+    maybe-dst-ip-deny
+    "Deny source ip(s) if true"
+    )
+  (dst-ip
+    maybe-dst-ip-add
+    "Source IP address(es)"
+    )
+  (policy
+    (string "drop")
+    "Policy for this interface defaults to drop everything"
+    (serializer serialize-policy))
+  (rules
+    (list-of-string '("client all deny"))
+    "List of rules to apply on interface"
+    (serializer serialize-list-of-string))
 )
 
 (define (list-of-interfaces? lst)
@@ -113,7 +142,7 @@
 
 (define-configuration firehol-configuration
   (version
-    (string "5")
+    (string "6")
     "File version"
     (serializer serialize-version))
   (interfaces
