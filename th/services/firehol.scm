@@ -75,11 +75,11 @@
     "Interface friendly name"
     (serializer serialize-interface-custom-name))
   (ip
-    (maybe-string "")
+    maybe-string
     "Source IP address(es)"
     (serializer serialize-ip))
   (deny
-    (maybe-boolean #f)
+    maybe-boolean
     "Deny source ip(s) if true"
     (serializer serialize-ip))
     
