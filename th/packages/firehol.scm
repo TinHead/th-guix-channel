@@ -1,6 +1,7 @@
 (define-module (th packages firehol)
 #:use-module (gnu packages)
 #:use-module (guix packages)
+#:use-module (gnu packages base)
 #:use-module (gnu packages linux)
 #:use-module (gnu packages admin)
 #:use-module (guix download)
