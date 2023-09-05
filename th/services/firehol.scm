@@ -33,7 +33,6 @@
   #~(string-append " " #$value)
 )
 
-;(define (serialize-list-of-interfaces field value))
 (define (serialize-list-of-interfaces field value)
   #~(string-append #$@(map (cut serialize-configuration <>
                                 firehol-interface-fields)
@@ -47,52 +46,6 @@
   "firehol.conf"
   #~(string-append #$(serialize-configuration config firehol-configuration-fields)))
 )
-
-; (define (src-ip-add? obj)
-;    (string? obj)
-; )
-
-; (define (src-ip-deny? obj)
-;    (boolean? obj)
-; )
-
-; (define-maybe src-ip-add)
-; (define-maybe src-ip-deny)
-
-;(define (serialize-src-ip-add field value)
-;  #~(if (equal? #$(uglify-field-name field) "src-ip")
-;          (string-append " " #$value "\n")))
-
-; (define (serialize-src-ip-add field value)
-;   (cond (
-;       (equal? (uglify-field-name field) "src-deny")(if (maybe-value-set? value)(string-append " src not")(string-append "src"))
-;       (equal? (uglify-field-name field) "src-ip")(string-append " " value)
-;     )
-;   ))
-
-
-; (define (serialize-src-ip-deny field value)
-;    (if (maybe-value-set? value)
-;            (string-append " src not")(string-append "src")))
-
-; (define (dst-ip-add? obj)
-;    (string? obj)
-; )
-
-; (define (dst-ip-deny? obj)
-;    (boolean? obj)
-; )
-
-; (define-maybe dst-ip-add)
-; (define-maybe dst-ip-deny)
-
-; (define (serialize-dst-ip-add field value)
-;   #~(if (equal? #$(uglify-field-name field) "dst-ip")
-;           (string-append " " #$value "\n")))
-
-; (define (serialize-dst-ip-deny field value)
-;    (if (maybe-value-set? value)
-;            (string-append " dst not")(string-append " dst")))
 
 (define (serialize-policy field value)
    (string-append "    policy " value "\n"))
@@ -114,22 +67,6 @@
     (string "lan")
     "Interface friendly name"
     (serializer serialize-interface-custom-name))
-  ; (src-deny
-  ;   maybe-src-ip-add
-  ;   "Deny source ip(s) if true"
-  ;   )
-  ; (src-ip
-  ;   maybe-src-ip-add
-  ;   "Source IP address(es)"
-  ;   )
-  ; (dst-deny
-  ;   maybe-dst-ip-deny
-  ;   "Deny source ip(s) if true"
-  ;   )
-  ; (dst-ip
-  ;   maybe-dst-ip-add
-  ;   "Source IP address(es)"
-  ;   )
   (extra-opts
     (string "")
     "Extra options as a string to add to this intreface - ie src ip dst ip"
