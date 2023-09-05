@@ -29,7 +29,8 @@
   (arguments
   `(#:configure-flags '("--localstatedir=/var")))
   (propagated-inputs 
-	(list util-linux 
+	(list util-linux
+        coreutils 
 	      iproute
 	      iptables
 	      ipset
