@@ -105,9 +105,11 @@
     (documentation "Run firehol")
     (provision '(firehol))
     (requirement '(networking))
-    (start #~(make-forkexec-constructor 
+    (oneshot #t)
+    (start #~(exec-command 
               (list #$(file-append firehol "/sbin/firehol") #$(serialize-firehol-config config) "start")))
-    (stop  #~(make-kill-destructor))
+    (stop  #~(exec-command
+              (list #$(file-append firehol "/sbin/firehol") "stop")))
     ; (actions (list (shepherd-configuration-action config)))))))
     ))))
     
