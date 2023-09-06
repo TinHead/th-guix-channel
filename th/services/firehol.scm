@@ -105,7 +105,7 @@
     (documentation "Run firehol")
     (provision '(firehol))
     (requirement '(networking))
-    (oneshot #t)
+    (one-shot #t)
     (start #~(exec-command 
               (list #$(file-append firehol "/sbin/firehol") #$(serialize-firehol-config config) "start")))
     (stop  #~(exec-command
