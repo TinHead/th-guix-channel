@@ -107,7 +107,7 @@
     (requirement '(networking))
     (one-shot? #t)
     (start #~(exec-command 
-              (list #$(file-append firehol "/sbin/firehol") #$(serialize-firehol-config config) "start")))
+              (list "FIREHOL_LOAD_KERNEL_MODULES=0" #$(file-append firehol "/sbin/firehol") #$(serialize-firehol-config config) "start")))
     (stop  #~(exec-command
               (list #$(file-append firehol "/sbin/firehol") "stop")))
     ; (actions (list (shepherd-configuration-action config)))))))
