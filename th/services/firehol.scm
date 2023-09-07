@@ -121,7 +121,7 @@
  (rules
   (list-of-string '("client all deny")
   "Rules to apply on this router"
-  (serializer serilize-list-of-string))) 
+  (serializer serialize-list-of-string))) 
 )
 
 (define (list-of-routers? lst)
