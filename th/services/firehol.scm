@@ -144,7 +144,7 @@
   (routers
     (list-of-routers  '())
     "List of router definitions"
-    (serializer serilaize-list-of-routers))
+    (serializer serialize-list-of-routers))
 )
 
 
