@@ -105,7 +105,7 @@
  (name
   (string "lan")
   "Router name"
-  (serilaizer serialize-router-name))
+  (serializer serialize-router-name))
  (inface
   (string "eth0")
   "Input interface"
