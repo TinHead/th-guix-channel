@@ -119,9 +119,9 @@
   "Extra options - ie src dst etc"
   (serializer serialize-extra-opts))
  (rules
-  (list-of-string '("client all deny")
+  (list-of-string '("client all deny"))
   "Rules to apply on this router"
-  (serializer serialize-list-of-string))) 
+  (serializer serialize-list-of-string)) 
 )
 
 (define (list-of-routers? lst)
