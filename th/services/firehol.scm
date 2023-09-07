@@ -10,10 +10,13 @@
   #:export (firehol-configuration
             firehol-configuration?
             firehol-interface
+            firehol-router
             firehol-service-type
             serialize-firehol-config
             ))
 
+
+;;; Firehol service definition
 
 (define (uglify-field-name field-name)
   (let ((str (symbol->string field-name)))
@@ -29,6 +32,18 @@
   #~(string-append "interface " #$value )
 )
 
+(define (serialize-router-name field value)
+  #~(string-append "router " #$value )
+)
+
+(define (serialize-router-inface field value)
+  #~(string-append "inface " #$value )
+)
+
+(define (serialize-router-outface field value)
+  #~(string-append "outface " #$value )
+)
+
 (define (serialize-interface-custom-name field value)
   #~(string-append " " #$value)
 )
@@ -37,6 +52,11 @@
   #~(string-append #$@(map (cut serialize-configuration <>
                                 firehol-interface-fields)
                            value)))
+(define (serialize-list-of-routers field value)
+  #~(string-append #$@(map (cut serialize-configuration <>
+                                firehol-router-fields)
+                           value)))
+                          
 (define (serialize-extra-opts field value)
    #~(string-append " " #$value "\n")
 )
@@ -81,6 +101,33 @@
     (serializer serialize-list-of-string))
 )
 
+(define-configuration firehol-router
+ (name
+  (string "lan")
+  "Router name"
+  (serilaizer serialize-router-name))
+ (inface
+  (string "eth0")
+  "Input interface"
+  (serializer serialize-router-inface))
+ (outface
+  (string "eth1")
+  "Output interface"
+  (serializer serialize-router-outface))
+ (extra-opts
+  (string "")
+  "Extra options - ie src dst etc"
+  (serializer serialize-extra-opts))
+ (rules
+  (list-of-string '("client all deny")
+  "Rules to apply on this router"
+  (serializer serilize-list-of-string))) 
+)
+
+(define (list-of-routers? lst)
+  (every firehol-router? lst)
+)
+
 (define (list-of-interfaces? lst)
   (every firehol-interface? lst) 
 )
@@ -94,6 +141,10 @@
     (list-of-interfaces '())
     "List of interface definitions"
     (serializer serialize-list-of-interfaces))
+  (routers
+    (list-of-routers  '())
+    "List of router definitions"
+    (serializer serilaize-list-of-routers))
 )
 
 
