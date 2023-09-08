@@ -41,3 +41,19 @@
  version package to bring them all, and in the darkness bind them.")
   (license expat))
 )
+(define-public python-home-assistant-bluetooth
+(package
+  (name "python-home-assistant-bluetooth")
+  (version "1.10.3")
+  (source (origin
+            (method url-fetch)
+            (uri (pypi-uri "home_assistant_bluetooth" version))
+            (sha256
+             (base32
+              "13f9ixc26gqxn3dk3rs0s5vzdg5sfshggjqv0znjw6lib4wl1x26"))))
+  (build-system pyproject-build-system)
+  (home-page "https://github.com/home-assistant-libs/home-assistant-bluetooth")
+  (synopsis "Home Assistant Bluetooth Models and Helpers")
+  (description "Home Assistant Bluetooth Models and Helpers")
+  (license #f))
+)
