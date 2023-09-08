@@ -4,7 +4,7 @@
 #:use-module (guix download)
 #:use-module (guix build-system python)
 #:use-module (guix build-system pyproject)
-#:use-module (guix packages check)
+#:use-module (gnu packages check)
 #:use-module (guix licenses))
 
 (define-public python-atomicwrites-homeassistant 
