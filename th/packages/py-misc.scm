@@ -22,7 +22,7 @@
   (description "Atomic file-name-separator-stringe writes.")
   (license expat))
 )
-(define-public python-awesomeversion )
+(define-public python-awesomeversion 
  (package
    (name "python-awesomeversion")
    (version "23.8.0")
@@ -39,5 +39,5 @@
    (description
     "One version package to rule them all, One version package to find them, One
  version package to bring them all, and in the darkness bind them.")
-  (license license:expat))
+  (license expat))
 )
