@@ -35,6 +35,7 @@
               (base32
                "1hr15q6a73fw0l0hizpwb1wc7m7d3a1iphx15f8xnskiga8v526p"))))
    (build-system pyproject-build-system)
+   (inputs (list python-pytest))
    (home-page "https://github.com/ludeeus/awesomeversion")
    (synopsis
     "One version package to rule them all, One version package to find them, One version package to bring them all, and in the darkness bind them.")
@@ -54,7 +55,6 @@
              (base32
               "13f9ixc26gqxn3dk3rs0s5vzdg5sfshggjqv0znjw6lib4wl1x26"))))
   (build-system pyproject-build-system)
-  (native-inputs (list poetry))
   (home-page "https://github.com/home-assistant-libs/home-assistant-bluetooth")
   (synopsis "Home Assistant Bluetooth Models and Helpers")
   (description "Home Assistant Bluetooth Models and Helpers")
