@@ -57,3 +57,19 @@
   (description "Home Assistant Bluetooth Models and Helpers")
   (license #f))
 )
+(define-public python-lru-dict
+(package
+  (name "python-lru-dict")
+  (version "1.2.0")
+  (source (origin
+            (method url-fetch)
+            (uri (pypi-uri "lru-dict" version))
+            (sha256
+             (base32
+              "1mqvl5rfrwhddl96nw2ca4b9d1cj242700fvv3sdss4xy616gi8k"))))
+  (build-system pyproject-build-system)
+  (native-inputs (list python-pytest))
+  (home-page "https://github.com/amitdev/lru-dict")
+  (synopsis "An Dict like LRU container.")
+  (description "An Dict like LRU container.")
+  (license expat)))
