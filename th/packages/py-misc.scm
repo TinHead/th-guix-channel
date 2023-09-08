@@ -22,3 +22,22 @@
   (description "Atomic file-name-separator-stringe writes.")
   (license expat))
 )
+(define-public python-awesomeversion )
+ (package
+   (name "python-awesomeversion")
+   (version "23.8.0")
+   (source (origin
+             (method url-fetch)
+             (uri (pypi-uri "awesomeversion" version))
+             (sha256
+              (base32
+               "1hr15q6a73fw0l0hizpwb1wc7m7d3a1iphx15f8xnskiga8v526p"))))
+   (build-system pyproject-build-system)
+   (home-page "https://github.com/ludeeus/awesomeversion")
+   (synopsis
+    "One version package to rule them all, One version package to find them, One version package to bring them all, and in the darkness bind them.")
+   (description
+    "One version package to rule them all, One version package to find them, One
+ version package to bring them all, and in the darkness bind them.")
+  (license license:expat))
+)
