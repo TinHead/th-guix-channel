@@ -35,7 +35,7 @@
               (base32
                "1hr15q6a73fw0l0hizpwb1wc7m7d3a1iphx15f8xnskiga8v526p"))))
    (build-system pyproject-build-system)
-   (inputs (list poetry))
+   (propagated-inputs (list poetry))
    (home-page "https://github.com/ludeeus/awesomeversion")
    (synopsis
     "One version package to rule them all, One version package to find them, One version package to bring them all, and in the darkness bind them.")
