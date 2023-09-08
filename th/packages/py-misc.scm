@@ -91,3 +91,20 @@
   (description "Create and-map transform ULIDs")
   (license expat))
 )
+(define-public python-voluptuous-serialize
+ (package
+  (name "python-voluptuous-serialize")
+  (version "2.6.0")
+  (source (origin
+            (method url-fetch)
+            (uri (pypi-uri "voluptuous-serialize" version))
+            (sha256
+             (base32
+              "1i57pkwzchljdmhdq31mypq6vzcfz8kxh0j42j9s70lm4dcdrb3r"))))
+  (build-system pyproject-build-system)
+  (propagated-inputs (list python-voluptuous))
+  (home-page "http://github.com/balloob/voluptuous-serialize")
+  (synopsis "Convert voluptuous schemas to dictionaries")
+  (description "Convert voluptuous schemas to dictionaries")
+  (license #f))
+)
