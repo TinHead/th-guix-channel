@@ -55,7 +55,7 @@
              (base32
               "13f9ixc26gqxn3dk3rs0s5vzdg5sfshggjqv0znjw6lib4wl1x26"))))
   (build-system pyproject-build-system)
-  (inputs (list python-pytest))
+  (inputs (list python-pytest poetry))
   (home-page "https://github.com/home-assistant-libs/home-assistant-bluetooth")
   (synopsis "Home Assistant Bluetooth Models and Helpers")
   (description "Home Assistant Bluetooth Models and Helpers")
