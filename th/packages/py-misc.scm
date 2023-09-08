@@ -74,3 +74,20 @@
   (synopsis "An Dict like LRU container.")
   (description "An Dict like LRU container.")
   (license expat)))
+  
+(define-public python-ulid-transform
+  (package
+  (name "python-ulid-transform")
+  (version "0.8.1")
+  (source (origin
+            (method url-fetch)
+            (uri (pypi-uri "ulid_transform" version))
+            (sha256
+             (base32
+              "07si139dhjac8r2q8l4frfizmxlfrf2impbfbzw92iqppn44hr57"))))
+  (build-system pyproject-build-system)
+  (home-page "https://github.com/bdraco/ulid-transform")
+  (synopsis "Create and transform ULIDs")
+  (description "Create and-map transform ULIDs")
+  (license expat))
+)
