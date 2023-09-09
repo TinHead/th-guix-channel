@@ -95,6 +95,8 @@
              (base32
               "07si139dhjac8r2q8l4frfizmxlfrf2impbfbzw92iqppn44hr57"))))
   (build-system pyproject-build-system)
+
+  (inputs (list python-poetry-core))
   (home-page "https://github.com/bdraco/ulid-transform")
   (synopsis "Create and transform ULIDs")
   (description "Create and-map transform ULIDs")
