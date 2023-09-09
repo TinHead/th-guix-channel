@@ -4,7 +4,7 @@
 #:use-module (guix download)
 #:use-module (guix build-system python)
 #:use-module (guix build-system pyproject)
-#:use-module (guix build-system python-poetry-core)
+#:use-module (gnu build-system python-poetry-core)
 #:use-module (gnu packages check)
 #:use-module (gnu packages python-xyz)
 #:use-module (guix licenses))
