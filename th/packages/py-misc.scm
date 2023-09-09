@@ -38,7 +38,7 @@
    (build-system pyproject-build-system)
    (propagated-inputs (list python-pytest python-poetry-core))
    (arguments
-    (list #tests? #f))
+    (list #:tests? #f))
    (home-page "https://github.com/ludeeus/awesomeversion")
    (synopsis
     "One version package to rule them all, One version package to find them, One version package to bring them all, and in the darkness bind them.")
