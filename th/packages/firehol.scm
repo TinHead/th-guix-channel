@@ -28,7 +28,18 @@
                              "firehol-uname.patch"))))  
   (build-system gnu-build-system)
   (arguments
-  `(#:configure-flags '("--localstatedir=/var")))
+  `(#:configure-flags '("--localstatedir=/var")
+   (#:phases
+    modify-phases %standard-phases
+     (add-after 'install 'wrap-program
+     (lambda* (#:key inputs outputs #:allow-other-keys)
+             (let ((out (assoc-ref outputs "out")))
+               (wrap-program (string-append out "/sbin/firehol")
+                 `("PATH" ":" prefix
+                   ,(map (lambda (input)
+                           (string-append (assoc-ref inputs input) "/bin"))
+                         '("readlink"
+                           "dirname")))))))))))
   (propagated-inputs 
 	(list util-linux
         coreutils 
