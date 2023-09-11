@@ -39,7 +39,7 @@
                    ,(map (lambda (input)
                            (string-append (assoc-ref inputs input) "/bin"))
                          '("readlink"
-                           "dirname")))))))))))
+                           "dirname"))))))))))
   (propagated-inputs 
 	(list util-linux
         coreutils 
