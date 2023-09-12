@@ -168,8 +168,8 @@
                   #$(file-append coreutils "/bin/")
                   ":"
                   #$(file-append gzip "/bin")))))
-    (stop  #~(make-forkexec-constructor 
-              (list #$(file-append firehol "/sbin/firehol") "stop")))
+    (stop  #~(lambda (-)
+              #$(invoke (file-append firehol "/sbin/firehol") "stop")))
               ;(list #$(file-append firehol "/sbin/firehol") "stop")))
     ; (actions (list (shepherd-configuration-action config)))))))
     ))))
