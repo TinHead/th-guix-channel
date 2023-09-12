@@ -166,6 +166,7 @@
                 "FIREHOL_LOAD_KERNEL_MODULES=0"
                 (string-append "PATH=$PATH:" 
                   #$(file-append coreutils "/bin/")
+                  ":"
                   #$(file-append gzip "/bin")))))
     (stop  #~(make-forkexec-constructor 
               (list #$(file-append firehol "/sbin/firehol") "stop")))
