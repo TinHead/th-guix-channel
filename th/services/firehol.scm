@@ -169,7 +169,11 @@
                   #$(file-append coreutils "/bin/")
                   ":"
                   #$(file-append gzip "/bin")))))
-    (stop  #~(system* (string-append #$firehol "/sbin/firehol") "stop"))
+    (stop  #~(execle  (string-append #$firehol "/sbin/firehol") 
+                      (string-append "PATH=$PATH:" 
+                        #$(file-append coreutils "/bin/")
+                        ":"
+                        #$(file-append gzip "/bin")) "stop"))
     ; (actions (list (shepherd-configuration-action config)))))))
     ))))
     
