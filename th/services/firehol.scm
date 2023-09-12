@@ -38,11 +38,11 @@
 )
 
 (define (serialize-router-inface field value)
-  #~(string-append "inface " #$value )
+  #~(string-append " inface " #$value )
 )
 
 (define (serialize-router-outface field value)
-  #~(string-append "outface " #$value )
+  #~(string-append " outface " #$value )
 )
 
 (define (serialize-interface-custom-name field value)
