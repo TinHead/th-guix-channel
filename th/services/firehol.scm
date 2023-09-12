@@ -170,8 +170,8 @@
                   ":"
                   #$(file-append gzip "/bin")))))
     (stop  #~(lambda (-)
-              #$(invoke (file-append firehol "/sbin/firehol") "stop")))
-              ;(list #$(file-append firehol "/sbin/firehol") "stop")))
+              #$(exec-command (file-append firehol "/sbin/firehol") "stop"))) 
+              ;list #$(file-append firehol "/sbin/firehol") "stop")))
     ; (actions (list (shepherd-configuration-action config)))))))
     ))))
     
