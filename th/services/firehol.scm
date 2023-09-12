@@ -1,7 +1,7 @@
 (define-module (th services firehol)
   #:use-module (gnu services)
   #:use-module (gnu packages base)
-  #:Use-module (gnu packages compression)
+  #:use-module (gnu packages compression)
   #:use-module (gnu services shepherd)
   #:use-module (th packages firehol)
   #:use-module (guix records)
