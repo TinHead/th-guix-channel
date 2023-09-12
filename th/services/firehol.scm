@@ -170,10 +170,10 @@
                   ":"
                   #$(file-append gzip "/bin")))))
     (stop  #~(execle  (string-append #$firehol "/sbin/firehol") 
-                      (string-append "PATH=$PATH:" 
+                      (list (string-append "PATH=$PATH:" 
                         #$(file-append coreutils "/bin/")
                         ":"
-                        #$(file-append gzip "/bin")) "stop"))
+                        #$(file-append gzip "/bin"))) "stop"))
     ; (actions (list (shepherd-configuration-action config)))))))
     ))))
     
