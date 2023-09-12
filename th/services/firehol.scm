@@ -1,6 +1,7 @@
 (define-module (th services firehol)
   #:use-module (gnu services)
   #:use-module (gnu packages base)
+  #:Use-module (gnu packages compression)
   #:use-module (gnu services shepherd)
   #:use-module (th packages firehol)
   #:use-module (guix records)
@@ -164,7 +165,8 @@
                 (list 
                 "FIREHOL_LOAD_KERNEL_MODULES=0"
                 (string-append "PATH=$PATH:" 
-                  #$(file-append coreutils "/bin/")))))
+                  #$(file-append coreutils "/bin/")
+                  #$(file-append gzip "/bin")))))
     (stop  #~(make-forkexec-constructor 
               (list #$(file-append firehol "/sbin/firehol") "stop")))
               ;(list #$(file-append firehol "/sbin/firehol") "stop")))
