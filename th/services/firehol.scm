@@ -1,5 +1,6 @@
 (define-module (th services firehol)
   #:use-module (gnu services)
+  #:use-module (gnu packages base)
   #:use-module (gnu services shepherd)
   #:use-module (th packages firehol)
   #:use-module (guix records)
@@ -159,7 +160,11 @@
     (one-shot? #t)
     (start #~(make-forkexec-constructor 
               (list #$(file-append firehol "/sbin/firehol") #$(serialize-firehol-config config) "start")
-              #:environment-variables (list "FIREHOL_LOAD_KERNEL_MODULES=0")))
+              #:environment-variables 
+                (list 
+                "FIREHOL_LOAD_KERNEL_MODULES=0"
+                (string-append "PATH=$PATH:" 
+                  (file-append coreutils "/bin/")))))
     (stop  #~(make-forkexec-constructor 
               (list #$(file-append firehol "/sbin/firehol") "stop")))
               ;(list #$(file-append firehol "/sbin/firehol") "stop")))
