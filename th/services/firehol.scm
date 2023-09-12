@@ -169,9 +169,8 @@
                   #$(file-append coreutils "/bin/")
                   ":"
                   #$(file-append gzip "/bin")))))
-    (stop  #~(lambda (-)
-              #$(exec-command (file-append firehol "/sbin/firehol") "stop"))) 
-              ;list #$(file-append firehol "/sbin/firehol") "stop")))
+    (stop  #~(exec-command ;(file-append firehol "/sbin/firehol") "stop"))) 
+              (list #$(file-append firehol "/sbin/firehol") "stop")))
     ; (actions (list (shepherd-configuration-action config)))))))
     ))))
     
