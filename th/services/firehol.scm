@@ -160,6 +160,7 @@
     (provision '(firehol))
     (requirement '(networking))
     (one-shot? #t)
+    (respawn? #f)
     (start #~(make-forkexec-constructor 
               (list #$(file-append firehol "/sbin/firehol") #$(serialize-firehol-config config) "start")
               #:environment-variables 
