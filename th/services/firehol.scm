@@ -159,8 +159,7 @@
     (documentation "Run firehol")
     (provision '(firehol))
     (requirement '(networking))
-    (one-shot? #f)
-    (respawn? #f)
+    (one-shot? #t)
     (start #~(make-forkexec-constructor 
               (list #$(file-append firehol "/sbin/firehol") #$(serialize-firehol-config config) "start")
               #:environment-variables 
@@ -179,6 +178,22 @@
                   #$(file-append coreutils "/bin/")
                   ":"
                   #$(file-append gzip "/bin")))))
+    (actions 
+     (list
+      (shepherd-action
+        (name "clear")
+        (documentation "Stop and clear firewall")
+        (procedure #~(
+          make-forkexec-constructor 
+              (list #$(file-append firehol "/sbin/firehol") "stop")
+              #:environment-variables 
+                (list 
+                "FIREHOL_LOAD_KERNEL_MODULES=0"
+                (string-append "PATH=$PATH:" 
+                  #$(file-append coreutils "/bin/")
+                  ":"
+                  #$(file-append gzip "/bin"))))
+        ))))
     ))))
     
 (define firehol-service-type
