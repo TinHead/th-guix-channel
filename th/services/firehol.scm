@@ -169,12 +169,16 @@
                   #$(file-append coreutils "/bin/")
                   ":"
                   #$(file-append gzip "/bin")))))
-    (stop  #~(execle  (string-append #$firehol "/sbin/firehol") 
-                      (list (string-append "PATH=$PATH:" 
-                        #$(file-append coreutils "/bin/")
-                        ":"
-                        #$(file-append gzip "/bin"))) "stop"))
-    ; (actions (list (shepherd-configuration-action config)))))))
+    (stop  #~(make-forkexec-constructor 
+              (list #$(file-append firehol "/sbin/firehol") "stop")
+              #:environment-variables 
+                (list 
+                "FIREHOL_LOAD_KERNEL_MODULES=0"
+                (string-append "PATH=$PATH:" 
+                  #$(file-append coreutils "/bin/")
+                  ":"
+                  #$(file-append gzip "/bin")))))
+ (list (shepherd-configuration-action config)))))))
     ))))
     
 (define firehol-service-type
