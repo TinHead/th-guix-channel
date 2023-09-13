@@ -178,7 +178,6 @@
                   #$(file-append coreutils "/bin/")
                   ":"
                   #$(file-append gzip "/bin")))))
- (list (shepherd-configuration-action config)))))))
     ))))
     
 (define firehol-service-type
