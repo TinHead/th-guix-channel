@@ -170,19 +170,19 @@
                   #$(file-append coreutils "/bin/")
                   ":"
                   #$(file-append gzip "/bin")))))
-    (stop  #~(make-forkexec-constructor 
-              (list #$(file-append firehol "/sbin/firehol") "stop")
-              #:environment-variables 
-                (list 
-                "FIREHOL_LOAD_KERNEL_MODULES=0"
-                (string-append "PATH=$PATH:" 
-                  #$(file-append coreutils "/bin/")
-                  ":"
-                  #$(file-append gzip "/bin")))))
+    (stop  #~(make-kill-deconstructor))
+              ; (list #$(file-append firehol "/sbin/firehol") "stop")
+              ; #:environment-variables 
+              ;   (list 
+              ;   "FIREHOL_LOAD_KERNEL_MODULES=0"
+              ;   (string-append "PATH=$PATH:" 
+              ;     #$(file-append coreutils "/bin/")
+              ;     ":"
+              ;     #$(file-append gzip "/bin")))))
     (actions 
      (list
       (shepherd-action
-        (name "clear")
+        (name 'clear)
         (documentation "Stop and clear firewall")
         (procedure #~(
           make-forkexec-constructor 
