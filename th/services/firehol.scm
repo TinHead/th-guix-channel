@@ -170,7 +170,7 @@
                   #$(file-append coreutils "/bin/")
                   ":"
                   #$(file-append gzip "/bin")))))
-    (stop  #~(make-kill-deconstructor))
+    (stop  #~(make-kill-destructor))
               ; (list #$(file-append firehol "/sbin/firehol") "stop")
               ; #:environment-variables 
               ;   (list 
