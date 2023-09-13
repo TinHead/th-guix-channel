@@ -140,6 +140,10 @@
     (string "6")
     "File version"
     (serializer serialize-version))
+  (custom-services
+    (list-of-string '())
+    "Define custom services here as list of strings"
+    (serializer serialize-list-of-string))
   (interfaces
     (list-of-interfaces '())
     "List of interface definitions"
