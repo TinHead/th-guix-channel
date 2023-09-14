@@ -4,6 +4,7 @@
 #:use-module (gnu packages base)
 #:use-module (gnu packages linux)
 #:use-module (gnu packages admin)
+#:use-module (gnu packages screen)
 #:use-module (gnu packages networking)
 #:use-module (guix download)
 #:use-module (th packages iprange)	
@@ -43,7 +44,8 @@
 	      procps
 	      iprange
 	      curl
-        inetutils)
+        inetutils
+        screen)
   )
   (synopsis "Firehol - firewall for humans")
   (description
