@@ -43,7 +43,7 @@
 	      procps
 	      iprange
 	      curl
-        inetools)
+        inetutils)
   )
   (synopsis "Firehol - firewall for humans")
   (description
