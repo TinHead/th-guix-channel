@@ -42,7 +42,8 @@
 	      module-init-tools
 	      procps
 	      iprange
-	      curl)
+	      curl
+        inetools)
   )
   (synopsis "Firehol - firewall for humans")
   (description
