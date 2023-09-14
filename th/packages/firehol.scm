@@ -4,6 +4,7 @@
 #:use-module (gnu packages base)
 #:use-module (gnu packages linux)
 #:use-module (gnu packages admin)
+#:use-module (gnu packages networking)
 #:use-module (guix download)
 #:use-module (th packages iprange)	
 #:use-module (gnu packages curl)
@@ -37,7 +38,7 @@
 	      iproute
 	      iptables
 	      ipset
-	      inetutils
+	      iputils
 	      module-init-tools
 	      procps
 	      iprange
