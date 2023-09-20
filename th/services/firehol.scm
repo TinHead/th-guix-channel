@@ -32,11 +32,11 @@
   #~(string-append #$(uglify-field-name field) " " #$value "\n"))
 
 (define (serialize-interface-name field value)
-  #~(string-append "interface " #$value )
+  #~(string-append "interface4 " #$value )
 )
 
 (define (serialize-router-name field value)
-  #~(string-append "router " #$value )
+  #~(string-append "router4 " #$value )
 )
 
 (define (serialize-router-inface field value)
