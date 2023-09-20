@@ -78,7 +78,7 @@
 )
 
 (define (serialize-list-of-string field lst)
-  (string-append "    " (string-join lst "\n") "\n")
+  (string-append "    " (string-join "     " lst "\n") "\n")
 )
 
 (define-configuration firehol-interface
