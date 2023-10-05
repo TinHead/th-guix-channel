@@ -10,7 +10,7 @@
 (define-public starship-bin
   (package
     (name "starship-bin")
-    (version "1.12.0")
+    (version "1.16.0")
     (source
      (origin
        (method url-fetch)
@@ -20,7 +20,7 @@
              "/starship-x86_64-unknown-linux-gnu.tar.gz"))
        (sha256
         (base32
-         "0zq5mn8m3jaqhx1px108izh5ibi23jcwy0wragip8dy1swb3kzr3"))))
+         "1bjq6y3wfxanahw4rzqxl86kc4j3slrg8dixnhf5hf31yd57yydv"))))
     (build-system binary-build-system)
     (arguments
      `(#:install-plan
