@@ -77,7 +77,7 @@
              (environment '(( "TZ" . "Europe/Bucharest")))
              (network "host")
              (ports
-              `((,port . "8123"))
+              `((,port . "8123")))
              (volumes
               `((,datadir . "/var/lib/hass")
                 (,config . "/etc/hass/config:rw"))))))))
