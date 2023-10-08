@@ -17,7 +17,7 @@
 
 (define hass-dir "/etc/hass")
 
-(define-configuration nas-prometheus-configuration
+(define-configuration hass-configuration
   (datadir
    (string "/var/lib/hass")
    "The directory where hass writes state.")
