@@ -11,7 +11,7 @@
 (define-public gopass-bin
   (package
     (name "gopass-bin")
-    (version "1.15.5")
+    (version "1.15.8")
     (source
      (origin
        (method url-fetch)
@@ -23,7 +23,7 @@
 	     "-linux-amd64.tar.gz"))
        (sha256
         (base32
-         "1r04pr6v64rh1q25dlvhp9nall318kakkvjnipx80wh3qjwi00af"))))
+         "0r0hf4qp0iqndn4i58g57mzsg9priiy5hfjhl9gq6z8mk1h6q204"))))
     (build-system binary-build-system)
     (inputs (list gnupg))
     (arguments

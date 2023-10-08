@@ -1,8 +1,11 @@
 (define-module (th packages firehol)
 #:use-module (gnu packages)
 #:use-module (guix packages)
+#:use-module (gnu packages base)
 #:use-module (gnu packages linux)
 #:use-module (gnu packages admin)
+#:use-module (gnu packages screen)
+#:use-module (gnu packages networking)
 #:use-module (guix download)
 #:use-module (th packages iprange)	
 #:use-module (gnu packages curl)
@@ -28,16 +31,21 @@
   (build-system gnu-build-system)
   (arguments
   `(#:configure-flags '("--localstatedir=/var")))
+  (inputs
+    (list coreutils))
   (propagated-inputs 
-	(list util-linux 
+	(list util-linux
+        coreutils 
 	      iproute
 	      iptables
 	      ipset
-	      inetutils
+	      iputils
 	      module-init-tools
 	      procps
 	      iprange
-	      curl)
+	      curl
+        inetutils
+        screen)
   )
   (synopsis "Firehol - firewall for humans")
   (description
