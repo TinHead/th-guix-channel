@@ -4,7 +4,10 @@
   #:use-module (gnu services configuration)
   #:use-module (gnu system shadow)
   #:use-module (guix gexp)
-  #:use-module (small-guix services docker))
+  #:use-module (small-guix services docker)
+  #:export (hass-service-type
+            hass-configuration
+            hass-configuration?))
 
 
 ;(define hass-etc
