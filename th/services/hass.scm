@@ -4,7 +4,7 @@
   #:use-module (gnu services configuration)
   #:use-module (gnu system shadow)
   #:use-module (guix gexp)
-  #:use-module (small-guix services docker)
+  #:use-module (small-guix services docker))
 
 
 ;(define hass-etc
@@ -93,5 +93,3 @@
                 (default-value (hass-configuration))
                 (description
                  "This service install a Docker backed Hass container.")))
-
-)
