@@ -9,6 +9,22 @@
 #:use-module (gnu packages python-xyz)
 #:use-module (guix licenses))
 
+(define-public python-micropython-rp2-pico-w-stubs
+(package
+  (name "python-micropython-rp2-pico-w-stubs")
+  (version "1.20.0.post3")
+  (source
+   (origin
+     (method url-fetch)
+     (uri (pypi-uri "micropython_rp2_pico_w_stubs" version))
+     (sha256
+      (base32 "092gpvwgkcjrgly5q70zqnwli22a8ip9zx4lwam1g93s1mh5dlri"))))
+  (build-system pyproject-build-system)
+  (home-page "https://github.com/josverl/micropython-stubs#micropython-stubs")
+  (synopsis "MicroPython stubs")
+  (description "@code{MicroPython} stubs")
+  (license license:expat))
+)
 (define-public python-atomicwrites-homeassistant 
 (package
   (name "python-atomicwrites-homeassistant")
