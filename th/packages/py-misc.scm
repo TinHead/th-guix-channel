@@ -19,7 +19,7 @@
      (uri (pypi-uri "micropython_rp2_pico_w_stubs" version))
      (sha256
       (base32 "092gpvwgkcjrgly5q70zqnwli22a8ip9zx4lwam1g93s1mh5dlri"))))
-  (build-system pyproject-build-system)
+  (build-system python-build-system)
   (home-page "https://github.com/josverl/micropython-stubs#micropython-stubs")
   (synopsis "MicroPython stubs")
   (description "@code{MicroPython} stubs")
