@@ -23,7 +23,7 @@
   (home-page "https://github.com/josverl/micropython-stubs#micropython-stubs")
   (synopsis "MicroPython stubs")
   (description "@code{MicroPython} stubs")
-  (license license:expat))
+  (license expat))
 )
 (define-public python-atomicwrites-homeassistant 
 (package
