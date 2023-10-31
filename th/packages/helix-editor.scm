@@ -74,4 +74,4 @@
     (home-page "https://helix-editor.com/")
     (license mpl2.0)
 ))
-helix-editor-bin
+
