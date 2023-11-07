@@ -1,5 +1,6 @@
 (define-module (th services dnsmasq)
   #:use-module (gnu services)
+  #:use-module (gnu packages dns)
   #:use-module (gnu packages base)
   #:use-module (gnu packages compression)
   #:use-module (gnu services shepherd)
