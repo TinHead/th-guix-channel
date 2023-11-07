@@ -195,7 +195,7 @@
     ; (one-shot? #t)
     ; (respawn? #f)
     (start #~(make-forkexec-constructor 
-              (list #$(file-append dnsmasq "/sbin/dnsmasq") "--keep-in-foreground" "--pid-file=/run/dnsmasq.pid" #$(format #f "--config-file=~a" #$(serialize-firehol-config config)))
+              (list #$(file-append dnsmasq "/sbin/dnsmasq") "--keep-in-foreground" "--pid-file=/run/dnsmasq.pid" #$(format #f "--config-file=~a" #$(serialize-dnsmasq-config config)))
               #:pid-file "/run/dnsmasq.pid")) 
     (stop  #~(make-kill-destructor))
     ; (actions 
