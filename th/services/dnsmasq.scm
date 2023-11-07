@@ -185,7 +185,7 @@
 
 
 (define (dnsmasq-shepherd-service config)
- ; (match-record config <dnsma-configuration>
+  (match-record config <dnsmasq-configuration>
     ; (version)
     ; (let* ((config-file (firehol-configuration-file config))))
   (list (shepherd-service
@@ -214,7 +214,7 @@
     ;               ":"
     ;               #$(file-append gzip "/bin"))))
     ;     ))))
-    )))
+    ))))
     
 (define dnsmasq-service-type
   (service-type
