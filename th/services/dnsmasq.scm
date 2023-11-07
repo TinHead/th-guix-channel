@@ -185,36 +185,15 @@
 
 
 (define (dnsmasq-shepherd-service config)
-  (match-record config <dnsmasq-configuration>
-    ; (version)
-    ; (let* ((config-file (firehol-configuration-file config))))
   (list (shepherd-service
     (documentation "Run Dnsmasq")
     (provision '(dnsmasq))
     (requirement '(networking))
-    ; (one-shot? #t)
-    ; (respawn? #f)
     (start #~(make-forkexec-constructor 
-              (list #$(file-append dnsmasq "/sbin/dnsmasq") "--keep-in-foreground" "--pid-file=/run/dnsmasq.pid" #$(format #f "--config-file=~a" #$(serialize-dnsmasq-config config)))
+              (list #$(file-append dnsmasq "/sbin/dnsmasq") "--keep-in-foreground" "--pid-file=/run/dnsmasq.pid" #$(format #f "--config-file=~a" (serialize-dnsmasq-config config)))
               #:pid-file "/run/dnsmasq.pid")) 
     (stop  #~(make-kill-destructor))
-    ; (actions 
-    ;  (list
-    ;   (shepherd-action
-    ;     (name 'clear)
-    ;     (documentation "Stop and clear firewall")
-    ;     (procedure #~(
-    ;       make-forkexec-constructor 
-    ;           (list #$(file-append firehol "/sbin/firehol") "stop")
-    ;           #:environment-variables 
-    ;             (list 
-    ;             "FIREHOL_LOAD_KERNEL_MODULES=0"
-    ;             (string-append "PATH=$PATH:" 
-    ;               #$(file-append coreutils "/bin/")
-    ;               ":"
-    ;               #$(file-append gzip "/bin"))))
-    ;     ))))
-    ))))
+    )))
     
 (define dnsmasq-service-type
   (service-type
