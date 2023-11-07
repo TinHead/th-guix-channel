@@ -213,7 +213,7 @@
     ;               ":"
     ;               #$(file-append gzip "/bin"))))
     ;     ))))
-    ))))
+    )))
     
 (define dnsmasq-service-type
   (service-type
