@@ -1,4 +1,4 @@
-(define-module (guile-lsp-server)
+(define-module (th packages guile-lsp-server)
   #:use-module (guix packages)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (guix download)
