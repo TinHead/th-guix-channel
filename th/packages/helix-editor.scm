@@ -11,7 +11,7 @@
 (define-public helix-editor-bin
   (package
     (name "helix-editor-bin")
-    (version "23.05")
+    (version "23.10")
     (source
      (origin
        (method url-fetch)
@@ -23,7 +23,7 @@
 	     "-x86_64-linux.tar.xz"))
        (sha256
         (base32
-         "1dadgsw5l147lmzh5g7fwsc4iy6w4h873xp3jv9hc3n1fbnnzg55"))))
+         "15xwnl90j0ymp22k0g72s8nxh8zxfpc9i3q92j6kq222p7nyakdx"))))
     
 ;    (let hx (string-append  ("helix-" version "-x86_64-linux/hx")))
     (build-system binary-build-system)
@@ -55,7 +55,9 @@
 	("runtime/grammars/python.so" ("gcc:lib" "glibc"))
 	("runtime/grammars/ruby.so" ("gcc:lib" "glibc"))
 	("runtime/grammars/vue.so" ("gcc:lib" "glibc"))
-	("runtime/grammars/yaml.so" ("gcc:lib" "glibc"))
+	("runtime/grammars/fsharp.so" ("gcc:lib" "glibc"))
+	("runtime/grammars/haskell-persistent.so" ("gcc:lib" "glibc"))
+  	("runtime/grammars/yaml.so" ("gcc:lib" "glibc"))
 		 )))
 ;;     #:phases
 ;     #~(modify-phases %standard-phases
