@@ -13,6 +13,7 @@
   #:export (dnsmasq-configuration
             dnsmasq-configuration?
             dnsmasq-service-type
+            dnsmasq-host
             serialize-dnsmasq-config
             ))
 
