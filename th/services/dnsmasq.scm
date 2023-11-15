@@ -24,50 +24,23 @@
         (string-append "is-" (string-drop-right str 1))
         str)))
 
-; (define (serialize-version field value)
-  ; #~(string-append #$(uglify-field-name field) " " #$value "\n"))
+(define (serialize-host-name field value)
+   #~(string-append "," #$value "\n"))
 
-; (define (serialize-interface-name field value)
-;   #~(string-append "interface4 " #$value )
-; )
+(define (serialize-mac-addr field value)
+  #~(string-append "dhcp-host=" #$value))
 
-; (define (serialize-router-name field value)
-;   #~(string-append "router4 " #$value )
-; )
+(define (serialize-ip-addr field value)
+  #~(string-append "," #$value))
 
-; (define (serialize-router-inface field value)
-;   #~(string-append " inface " #$value )
-; )
-
-; (define (serialize-router-outface field value)
-;   #~(string-append " outface " #$value )
-; )
-
-(define (serialize-interface-name field value)
-   #~(string-append "interface=" #$value "\n")
-)
-
-(define (serialize-list-of-interfaces field value)
+(define (serialize-list-of-hosts field value)
    #~(string-append #$@(map (cut serialize-configuration <>
-                                 dnsmasq-interface-fields)
+                                 dnsmasq-host-fields)
                             value)))
-; (define (serialize-list-of-routers field value)
-;   #~(string-append #$@(map (cut serialize-configuration <>
-;                                 firehol-router-fields)
-;                            value)))
-                          
-; (define (serialize-extra-opts field value)
-;    #~(string-append " " #$value "\n")
-; )
-
 (define (serialize-dnsmasq-config config)
   (mixed-text-file
   "dnsmasq.conf"
-  #~(string-append #$(serialize-configuration config dnsmasq-configuration-fields)))
-)
-
-; (define (serialize-policy field value)
-;    (string-append "    policy " value "\n"))
+  #~(string-append #$(serialize-configuration config dnsmasq-configuration-fields))))
 
 (define (list-of-string? lst)
   (every string? lst)
@@ -77,59 +50,27 @@
   (string-append (string-join lst "\n") "\n")
 )
 
-(define-configuration dnsmasq-interface
-  (name
-    (string "eth0")
-    "Interface device name to listen for dhcp on"
-    (serializer serialize-interface-name))
-  ; (custom-name
-  ;   (string "lan")
-  ;   "Interface friendly name"
-  ;   (serializer serialize-interface-custom-name))
-  ; (extra-opts
-  ;   (string "")
-  ;   "Extra options as a string to add to this intreface - ie src ip dst ip"
-  ;   (serializer serialize-extra-opts))
-  ; (policy
-  ;   (string "drop")
-  ;   "Policy for this interface defaults to drop everything"
-  ;   (serializer serialize-policy))
-  ; (rules
-  ;   (list-of-string '("client all deny"))
-  ;   "List of rules to apply on interface"
-  ;   (serializer serialize-list-of-string))
+(define-configuration dnsmasq-host
+   (host-name
+     (string "myhostname")
+     "Hostname of the device"
+     (serializer serialize-host-name))
+   (mac-addr
+     (string "00:11:11:22:33:55")
+     "MAC address of the device"
+     (serializer serialize-mac-addr))
+   (ip-addr
+     (string "192.168.1.111")
+     "IP address for the device"
+     (serializer serialize-ip-addr)))
+
+(define (list-of-hosts? lst)
+   (every dnsmasq-host? lst)
 )
 
-; (define-configuration firehol-router
-;  (name
-;   (string "lan")
-;   "Router name"
-;   (serializer serialize-router-name))
-;  (inface
-;   (string "eth0")
-;   "Input interface"
-;   (serializer serialize-router-inface))
-;  (outface
-;   (string "eth1")
-;   "Output interface"
-;   (serializer serialize-router-outface))
-;  (extra-opts
-;   (string "")
-;   "Extra options - ie src dst etc"
-;   (serializer serialize-extra-opts))
-;  (rules
-;   (list-of-string '("client all deny"))
-;   "Rules to apply on this router"
-;   (serializer serialize-list-of-string)) 
+; (define (list-of-interfaces? lst)
+;    (every dnsmasq-interface? lst) 
 ; )
-
-; (define (list-of-routers? lst)
-;   (every firehol-router? lst)
-; )
-
-(define (list-of-interfaces? lst)
-   (every dnsmasq-interface? lst) 
-)
 
 (define-configuration dnsmasq-configuration
   (custom-opts
@@ -157,14 +98,14 @@
     (list-of-string '())
     "Define a list of domains to bind to ip eg: address=/example.com/127.0.0.1"
    (serializer serialize-list-of-string))
-  (interfaces
-    (list-of-interfaces '())
-    "List of interface definitions"
-    (serializer serialize-list-of-interfaces))
-  (dhcp-hosts
-    (list-of-strings  '())
-    "List of host  definitions"
+  (listen
+    (list-of-strings '())
+    "List of listen definitions"
     (serializer serialize-list-of-string))
+  (dhcp-hosts
+    (list-of-hosts  '())
+    "List of host  definitions"
+    (serializer serialize-list-of-hosts))
   (dhcp-opts
     (list-of-strings  '())
     "List of dhcp-opts definitions"
