@@ -52,10 +52,6 @@
 )
 
 (define-configuration dnsmasq-host
-   (host-name
-     (string "myhostname")
-     "Hostname of the device"
-     (serializer serialize-host-name))
    (mac-addr
      (string "00:11:11:22:33:55")
      "MAC address of the device"
@@ -63,7 +59,11 @@
    (ip-addr
      (string "192.168.1.111")
      "IP address for the device"
-     (serializer serialize-ip-addr)))
+     (serializer serialize-ip-addr))
+   (host-name
+     (string "myhostname")
+     "Hostname of the device"
+     (serializer serialize-host-name)))
 
 (define (list-of-hosts? lst)
    (every dnsmasq-host? lst)
