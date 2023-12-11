@@ -517,9 +517,9 @@ password.")
                    (module pam-ldap-module))))
              (pam-service
               (inherit pam)
-              (auth (cons sufficient (pam-service-auth pam)))
+              (auth (cons (pam-entry (control "sufficient")(module pam-ldap-module)(args "use_first_pass"))(pam-service-auth pam)))
               (session (cons sufficient (pam-service-session pam)))
-              (password (cons sufficient (pam-service-session pam)))
+              ; (password (cons sufficient (pam-service-session pam)))
               (account (cons sufficient (pam-service-account pam)))))
            pam)))))
 
