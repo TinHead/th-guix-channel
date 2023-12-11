@@ -519,7 +519,7 @@ password.")
               (inherit pam)
               (auth (cons sufficient (pam-service-auth pam)))
               (session (cons sufficient (pam-service-session pam)))
-              (passwd (cons sufficient (pam-service-session pam)))
+              (password (cons sufficient (pam-service-session pam)))
               (account (cons sufficient (pam-service-account pam)))))
            pam)))))
 
