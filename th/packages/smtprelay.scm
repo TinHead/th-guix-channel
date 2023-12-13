@@ -24,10 +24,14 @@
     (inputs (list gnupg))
     (arguments
      `(#:install-plan
-      `(("smtprelay" "/bin/"))
+       `(("smtprelay" "/bin/"))
+       #:patchelf-plan
+       `(("smtprelay" ("gcc:lib" "glibc")))
+
 		 ))
     (synopsis "Simple Golang SMTP relay/proxy server")
     (description "Simple Golang SMTP relay/proxy server")
     (home-page "https://github.com/decke/smtprelay")
     (license (nonfree "https://github.com/decke/smtprelay"))
 ))
+smtprelay-bin
