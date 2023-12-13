@@ -19,7 +19,7 @@
              "https://github.com/decke/smtprelay/releases/download/v" version  "/smtprelay-v" version "-linux-amd64.tar.gz"))
        (sha256
         (base32
-         "0r0hf4qp0iqndn4i58g57mzsg9priiy5hfjhl9gq6z8mk1h6q204"))))
+         "1qlhb21msc6sgi17nr5kzm88cfndrcsx6zr75x49s08fjhlsjmfj"))))
     (build-system binary-build-system)
     (inputs (list gnupg))
     (arguments
