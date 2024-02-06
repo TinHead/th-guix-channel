@@ -17,9 +17,9 @@
 (define %source-dir (getcwd))
 
 (define-public guile-json-rpc
-  (let ((version "0.4.0")
-        (revision "0")
-        (commit "3c4f55aa55bda8616f84f647f47e79b9fbd45889"))
+  (let ((version "0.4.5")
+        (revision "a")
+        (commit "70192263f3947624400803e00fa37e69b9e574a3"))
     (package
      (name "guile-json-rpc")
      (version (git-version version revision commit))
@@ -31,7 +31,7 @@
              (commit commit)))
        (sha256
         (base32
-         "0z5azrxm4qd8dccz7hx2gnnw4wgig1n8x1jqv3bi9zack8q1wyfk"))))
+         "0356hm6phcfgvwvx3ys6b927v40jzb7qrfgvql7g78na24zp2cmi"))))
      (build-system gnu-build-system)
      (arguments
       (list
@@ -61,14 +61,14 @@ when needed.")
 (define-public guile-lsp-server
     (package
      (name "guile-lsp-server")
-     (version "0.4.1")
+     (version "0.4.4")
      (source 
       (origin
         (method url-fetch)
         (uri (string-append "https://codeberg.org/rgherdt/scheme-lsp-server/archive/" version ".tar.gz"))
         (sha256
            (base32
-              "1xj6l47wc284d2gggs6ma0vrdis2288an7pxs7qc2486bkgysz11"))))
+              "166r7wpfzc1az50b5767aqgnxqwrmn527marawmmgjhl4xnm4anz"))))
      (build-system gnu-build-system)
      (arguments
       (list
@@ -96,3 +96,4 @@ when needed.")
 provide IDE functionality for Guile Scheme.")
      (home-page "https://codeberg.org/rgherdt/scheme-lsp-server")
      (license license:expat)))
+
