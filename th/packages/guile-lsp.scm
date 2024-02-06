@@ -68,7 +68,7 @@ when needed.")
         (uri (string-append "https://codeberg.org/rgherdt/scheme-lsp-server/archive/" version ".tar.gz"))
         (sha256
            (base32
-              "0m53kg1l9jxkpr3l82if9g6809xmwrfnn3z3q5ajk3k99h255k0z"))))
+              "1xj6l47wc284d2gggs6ma0vrdis2288an7pxs7qc2486bkgysz11"))))
      (build-system gnu-build-system)
      (arguments
       (list
