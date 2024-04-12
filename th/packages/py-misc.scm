@@ -10,54 +10,55 @@
 #:use-module (gnu packages python-web)
 #:use-module (gnu packages python-check)
 #:use-module (gnu packages django)
-#:use-module (gnu packages rust-apps)
-#:use-module (gnu packages rust)
+#:use-module (gnu packages python-crypto)
+#:use-module (gnu packages openstack)
 #:use-module (guix licenses))
 
-(define-public python-sanic
-  (package
-    (name "python-sanic")
-    (version "23.12.1")
-    (source
-     (origin
-       (method url-fetch)
-       (uri (pypi-uri "sanic" version))
-       (sha256
-        (base32 "115vnir4qijv89139g5h0i4l0n4w3bgh1ickgnk8xidxsa0wla15"))))
-    (build-system pyproject-build-system)
-    (propagated-inputs (list python-aiofiles
-                             python-html5tagger
-                             python-httptools
-                             python-multidict
-                             python-sanic-routing
-                             python-tracerite
-                             python-typing-extensions
-                             python-websockets))
-    (native-inputs (list python-bandit
-                         python-beautifulsoup4
-                         python-chardet
-                         python-coverage
-                         python-cryptography
-                         python-docutils
-                         python-mypy
-                         python-pygments
-                         python-pytest
-                         python-pytest-benchmark
-                         python-pytest-sanic
-                         python-ruff
-                         python-sanic-testing
-                         python-slotscheck
-                         python-towncrier
-                         python-tox
-                         python-types-ujson
-                         python-uvicorn))
-    (home-page "http://github.com/sanic-org/sanic/")
-    (synopsis
-     "A web server and web framework that's written to go fast. Build fast. Run fast.")
-    (description
-     "This package provides a web server and web framework that's written to go fast.
-Build fast.  Run fast.")
-    (license expat)))
+; (define-public python-sanic
+;   (package
+;     (name "python-sanic")
+;     (version "23.12.1")
+;     (source
+;      (origin
+;        (method url-fetch)
+;        (uri (pypi-uri "sanic" version))
+;        (sha256
+;         (base32 "115vnir4qijv89139g5h0i4l0n4w3bgh1ickgnk8xidxsa0wla15"))))
+;     (build-system pyproject-build-system)
+;     (propagated-inputs (list python-aiofiles
+;                              python-html5tagger
+;                              python-httptools
+;                              python-multidict
+;                              python-sanic-routing
+;                              python-tracerite
+;                              python-typing-extensions
+;                              python-websockets))
+;     (native-inputs (list python-bandit
+;                          python-beautifulsoup4
+;                          python-chardet
+;                          python-coverage
+;                          python-cryptography
+;                          python-docutils
+;                          python-mypy
+;                          python-pygments
+;                          python-pytest
+;                          python-pytest-benchmark
+;                          python-pytest-sanic
+;                          python-ruff
+;                          python-sanic-testing
+;                          python-slotscheck
+;                          python-towncrier
+;                          python-tox
+;                          python-types-ujson
+;                          python-uvicorn))
+;     (home-page "http://github.com/sanic-org/sanic/")
+;     (synopsis
+;      "A web server and web framework that's written to go fast. Build fast. Run fast.")
+;     (description
+;      "This package provides a web server and web framework that's written to go fast.
+; Build fast.  Run fast.")
+;     (license expat)))
+
     
 (define-public python-readme-renderer
   (package
@@ -323,4 +324,4 @@ methodologies, and modern toolchains for unrivaled success.")
   (license #f))
 )
 
-python-platformio
+; python-sanic
