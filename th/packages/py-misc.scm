@@ -7,7 +7,166 @@
 #:use-module (gnu packages python-build)
 #:use-module (gnu packages check)
 #:use-module (gnu packages python-xyz)
+#:use-module (gnu packages python-web)
+#:use-module (gnu packages python-check)
+#:use-module (gnu packages django)
+#:use-module (gnu packages rust-apps)
+#:use-module (gnu packages rust)
 #:use-module (guix licenses))
+
+(define-public python-nh3
+  (package
+    (name "python-nh3")
+    (version "0.2.17")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (pypi-uri "nh3" version))
+       (sha256
+        (base32 "0a7hrca5bbbrz20cbqy16n8vaxf4v2q1r9zv9vjlbmn334d79l20"))))
+    (build-system pyproject-build-system)
+    (propagated-inputs (list maturin rust-cargo rust))
+    (home-page "")
+    (synopsis "Python bindings to the ammonia HTML sanitization library.")
+    (description "Python bindings to the ammonia HTML sanitization library.")
+    (license expat)))
+
+(define-public python-readme-renderer
+  (package
+    (name "python-readme-renderer")
+    (version "43.0")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (pypi-uri "readme_renderer" version))
+       (sha256
+        (base32 "04g3zpa0kp6505h5inylj2npnkydyy3jdmnqxsg504q82hlds60q"))))
+    (build-system pyproject-build-system)
+    (arguments
+     `(#:tests? #f
+       #:phases
+        (modify-phases %standard-phases
+         (delete 'sanity-check))))
+    (propagated-inputs (list python-docutils python-pygments))
+    (home-page "")
+    (synopsis
+     "readme_renderer is a library for rendering readme descriptions for Warehouse")
+    (description
+     "readme_renderer is a library for rendering readme descriptions for Warehouse")
+    (license asl2.0)))
+    
+(define-public python-build
+  (package
+    (name "python-build")
+    (version "1.2.1")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (pypi-uri "build" version))
+       (sha256
+        (base32 "17g1wcx8f7h0db3ymwdni1sjnyrpfna5fi9m8dng49hchzs66qjj"))))
+    (build-system pyproject-build-system)
+    (arguments
+     `(#:tests? #f))
+    (native-inputs (list python-flit-core-bootstrap python-tomli python-pyproject-hooks))
+    (home-page "")
+    (synopsis "A simple, correct Python build frontend")
+    (description
+     "This package provides a simple, correct Python build frontend")
+    (license #f)))
+
+(define-public python-zest.releaser
+  (package
+    (name "python-zest.releaser")
+    (version "9.1.3")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (pypi-uri "zest.releaser" version))
+       (sha256
+        (base32 "00b0mp0m6cq6126d54g43fm9sk31j9q4v7vr7l83wsvzk8jzpwby"))))
+    (build-system pyproject-build-system)
+    (arguments
+     `(#:tests? #f
+       #:phases
+        (modify-phases %standard-phases
+         (delete 'sanity-check))))
+    (propagated-inputs (list python-build
+                             python-colorama
+                             python-readme-renderer
+                             python-requests
+                             python-setuptools
+                             python-twine))
+    (native-inputs (list python-wheel python-tomli python-zope-testing
+                         python-zope-testrunner python-readme-renderer))
+    (home-page #f)
+    (synopsis "Software releasing made easy and repeatable")
+    (description "Software releasing made easy and repeatable")
+    (license gpl3)))
+
+(define-public python-semantic-version
+  (package
+    (name "python-semantic-version")
+    (version "2.10.0")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (pypi-uri "semantic_version" version))
+       (sha256
+        (base32 "0704smz9k6hdd6i5xh0xf0sk47kannjb77abilvvp34r6v9vdaxx"))))
+    (build-system pyproject-build-system)
+    (native-inputs (list python-check-manifest
+                         python-colorama
+                         python-coverage
+                         python-django
+                         python-flake8
+                         python-nose2
+                         python-readme-renderer
+                         python-tox
+                         python-wheel
+                         python-zest.releaser))
+    (home-page "https://github.com/rbarrois/python-semanticversion")
+    (synopsis "A library implementing the 'SemVer' scheme.")
+    (description
+     "This package provides a library implementing the @code{SemVer} scheme.")
+    (license bsd-3)))
+
+(define-public python-platformio
+  (package
+    (name "python-platformio")
+    (version "6.1.14")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (pypi-uri "platformio" version))
+       (sha256
+        (base32 "1r6lsyf3jwpi0qvgs2dzxssc9hv18ync7x7q1ky3ii9hiw4wx23s"))))
+    (build-system pyproject-build-system)
+    (arguments
+     `(#:tests? #f))
+    (propagated-inputs (list python-ajsonrpc
+                             python-bottle
+                             python-click
+                             python-colorama
+                             python-marshmallow
+                             python-pyelftools
+                             python-pyserial
+                             python-requests
+                             python-semantic-version
+                             python-starlette
+                             python-tabulate
+                             python-uvicorn
+                             python-wsproto))
+    (home-page "https://platformio.org")
+    (synopsis
+     "Your Gateway to Embedded Software Development Excellence. Unlock the true potential of embedded software development with PlatformIO's collaborative ecosystem, embracing declarative principles, test-driven methodologies, and modern toolchains for unrivaled success.")
+    (description
+     "Your Gateway to Embedded Software Development Excellence.  Unlock the true
+potential of embedded software development with @code{PlatformIO's}
+collaborative ecosystem, embracing declarative principles, test-driven
+methodologies, and modern toolchains for unrivaled success.")
+    (license #f))
+)
 
 (define-public python-micropython-rp2-pico-w-stubs
 (package
@@ -135,3 +294,5 @@
   (description "Convert voluptuous schemas to dictionaries")
   (license #f))
 )
+
+python-platformio
