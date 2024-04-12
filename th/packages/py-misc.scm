@@ -14,23 +14,51 @@
 #:use-module (gnu packages rust)
 #:use-module (guix licenses))
 
-(define-public python-nh3
+(define-public python-sanic
   (package
-    (name "python-nh3")
-    (version "0.2.17")
+    (name "python-sanic")
+    (version "23.12.1")
     (source
      (origin
        (method url-fetch)
-       (uri (pypi-uri "nh3" version))
+       (uri (pypi-uri "sanic" version))
        (sha256
-        (base32 "0a7hrca5bbbrz20cbqy16n8vaxf4v2q1r9zv9vjlbmn334d79l20"))))
+        (base32 "115vnir4qijv89139g5h0i4l0n4w3bgh1ickgnk8xidxsa0wla15"))))
     (build-system pyproject-build-system)
-    (propagated-inputs (list maturin rust-cargo rust))
-    (home-page "")
-    (synopsis "Python bindings to the ammonia HTML sanitization library.")
-    (description "Python bindings to the ammonia HTML sanitization library.")
+    (propagated-inputs (list python-aiofiles
+                             python-html5tagger
+                             python-httptools
+                             python-multidict
+                             python-sanic-routing
+                             python-tracerite
+                             python-typing-extensions
+                             python-websockets))
+    (native-inputs (list python-bandit
+                         python-beautifulsoup4
+                         python-chardet
+                         python-coverage
+                         python-cryptography
+                         python-docutils
+                         python-mypy
+                         python-pygments
+                         python-pytest
+                         python-pytest-benchmark
+                         python-pytest-sanic
+                         python-ruff
+                         python-sanic-testing
+                         python-slotscheck
+                         python-towncrier
+                         python-tox
+                         python-types-ujson
+                         python-uvicorn))
+    (home-page "http://github.com/sanic-org/sanic/")
+    (synopsis
+     "A web server and web framework that's written to go fast. Build fast. Run fast.")
+    (description
+     "This package provides a web server and web framework that's written to go fast.
+Build fast.  Run fast.")
     (license expat)))
-
+    
 (define-public python-readme-renderer
   (package
     (name "python-readme-renderer")
