@@ -14,6 +14,36 @@
 #:use-module (gnu packages openstack)
 #:use-module (guix licenses))
 
+(define-public python-sanic2
+  (package
+    (inherit python-sanic)
+   (arguments
+     '(#:tests? #f))
+       ; #:phases (modify-phases %standard-phases
+          ; (delete 'patch-fish-config))))                          ;funky version number
+))
+
+(define-public python-ajsonrpc
+  (package
+    (name "python-ajsonrpc")
+    (version "1.2.0")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (pypi-uri "ajsonrpc" version))
+       (sha256
+        (base32 "17x1a4r4l428mhwn53abki9gzdzq3halyr4lj48fw3dzy0caq6vr"))))
+    (build-system python-build-system)
+    (propagated-inputs
+     (list python-quart
+           python-sanic2
+           python-tornado))
+    (home-page "https://github.com/pavlov99/ajsonrpc")
+    (synopsis "Async JSON-RPC 2.0 protocol and server")
+    (description
+     "This package provides a Python JSON-RPC 2.0 protocol and server powered
+by asyncio.")
+    (license expat)))
 ; (define-public python-sanic
 ;   (package
 ;     (name "python-sanic")
@@ -175,6 +205,7 @@
      `(#:tests? #f))
     (propagated-inputs (list python-ajsonrpc
                              python-bottle
+                             ; python-sanic
                              python-click
                              python-colorama
                              python-marshmallow
@@ -324,4 +355,4 @@ methodologies, and modern toolchains for unrivaled success.")
   (license #f))
 )
 
-; python-sanic
+python-platformio
