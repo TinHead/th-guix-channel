@@ -1,4 +1,4 @@
-(define-module (th packages bemenu)
+(define-module (th packages boringtun)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (guix packages)
   #:use-module (gnu packages xdisorg)
