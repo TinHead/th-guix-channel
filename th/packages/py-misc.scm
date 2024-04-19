@@ -10,27 +10,86 @@
 #:use-module (gnu packages python-web)
 #:use-module (gnu packages python-check)
 #:use-module (gnu packages django)
-#:use-module (gnu packages rust-apps)
-#:use-module (gnu packages rust)
+#:use-module (gnu packages python-crypto)
+#:use-module (gnu packages openstack)
 #:use-module (guix licenses))
 
-(define-public python-nh3
+(define-public python-sanic2
   (package
-    (name "python-nh3")
-    (version "0.2.17")
+    (inherit python-sanic)
+   (arguments
+     '(#:tests? #f))
+       ; #:phases (modify-phases %standard-phases
+          ; (delete 'patch-fish-config))))                          ;funky version number
+))
+
+(define-public python-ajsonrpc
+  (package
+    (name "python-ajsonrpc")
+    (version "1.2.0")
     (source
      (origin
        (method url-fetch)
-       (uri (pypi-uri "nh3" version))
+       (uri (pypi-uri "ajsonrpc" version))
        (sha256
-        (base32 "0a7hrca5bbbrz20cbqy16n8vaxf4v2q1r9zv9vjlbmn334d79l20"))))
-    (build-system pyproject-build-system)
-    (propagated-inputs (list maturin rust-cargo rust))
-    (home-page "")
-    (synopsis "Python bindings to the ammonia HTML sanitization library.")
-    (description "Python bindings to the ammonia HTML sanitization library.")
+        (base32 "17x1a4r4l428mhwn53abki9gzdzq3halyr4lj48fw3dzy0caq6vr"))))
+    (build-system python-build-system)
+    (propagated-inputs
+     (list python-quart
+           python-sanic2
+           python-tornado))
+    (home-page "https://github.com/pavlov99/ajsonrpc")
+    (synopsis "Async JSON-RPC 2.0 protocol and server")
+    (description
+     "This package provides a Python JSON-RPC 2.0 protocol and server powered
+by asyncio.")
     (license expat)))
+; (define-public python-sanic
+;   (package
+;     (name "python-sanic")
+;     (version "23.12.1")
+;     (source
+;      (origin
+;        (method url-fetch)
+;        (uri (pypi-uri "sanic" version))
+;        (sha256
+;         (base32 "115vnir4qijv89139g5h0i4l0n4w3bgh1ickgnk8xidxsa0wla15"))))
+;     (build-system pyproject-build-system)
+;     (propagated-inputs (list python-aiofiles
+;                              python-html5tagger
+;                              python-httptools
+;                              python-multidict
+;                              python-sanic-routing
+;                              python-tracerite
+;                              python-typing-extensions
+;                              python-websockets))
+;     (native-inputs (list python-bandit
+;                          python-beautifulsoup4
+;                          python-chardet
+;                          python-coverage
+;                          python-cryptography
+;                          python-docutils
+;                          python-mypy
+;                          python-pygments
+;                          python-pytest
+;                          python-pytest-benchmark
+;                          python-pytest-sanic
+;                          python-ruff
+;                          python-sanic-testing
+;                          python-slotscheck
+;                          python-towncrier
+;                          python-tox
+;                          python-types-ujson
+;                          python-uvicorn))
+;     (home-page "http://github.com/sanic-org/sanic/")
+;     (synopsis
+;      "A web server and web framework that's written to go fast. Build fast. Run fast.")
+;     (description
+;      "This package provides a web server and web framework that's written to go fast.
+; Build fast.  Run fast.")
+;     (license expat)))
 
+    
 (define-public python-readme-renderer
   (package
     (name "python-readme-renderer")
@@ -146,6 +205,7 @@
      `(#:tests? #f))
     (propagated-inputs (list python-ajsonrpc
                              python-bottle
+                             ; python-sanic
                              python-click
                              python-colorama
                              python-marshmallow
