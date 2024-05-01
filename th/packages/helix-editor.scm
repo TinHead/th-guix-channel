@@ -11,7 +11,7 @@
 (define-public helix-editor-bin
   (package
     (name "helix-editor-bin")
-    (version "23.10")
+    (version "24.03")
     (source
      (origin
        (method url-fetch)
@@ -23,7 +23,7 @@
 	     "-x86_64-linux.tar.xz"))
        (sha256
         (base32
-         "15xwnl90j0ymp22k0g72s8nxh8zxfpc9i3q92j6kq222p7nyakdx"))))
+         "1z4v6wwcmbhqpwj6590860m6cx2f5a6402khpix91x7dgy090lmi"))))
     
 ;    (let hx (string-append  ("helix-" version "-x86_64-linux/hx")))
     (build-system binary-build-system)
@@ -75,3 +75,4 @@
     (license mpl2.0)
 ))
 
+helix-editor-bin
