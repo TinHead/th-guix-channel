@@ -7,7 +7,7 @@
   #:use-module (guix packages)
   #:use-module (gnu services configuration)
   #:use-module (guix gexp)
-  #:use-module (th packages prometheus-exporters)
+  #:use-module (th packages promexp)
   #:use-module (srfi srfi-1)
   #:use-module (srfi srfi-26)
   #:export (wg-exporter-configuration
