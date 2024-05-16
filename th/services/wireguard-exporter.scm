@@ -1,4 +1,4 @@
-(define-module (th services wg-exporter)
+(define-module (th services wireguard-exporter)
   #:use-module (gnu services)
   #:use-module (gnu packages base)
   #:use-module (gnu packages )
