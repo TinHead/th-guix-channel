@@ -1,7 +1,7 @@
-(define-module (th packages promexp))
+(define-module (th packages prometheus-exporters))
 (use-modules 
   (gnu packages base)
-  (guix packages)
+  (guix packages)``
   (guix download)
   (guix build-system cargo)
   ((guix licenses) #:prefix license:)
