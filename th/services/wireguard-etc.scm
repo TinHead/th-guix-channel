@@ -161,7 +161,7 @@
                      (format port "~a~%~%~{~a~%~^~%~}"
                              (string-join (remove string-null? lines) "\n")
                              '#$peers)))
-                 (copy-file #$config-file "/etc/wireguard/")))))
+                 (copy-file #$config-file (string-append "/etc/wireguard/" #$config-file)))))
       (file-append config "/" config-file)
       ; (symlink (file-append config "/" config-file) (string-append "/etc/wireguard/" config-file))
       )))
