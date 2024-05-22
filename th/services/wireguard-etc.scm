@@ -172,6 +172,8 @@
         (use-modules (guix build utils)
                      (ice-9 popen)
                      (ice-9 rdelim))
+        
+        (copy-file #$config (string-append "/etc/wireguard/" #$interface ".conf" ))            
         (mkdir-p (dirname #$private-key))
         (unless (file-exists? #$private-key)
           (let* ((pipe
@@ -183,7 +185,6 @@
               (lambda (port)
                 (display key port)))
             (chmod #$private-key #o400)
-            (copy-file #$config (string-append "/etc/wireguard/" #$interface ".conf" ))            
             (close-pipe pipe))))))
 
 ;;; XXX: Copied from (guix scripts pack), changing define to define*.
