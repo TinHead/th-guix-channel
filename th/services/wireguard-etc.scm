@@ -160,9 +160,11 @@
                    (lambda (port)
                      (format port "~a~%~%~{~a~%~^~%~}"
                              (string-join (remove string-null? lines) "\n")
-                             '#$peers)))))))
+                             '#$peers)))
+                 (copy-file #$config-file "/etc/wireguard/")))))
       (file-append config "/" config-file)
-      (symlink (string-append config "/" config-file) (string-append "/etc/wireguard" config-file)))))
+      ; (symlink (file-append config "/" config-file) (string-append "/etc/wireguard/" config-file))
+      )))
 
 (define (wireguard-activation config)
   (match-record config <wireguard-configuration>
