@@ -161,13 +161,13 @@
                      (format port "~a~%~%~{~a~%~^~%~}"
                              (string-join (remove string-null? lines) "\n")
                              '#$peers)))
-                 (mkdir "/etc/wireguard")
-                 (copy-file (string-append #$output "/" #$config-file) (string-append "/etc/wireguard/" #$config-file))))))
+                 (ls #$output)
+                 ))))
       (file-append config "/" config-file))))
 
 (define (wireguard-activation config)
   (match-record config <wireguard-configuration>
-    (private-key wireguard)
+    (private-key wireguard interface)
     #~(begin
         (use-modules (guix build utils)
                      (ice-9 popen)
@@ -183,6 +183,7 @@
               (lambda (port)
                 (display key port)))
             (chmod #$private-key #o400)
+            (copy-file #$config (string-append "/etc/wireguard/" #$interface ".conf" ))            
             (close-pipe pipe))))))
 
 ;;; XXX: Copied from (guix scripts pack), changing define to define*.
