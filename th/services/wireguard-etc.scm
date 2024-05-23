@@ -165,7 +165,7 @@
     ; (display (string-append #$output "/" #$interface ".conf")); (string-append "/etc/wireguard/" #$interface ".conf" ))            
                  ))))
       (file-append config "/" config-file)
-      (display (file-append config "/" config-file))
+      ; (display (file-append config "/" config-file))
       ; (display (string-append ((@ (guile) getenv) "out") "/" "home" ".conf"))
       ; (display config)
       ; (display out)
@@ -178,7 +178,7 @@
         (use-modules (guix build utils)
                      (ice-9 popen)
                      (ice-9 rdelim))
-        
+        (display (wireguard-configuration-file config))
         (mkdir-p (dirname #$private-key))
         (unless (file-exists? #$private-key)
           (let* ((pipe
