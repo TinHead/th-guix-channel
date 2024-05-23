@@ -163,12 +163,13 @@
                              (string-join (remove string-null? lines) "\n")
                              '#$peers)))
                  ))))
-      (file-append config "/" config-file))))
+      (file-append config "/" config-file)
+    (copy-file (file-append config "/" interface ".conf") (string-append "/etc/wireguard/" interface ".conf" ))            
+      )))
 
 (define (wireguard-activation config)
   (match-record config <wireguard-configuration>
     (private-key wireguard interface)
-    (copy-file (file-append config "/" interface ".conf") (string-append "/etc/wireguard/" interface ".conf" ))            
          #~(begin
         (use-modules (guix build utils)
                      (ice-9 popen)
