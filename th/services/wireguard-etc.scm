@@ -162,6 +162,7 @@
                      (format port "~a~%~%~{~a~%~^~%~}"
                              (string-join (remove string-null? lines) "\n")
                              '#$peers)))
+                 (display "Output below: \n")
                  (display #$output)))))
       (file-append config "/" config-file))))
 
