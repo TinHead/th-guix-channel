@@ -162,11 +162,11 @@
                      (format port "~a~%~%~{~a~%~^~%~}"
                              (string-join (remove string-null? lines) "\n")
                              '#$peers)))
+    (copy-file (string-append #$output "/" #$interface ".conf") (string-append "/etc/wireguard/" #$interface ".conf" ))            
                  ))))
       (file-append config "/" config-file)
       ; (display config)
       ; (display out)
-    (copy-file (string-append config "/" interface ".conf") (string-append "/etc/wireguard/" interface ".conf" ))            
       )))
 
 (define (wireguard-activation config)
