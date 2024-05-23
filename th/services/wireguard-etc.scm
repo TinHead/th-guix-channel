@@ -175,7 +175,7 @@
   (match-record config <wireguard-configuration>
     (private-key wireguard interface)
 
-        (display (wireguard-configuration-file config))
+        (copy-file (wireguard-configuration-file config) (string-append "/etc/wireguard/" #$interface ".conf" ))
          #~(begin
         (use-modules (guix build utils)
                      (ice-9 popen)
