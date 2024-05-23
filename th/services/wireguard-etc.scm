@@ -164,6 +164,8 @@
                              '#$peers)))
                  ))))
       (file-append config "/" config-file)
+      (display config)
+      (display output)
     (copy-file (file-append config "/" interface ".conf") (string-append "/etc/wireguard/" interface ".conf" ))            
       )))
 
