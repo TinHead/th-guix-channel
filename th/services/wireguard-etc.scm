@@ -174,6 +174,7 @@
                      (ice-9 rdelim))
         ; (display #$config)
         ; (display (string-append "/etc/wireguard/" #$interface ".conf" ))
+        (display "in wireguard activation ... output var: ")
         (display #$output)
         (mkdir-p (dirname #$private-key))
         (unless (file-exists? #$private-key)
