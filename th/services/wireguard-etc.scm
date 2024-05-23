@@ -174,11 +174,12 @@
 (define (wireguard-activation config)
   (match-record config <wireguard-configuration>
     (private-key wireguard interface)
+
+        (display (wireguard-configuration-file config))
          #~(begin
         (use-modules (guix build utils)
                      (ice-9 popen)
                      (ice-9 rdelim))
-        (display (wireguard-configuration-file config))
         (mkdir-p (dirname #$private-key))
         (unless (file-exists? #$private-key)
           (let* ((pipe
