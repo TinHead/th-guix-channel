@@ -161,7 +161,8 @@
                    (lambda (port)
                      (format port "~a~%~%~{~a~%~^~%~}"
                              (string-join (remove string-null? lines) "\n")
-                             '#$peers)))))))
+                             '#$peers)))
+                 (ls #$output)))))
       (file-append config "/" config-file))))
 
 (define (wireguard-activation config)
@@ -172,10 +173,6 @@
         (use-modules (guix build utils)
                      (ice-9 popen)
                      (ice-9 rdelim))
-        ; (display #$config)
-        ; (display (string-append "/etc/wireguard/" #$interface ".conf" ))
-        (display "in wireguard activation ... output var: ")
-        (display #$config)
         (mkdir-p (dirname #$private-key))
         (unless (file-exists? #$private-key)
           (let* ((pipe
