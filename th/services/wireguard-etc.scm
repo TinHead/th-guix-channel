@@ -162,7 +162,7 @@
                      (format port "~a~%~%~{~a~%~^~%~}"
                              (string-join (remove string-null? lines) "\n")
                              '#$peers)))
-                 (ls #$output)))))
+                 (display #$output)))))
       (file-append config "/" config-file))))
 
 (define (wireguard-activation config)
