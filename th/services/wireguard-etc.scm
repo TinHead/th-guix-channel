@@ -165,7 +165,7 @@
     ; (display (string-append #$output "/" #$interface ".conf")); (string-append "/etc/wireguard/" #$interface ".conf" ))            
                  ))))
       (file-append config "/" config-file)
-      (display (string-append ((@ (guile) getenv) "out") "/" "home" ".conf")))
+      (display (string-append ((@ (guile) getenv) "out") "/" "home" ".conf"))
       ; (display config)
       ; (display out)
       )))
