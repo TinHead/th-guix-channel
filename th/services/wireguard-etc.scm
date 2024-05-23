@@ -162,17 +162,18 @@
                      (format port "~a~%~%~{~a~%~^~%~}"
                              (string-join (remove string-null? lines) "\n")
                              '#$peers)))
-                 (copy-file (string-append #$output "/" #$config-file) (string-append "/etc/wireguard/" #$config-file))))))
+                 ))))
       (file-append config "/" config-file))))
 
 (define (wireguard-activation config)
   (match-record config <wireguard-configuration>
     (private-key wireguard interface)
-    ; (copy-file config (string-append "/etc/wireguard/" interface ".conf" ))            
-    #~(begin
+    (copy-file (file-append config "/" interface ".conf") (string-append "/etc/wireguard/" interface ".conf" ))            
+         #~(begin
         (use-modules (guix build utils)
                      (ice-9 popen)
                      (ice-9 rdelim))
+        
         (mkdir-p (dirname #$private-key))
         (unless (file-exists? #$private-key)
           (let* ((pipe
