@@ -165,7 +165,7 @@
                  ))))
       (file-append config "/" config-file)
       (display config)
-      (display output)
+      (display out)
     (copy-file (file-append config "/" interface ".conf") (string-append "/etc/wireguard/" interface ".conf" ))            
       )))
 
