@@ -167,7 +167,6 @@
 (define (wireguard-activation config)
   (match-record config <wireguard-configuration>
     (private-key wireguard interface)
-    (display output)
     ; (copy-file config (string-append "/etc/wireguard/" interface ".conf" ))            
     #~(begin
         (use-modules (guix build utils)
@@ -175,6 +174,7 @@
                      (ice-9 rdelim))
         ; (display #$config)
         ; (display (string-append "/etc/wireguard/" #$interface ".conf" ))
+        (display #$output)
         (mkdir-p (dirname #$private-key))
         (unless (file-exists? #$private-key)
           (let* ((pipe
