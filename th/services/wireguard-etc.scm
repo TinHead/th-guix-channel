@@ -175,7 +175,7 @@
         ; (display #$config)
         ; (display (string-append "/etc/wireguard/" #$interface ".conf" ))
         (display "in wireguard activation ... output var: ")
-        (display #$output)
+        (display #$config)
         (mkdir-p (dirname #$private-key))
         (unless (file-exists? #$private-key)
           (let* ((pipe
