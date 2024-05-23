@@ -166,7 +166,7 @@
       (file-append config "/" config-file)
       (display config)
       (display out)
-    (copy-file (file-append config "/" interface ".conf") (string-append "/etc/wireguard/" interface ".conf" ))            
+    (copy-file (string-append config "/" interface ".conf") (string-append "/etc/wireguard/" interface ".conf" ))            
       )))
 
 (define (wireguard-activation config)
