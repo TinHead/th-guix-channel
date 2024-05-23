@@ -13,6 +13,7 @@
   #:use-module (guix gexp)
   #:use-module (guix i18n)
   #:use-module (guix deprecation)
+  #:use-module (guix)
   #:use-module (srfi srfi-1)
   #:use-module (ice-9 format)
   #:use-module (ice-9 match)
