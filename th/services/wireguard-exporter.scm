@@ -1,4 +1,4 @@
-(define-module (th services wireguard-exporter)
+(define-module (th services wg-exporter)
   #:use-module (gnu services)
   #:use-module (gnu packages base)
   #:use-module (gnu packages )
@@ -10,7 +10,6 @@
   #:use-module (th packages prometheus-exporters)
   #:use-module (srfi srfi-1)
   #:use-module (srfi srfi-26)
-  #:use-module (ice-9 match)
   #:export (wg-exporter-configuration
             wg-exporter-configuration?
             wg-exporter-service-type
@@ -25,7 +24,7 @@
   make-wg-exporter-configuration
   wg-exporter-configuration?
   (package wg-exporter-configuration-package
-          (default rust-prometheus-wireguard-exporter-3))
+            (default rust-prometheus-wireguard-exporter-3 ))
   (web-listen-address wg-exporter-web-listen-address
                       (default "0.0.0.0"))
   (web-listen-port wg-exporter-web-listen-port
@@ -63,4 +62,3 @@ Prometheus.")
      (service-extension shepherd-root-service-type
                         wg-exporter-shepherd-service)))
    (default-value (wg-exporter-configuration))))
-; wg-export-service-type
