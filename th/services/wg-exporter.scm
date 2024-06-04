@@ -1,7 +1,6 @@
 (define-module (th services wg-exporter)
   #:use-module (gnu services)
   #:use-module (gnu packages base)
-  #:use-module (gnu packages )
   #:use-module (gnu services shepherd)
   #:use-module (guix records)
   #:use-module (guix packages)
@@ -23,8 +22,8 @@
   wg-exporter-configuration
   make-wg-exporter-configuration
   wg-exporter-configuration?
-  (package wg-exporter-configuration-package
-            (default rust-prometheus-wireguard-exporter ))
+  (package wg-exporter-configuration-package)
+            ; (default rust-prometheus-wireguard-exporter))
   (web-listen-address wg-exporter-web-listen-address
                       (default "0.0.0.0"))
   (web-listen-port wg-exporter-web-listen-port
