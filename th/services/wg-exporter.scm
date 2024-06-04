@@ -32,14 +32,14 @@
                       (default "0.0.0.0"))
   (web-listen-port wg-exporter-web-listen-port
                       (default "9586"))
-  (extra-options      wg-exporter-extra-options
+  (env-vars      wg-exporter-env-vars
                       (default '())))
 
 
 (define wg-exporter-shepherd-service
   (match-lambda
     (( $ <wg-exporter-configuration>
-         package web-listen-address web-listen-port extra-options)
+         package web-listen-address web-listen-port env-vars)
      (list
       (shepherd-service
        (documentation "Prometheus wireguard exporter.")
@@ -49,7 +49,9 @@
                  (list #$(file-append package "/bin/prometheus_wireguard_exporter")
                        "-l" #$web-listen-address
                        "-p" #$web-listen-port
-                       #$extra-options)
+                       )
+                 #:environment-variables
+                 (list #$@env-vars)
                  #:log-file "/var/log/wg-node-exporter.log"))
        (stop #~(make-kill-destructor)))))))
 
