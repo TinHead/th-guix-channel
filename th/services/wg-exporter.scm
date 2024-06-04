@@ -4,11 +4,15 @@
   #:use-module (gnu services shepherd)
   #:use-module (guix records)
   #:use-module (guix packages)
+  #:use-module (guix)
   #:use-module (gnu services configuration)
   #:use-module (guix gexp)
   #:use-module (th packages prometheus-exporters)
   #:use-module (srfi srfi-1)
   #:use-module (srfi srfi-26)
+  #:use-module (ice-9 format)
+  #:use-module (ice-9 match)
+  #:use-module (ice-9 regex)
   #:export (wg-exporter-configuration
             wg-exporter-configuration?
             wg-exporter-service-type
@@ -22,8 +26,8 @@
   wg-exporter-configuration
   make-wg-exporter-configuration
   wg-exporter-configuration?
-  (package wg-exporter-configuration-package)
-            ; (default rust-prometheus-wireguard-exporter))
+  (package wg-exporter-configuration-package
+            (default rust-prometheus-wireguard-exporter))
   (web-listen-address wg-exporter-web-listen-address
                       (default "0.0.0.0"))
   (web-listen-port wg-exporter-web-listen-port
