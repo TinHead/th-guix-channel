@@ -27,7 +27,7 @@
   make-wg-exporter-configuration
   wg-exporter-configuration?
   (package wg-exporter-configuration-package
-            (default rust-prometheus-wireguard-exporter))
+            (default rust-prometheus-wireguard-exporter-3))
   (web-listen-address wg-exporter-web-listen-address
                       (default "0.0.0.0"))
   (web-listen-port wg-exporter-web-listen-port
