@@ -179,6 +179,7 @@
         (use-modules (guix build utils)
                      (ice-9 popen)
                      (ice-9 rdelim))
+        (if (file-exists?  (string-append "/etc/wireguard/" #$interface ".conf" )(delete-file (string-append "/etc/wireguard/" #$interface ".conf" ))))
         (symlink #$(wireguard-configuration-file config) (string-append "/etc/wireguard/" #$interface ".conf" ))
         (mkdir-p (dirname #$private-key))
         (unless (file-exists? #$private-key)
