@@ -162,13 +162,8 @@
                      (format port "~a~%~%~{~a~%~^~%~}"
                              (string-join (remove string-null? lines) "\n")
                              '#$peers)))
-    ; (display (string-append #$output "/" #$interface ".conf")); (string-append "/etc/wireguard/" #$interface ".conf" ))            
                  ))))
       (file-append config "/" config-file)
-      ; (display (file-append config "/" config-file))
-      ; (display (string-append ((@ (guile) getenv) "out") "/" "home" ".conf"))
-      ; (display config)
-      ; (display out)
       )))
 
 (define (wireguard-activation config)
@@ -179,7 +174,7 @@
         (use-modules (guix build utils)
                      (ice-9 popen)
                      (ice-9 rdelim))
-        (if (file-exists?  (string-append "/etc/wireguard/" #$interface ".conf" )(delete-file (string-append "/etc/wireguard/" #$interface ".conf" ))))
+        (if (file-exists?  (string-append "/etc/wireguard/" #$interface ".conf" ))(delete-file (string-append "/etc/wireguard/" #$interface ".conf" )))
         (symlink #$(wireguard-configuration-file config) (string-append "/etc/wireguard/" #$interface ".conf" ))
         (mkdir-p (dirname #$private-key))
         (unless (file-exists? #$private-key)
