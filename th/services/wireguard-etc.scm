@@ -100,7 +100,7 @@
     (match-record peer <wireguard-peer>
       (name public-key endpoint allowed-ips keep-alive)
       (let ((lines (list
-                    (format #f "[Peer]   #~a" name)
+                    (format #f "[Peer]   \n#~a" name)
                     (format #f "PublicKey = ~a" public-key)
                     (format #f "AllowedIPs = ~{~a~^, ~}" allowed-ips)
                     (format #f "~@[Endpoint = ~a~]" endpoint)
