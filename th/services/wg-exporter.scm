@@ -49,7 +49,7 @@
                  (list #$(file-append package "/bin/prometheus_wireguard_exporter")
                        "-l" #$web-listen-address
                        "-p" #$web-listen-port
-                       #$@extra-options)
+                       #$extra-options)
                  #:log-file "/var/log/wg-node-exporter.log"))
        (stop #~(make-kill-destructor)))))))
 
