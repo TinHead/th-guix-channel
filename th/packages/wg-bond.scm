@@ -1,5 +1,5 @@
 
-(define-module (th packages prometheus-exporters))
+(define-module (th packages wg-bond))
 (use-modules 
   (gnu packages base)
   (guix packages)
