@@ -23,7 +23,7 @@
               ; (file-name-separator-stringe-name (git-file-name name version))
               (sha256
                (base32
-                "15x9xx4fd1n7ma7qqcpz94mym5gmg7rlff3f5kg7jqribda30hrm"))))
+                "1jadds3zqlxpvlkm6vk0kv4bbh6b5n2wm7mwp9rj5f72vzk4wwfq"))))
     (build-system go-build-system)
     (arguments
      '(#:tests? #f
@@ -46,4 +46,4 @@
     (home-page "https://github.com/tinhead/wireguard-go-exporter")
     (license #f)))
 
-; wireguard-go-exporter
+wireguard-go-exporter
