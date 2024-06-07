@@ -19,11 +19,11 @@
               (method git-fetch)
               (uri (git-reference
                     (url "https://github.com/tinhead/wireguard-go-exporter")
-                    (commit "54e5cbe65998b75527c71c4632932949c60ba55b")))
+                    (commit "b7a6eca90d4263de7e99cf51193f59326a8f443b")))
               ; (file-name-separator-stringe-name (git-file-name name version))
               (sha256
                (base32
-                "1jadds3zqlxpvlkm6vk0kv4bbh6b5n2wm7mwp9rj5f72vzk4wwfq"))))
+                "09rjy6dphzchlmai3hvl55bqwxzz2vf7fdp3jsa50s788zihkbm0"))))
     (build-system go-build-system)
     (arguments
      '(#:tests? #f
