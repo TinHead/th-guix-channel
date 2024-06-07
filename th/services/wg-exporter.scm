@@ -35,7 +35,7 @@
   (interface wg-exporter-interface
                      (default "wg0"))
   (conf-file      wg-exporter-conf-file
-                      (default "/etc/wireguard/wg0.conf"))
+                      (default "/etc/wireguard/wg0.conf")))
 
 
 (define wg-exporter-shepherd-service
