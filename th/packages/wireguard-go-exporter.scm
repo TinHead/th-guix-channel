@@ -18,8 +18,8 @@
     (source (origin
               (method git-fetch)
               (uri (git-reference
-                    (url "https://github.com/1kurops/wireguard-go-exporter")
-                    (commit "0d224ca238d5bb735a2b3b08dd5f32bc8957b022")))
+                    (url "https://github.com/tinhead/wireguard-go-exporter")
+                    (commit "54e5cbe65998b75527c71c4632932949c60ba55b")))
               ; (file-name-separator-stringe-name (git-file-name name version))
               (sha256
                (base32
@@ -28,7 +28,7 @@
     (arguments
      '(#:tests? #f
        #:install-source? #f
-       #:import-path "github.com/1kurops/wireguard-go-exporter"))
+       #:import-path "github.com/tinhead/wireguard-go-exporter"))
        ; #:phases
        ; (modify-phases %standard-phases
          ;; Source-only package
@@ -43,7 +43,7 @@
            ; go-github-com-cespare-xxhash))
     (synopsis "Golang Wireguard exporter format Prometheus")
     (description "This package @code{promhttp} provides wireguard Prometheus metrics.")
-    (home-page "https://github.com/1kurops/wireguard-go-exporter")
+    (home-page "https://github.com/tinhead/wireguard-go-exporter")
     (license #f)))
 
 ; wireguard-go-exporter
