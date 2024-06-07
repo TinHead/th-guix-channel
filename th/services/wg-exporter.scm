@@ -7,7 +7,7 @@
   #:use-module (guix)
   #:use-module (gnu services configuration)
   #:use-module (guix gexp)
-  #:use-module (th packages prometheus-exporters)
+  #:use-module (th packages wireguard-go-exporter)
   #:use-module (srfi srfi-1)
   #:use-module (srfi srfi-26)
   #:use-module (ice-9 format)
@@ -27,31 +27,33 @@
   make-wg-exporter-configuration
   wg-exporter-configuration?
   (package wg-exporter-configuration-package
-            (default rust-prometheus-wireguard-exporter-3))
-  (web-listen-address wg-exporter-web-listen-address
-                      (default "0.0.0.0"))
-  (web-listen-port wg-exporter-web-listen-port
-                      (default "9586"))
-  (env-vars      wg-exporter-env-vars
-                      (default '())))
+            (default wireguard-go-exporter))
+  (web-listen wg-exporter-web-listen
+                      (default ":9586"))
+  (web-metrics-url wg-exporter-web-metrics-url
+                     (default "/metrics"))
+  (interface wg-exporter-interface
+                     (default "wg0"))
+  (conf-file      wg-exporter-conf-file
+                      (default "/etc/wireguard/wg0.conf"))
 
 
 (define wg-exporter-shepherd-service
   (match-lambda
     (( $ <wg-exporter-configuration>
-         package web-listen-address web-listen-port env-vars)
+         package web-listen web-metrics-url interface conf-file)
      (list
       (shepherd-service
        (documentation "Prometheus wireguard exporter.")
        (provision '(wg-exporter))
        (requirement '(networking))
        (start #~(make-forkexec-constructor
-                 (list #$(file-append package "/bin/prometheus_wireguard_exporter")
-                       "-l" #$web-listen-address
-                       "-p" #$web-listen-port
+                 (list #$(file-append package "/bin/wireguard_go_exporter")
+                       "-p" #$web-listen
+                       "-a" #$web-metrics-url
+                       "-i" #$interface
+                       "-c" #$conf-file
                        )
-                 #:environment-variables
-                 (list #$@env-vars)
                  #:log-file "/var/log/wg-node-exporter.log"))
        (stop #~(make-kill-destructor)))))))
 
