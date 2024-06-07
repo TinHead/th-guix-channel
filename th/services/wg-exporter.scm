@@ -48,7 +48,7 @@
        (provision '(wg-exporter))
        (requirement '(networking))
        (start #~(make-forkexec-constructor
-                 (list #$(file-append package "/bin/wireguard_go_exporter")
+                 (list #$(file-append package "/bin/wireguard-go-exporter")
                        "-p" #$web-listen
                        "-a" #$web-metrics-url
                        "-i" #$interface
