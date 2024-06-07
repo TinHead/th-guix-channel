@@ -54,6 +54,7 @@
                        "-i" #$interface
                        "-c" #$conf-file
                        )
+                 #:environment-variables (list "PATH=$PATH:/run/current-system/profile/bin/")
                  #:log-file "/var/log/wg-node-exporter.log"))
        (stop #~(make-kill-destructor)))))))
 
