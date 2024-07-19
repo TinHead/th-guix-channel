@@ -25,6 +25,13 @@
   #:use-module (ice-9 match)
   #:export (oci-podman-service-type))
 
+(define (oci-image-reference image)
+  (if (string? image)
+      image
+      (string-append (oci-image-repository image)
+                     ":" (oci-image-tag image))))
+
+
 (define (%oci-image-loader name image tag)
   (let ((docker (file-append podman "/bin/podman"))
         (tarball (lower-oci-image name image)))
