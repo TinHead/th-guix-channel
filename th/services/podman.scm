@@ -110,7 +110,7 @@
          (actions (oci-container-configuration-shepherd-actions config))
          (auto-start?
           (oci-container-configuration-auto-start? config))
-         (user "oci-podman")
+         (user "podman-container")
          (group "podman")
          (host-environment
           (oci-container-configuration-host-environment config))
