@@ -186,7 +186,7 @@
 (define oci-podman-service-type
   (service-type (name 'oci-container)
                 (extensions (list (service-extension profile-service-type
-                                                     (lambda _ (list docker-cli)))
+                                                     (lambda _ (list podman)))
                                   (service-extension account-service-type
                                                      (const %oci-container-accounts))
                                   (service-extension shepherd-root-service-type
