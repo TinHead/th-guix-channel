@@ -3,7 +3,26 @@
   #:use-module (gnu packages containers)
   #:use-module (gnu services)
   #:use-module (gnu services configuration)
-  
+  #:use-module (gnu services base)
+  #:use-module (gnu services shepherd)
+  #:use-module (gnu system)
+  #:use-module (gnu system image)
+  #:use-module (gnu system setuid)
+  #:use-module (gnu system shadow)
+  #:use-module (gnu packages admin)               ;shadow
+  #:use-module (gnu packages linux)               ;singularity
+  #:use-module (guix records)
+  #:use-module (guix diagnostics)
+  #:use-module (guix gexp)
+  #:use-module (guix i18n)
+  #:use-module (guix monads)
+  #:use-module (guix packages)
+  #:use-module (guix profiles)
+  #:use-module ((guix scripts pack) #:prefix pack:)
+  #:use-module (guix store)
+  #:use-module (srfi srfi-1)
+  #:use-module (ice-9 format)
+  #:use-module (ice-9 match)
   #:export (podman-service-type))
 
 (define (%oci-image-loader name image tag)
