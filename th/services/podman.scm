@@ -23,7 +23,7 @@
   #:use-module (srfi srfi-1)
   #:use-module (ice-9 format)
   #:use-module (ice-9 match)
-  #:export (podman-service-type))
+  #:export (oci-podman-service-type))
 
 (define (%oci-image-loader name image tag)
   (let ((docker (file-append podman "/bin/podman"))
