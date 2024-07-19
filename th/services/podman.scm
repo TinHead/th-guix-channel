@@ -172,7 +172,10 @@
                             actions))))))
 
 (define %oci-container-accounts
-  (list (user-account
+  (list (user-group
+          (name "podman")
+          (system? #t))
+        (user-account
          (name "podman-container")
          (comment "OCI services account")
          (group "podman")
