@@ -4,7 +4,7 @@
   #:use-module (gnu services)
   #:use-module (gnu services configuration)
   
-  #:export podman-service-type)
+  #:export (podman-service-type))
 
 (define (%oci-image-loader name image tag)
   (let ((docker (file-append podman "/bin/podman"))
