@@ -171,6 +171,20 @@
                                    (invoke #$docker "pull" #$image)))))
                             actions))))))
 
+
+(define %podman-activation
+  (with-imported-modules '((guix build utils))
+    #~(begin
+        (use-modules (guix build utils))
+
+        ;; Create the directories that Singularity 2.6 expects to find.  Make
+        ;; them #o755 like the 'install-data-hook' rule in 'Makefile.am' of
+        ;; Singularity 2.6.1.
+        (mkdir-p "/var/podman/.config")
+        (chmod  "/var/podman/.config" #o755)
+        (chown "/var/podman/.config" "podman-container" "podman")
+)))
+
 (define %oci-container-accounts
   (list (user-group
           (name "podman")
@@ -180,7 +194,7 @@
          (comment "OCI services account")
          (group "podman")
          (system? #t)
-         (home-directory "/var/empty")
+         (home-directory "/var/podman")
          (shell (file-append shadow "/sbin/nologin")))))
 
 (define (configs->shepherd-services configs)
