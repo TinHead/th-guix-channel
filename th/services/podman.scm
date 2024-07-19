@@ -25,6 +25,43 @@
   #:use-module (ice-9 match)
   #:export (oci-podman-service-type))
 
+(define oci-container-configuration->options
+  (lambda (config)
+    (let ((entrypoint
+           (oci-container-configuration-entrypoint config))
+          (network
+           (oci-container-configuration-network config))
+          (user
+           (oci-container-configuration-container-user config))
+          (workdir
+           (oci-container-configuration-workdir config)))
+      (apply append
+             (filter (compose not unspecified?)
+                     `(,(if (maybe-value-set? entrypoint)
+                            `("--entrypoint" ,entrypoint)
+                            '())
+                       ,(append-map
+                         (lambda (spec)
+                           (list "--env" spec))
+                         (oci-container-configuration-environment config))
+                       ,(if (maybe-value-set? network)
+                            `("--network" ,network)
+                            '())
+                       ,(if (maybe-value-set? user)
+                            `("--user" ,user)
+                            '())
+                       ,(if (maybe-value-set? workdir)
+                            `("--workdir" ,workdir)
+                            '())
+                       ,(append-map
+                         (lambda (spec)
+                           (list "-p" spec))
+                         (oci-container-configuration-ports config))
+                       ,(append-map
+                         (lambda (spec)
+                           (list "-v" spec))
+                         (oci-container-configuration-volumes config))))))))
+
 (define (oci-image-reference image)
   (if (string? image)
       image
