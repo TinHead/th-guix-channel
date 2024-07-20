@@ -25,6 +25,15 @@
   #:use-module (ice-9 match)
   #:export (oci-podman-service-type))
 
+(define podman-containers-policy
+ "{\"default\": [{ \"type\": \"insecureAcceptAnything\" }],
+   \"transports\": {
+           \"docker-daemon\": {
+
+\"\": [{ \"type\": \"insecureAcceptAnything\" }]
+
+  }}}")
+
 (define oci-container-configuration->options
   (lambda (config)
     (let ((entrypoint
@@ -183,7 +192,16 @@
         (mkdir-p "/var/podman/.config")
         (chmod  "/var/podman/.config" #o755)
         (chown "/var/podman/.config" "podman-container" "podman")
-)))
+        (plain-file "/etc/subuid"
+           (string-join
+            '("root:65536:65536"
+              "podman-container:16777216:65536")
+             "\n"))
+        (plain-file "/etc/subgid"
+           (string-join
+            '("root:65536:65536"
+              "podman-container:16777216:65536")
+             "\n")))))
 
 (define %oci-container-accounts
   (list (user-group
