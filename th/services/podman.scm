@@ -192,7 +192,7 @@
         (mkdir-p "/var/podman/.config")
         (mkdir-p "/etc/containers")
         (chmod  "/var/podman/.config" #o755)
-        (chown "/var/podman/.config" "podman-container" "podman")
+        (chown "/var/podman/.config" (passwd:uid "podman-container") (passwd:gid  "podman"))
         (plain-file "/etc/subuid"
            (string-join
             '("root:65536:65536"
@@ -201,7 +201,7 @@
         (plain-file "/etc/subgid"
            (string-join
             '("root:65536:65536"
-              "podman-container:16777216:65536")
+              "podman:16777216:65536")
              "\n"))
         (plain-file "/etc/containers/policy.json"
  "{\"default\": [{ \"type\": \"insecureAcceptAnything\" }],
