@@ -190,6 +190,7 @@
         ;; them #o755 like the 'install-data-hook' rule in 'Makefile.am' of
         ;; Singularity 2.6.1.
         (mkdir-p "/var/podman/.config")
+        (mkdir-p "/var/podman/.config/containers")
         (chmod  "/var/podman/.config" #o755)
         (chown "/var/podman/.config" "podman-container" "podman")
         (plain-file "/etc/subuid"
@@ -203,8 +204,8 @@
               "podman-container:16777216:65536")
              "\n"))
         
-        (mkdir-p "/etc/containers")
-        (plain-file "/etc/containers/policy.json" podman-containers-policy))))
+        (mkdir-p "/var/podman/.config/containers")
+        (plain-file "//var/podman/.config/containers/policy.json" podman-containers-policy))))
 
 (define %oci-container-accounts
   (list (user-group
