@@ -203,8 +203,8 @@
               "podman-container:16777216:65536")
              "\n"))
         
-        (mkdir-p "/var/podman/.config/containers")
-        (plain-file "/var/podman/.config/containers/policy.json" podman-containers-policy))))
+        (mkdir-p "/etc/containers")
+        (plain-file "/etc/containers/policy.json" podman-containers-policy))))
 
 (define %oci-container-accounts
   (list (user-group
