@@ -185,7 +185,7 @@
   (with-imported-modules '((guix build utils))
     #~(begin
         (use-modules (guix build utils))
-        (let ((user (getpwnam "podman-container"))))
+        (let ((user (getpwnam "podman-container")))
 
         ;; Create the directories that Singularity 2.6 expects to find.  Make
         ;; them #o755 like the 'install-data-hook' rule in 'Makefile.am' of
@@ -211,7 +211,7 @@
 
 \"\": [{ \"type\": \"insecureAcceptAnything\" }]
 
-  }}}"))))
+  }}}")))))
 
 (define %oci-container-accounts
   (list (user-group
