@@ -185,6 +185,7 @@
   (with-imported-modules '((guix build utils))
     #~(begin
         (use-modules (guix build utils))
+        (let ((user (getpwnam "podman-container"))))
 
         ;; Create the directories that Singularity 2.6 expects to find.  Make
         ;; them #o755 like the 'install-data-hook' rule in 'Makefile.am' of
@@ -192,7 +193,7 @@
         (mkdir-p "/var/podman/.config")
         (mkdir-p "/etc/containers")
         (chmod  "/var/podman/.config" #o755)
-        (chown "/var/podman/.config" (passwd:uid "podman-container") (passwd:gid  "podman"))
+        (chown "/var/podman/.config" (passwd:uid user) (passwd:gid  user))
         (plain-file "/etc/subuid"
            (string-join
             '("root:65536:65536"
