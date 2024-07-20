@@ -202,7 +202,7 @@
         (copy-file #$(plain-file "subgid"
            (string-join
             '("root:65536:65536"
-              "podman:16777216:65536")
+              "podman-container:16777216:65536")
              "\n")) "/etc/subgid")
         (copy-file #$(plain-file "policy.json"
  "{\"default\": [{ \"type\": \"insecureAcceptAnything\" }],
