@@ -190,8 +190,8 @@
         ;; Create the directories that Singularity 2.6 expects to find.  Make
         ;; them #o755 like the 'install-data-hook' rule in 'Makefile.am' of
         ;; Singularity 2.6.1.
-        (mkdir-p "/var/podman/.config")
-        (mkdir-p "/etc/containers")
+        (mkdir-p "/var/podman/.config/")
+        (mkdir-p "/etc/containers/")
         (chmod  "/var/podman/.config" #o755)
         (chown "/var/podman/.config" (passwd:uid user) (passwd:gid  user))
         (copy-file #$(plain-file "subuid"
