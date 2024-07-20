@@ -137,7 +137,7 @@
           (oci-container-configuration-extra-arguments config)))
 
     (shepherd-service (provision `(,(string->symbol name)))
-                      (requirement `(dockerd user-processes ,@requirement))
+                      (requirement `(dockerd user-processes file-system-/sys/fs/cgroup/memory ,@requirement))
                       (respawn? respawn?)
                       (auto-start? auto-start?)
                       (documentation
