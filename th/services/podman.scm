@@ -203,7 +203,14 @@
             '("root:65536:65536"
               "podman-container:16777216:65536")
              "\n"))
-        (plain-file "/etc/containers/policy.json" #$podman-containers-policy))))
+        (plain-file "/etc/containers/policy.json"
+ "{\"default\": [{ \"type\": \"insecureAcceptAnything\" }],
+   \"transports\": {
+           \"docker-daemon\": {
+
+\"\": [{ \"type\": \"insecureAcceptAnything\" }]
+
+  }}}"))))
 
 (define %oci-container-accounts
   (list (user-group
