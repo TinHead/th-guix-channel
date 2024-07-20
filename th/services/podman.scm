@@ -194,24 +194,24 @@
         (mkdir-p "/etc/containers")
         (chmod  "/var/podman/.config" #o755)
         (chown "/var/podman/.config" (passwd:uid user) (passwd:gid  user))
-        (plain-file "/etc/subuid"
+        (copy-file #$(plain-file "subuid"
            (string-join
             '("root:65536:65536"
               "podman-container:16777216:65536")
-             "\n"))
-        #$(plain-file "/etc/subgid"
+             "\n")) "/etc/subuid")
+        (copy-file #$(plain-file "subgid"
            (string-join
             '("root:65536:65536"
               "podman:16777216:65536")
-             "\n"))
-        #$(plain-file "/etc/containers/policy.json"
+             "\n")) "/etc/subgid")
+        (copy-file #$(plain-file "policy.json"
  "{\"default\": [{ \"type\": \"insecureAcceptAnything\" }],
    \"transports\": {
            \"docker-daemon\": {
 
 \"\": [{ \"type\": \"insecureAcceptAnything\" }]
 
-  }}}")))))
+  }}}") "/etc/containers/policy.json")))))
 
 (define %oci-container-accounts
   (list (user-group
