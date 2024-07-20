@@ -233,6 +233,8 @@
                                                      (lambda _ (list podman)))
                                   (service-extension account-service-type
                                                      (const %oci-container-accounts))
+                                  (service-extension activation-service-type
+                                                     %podman-activation)
                                   (service-extension shepherd-root-service-type
                                                      configs->shepherd-services)))
                 (default-value '())
