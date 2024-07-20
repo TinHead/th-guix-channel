@@ -199,12 +199,12 @@
             '("root:65536:65536"
               "podman-container:16777216:65536")
              "\n"))
-        (plain-file "/etc/subgid"
+        #$(plain-file "/etc/subgid"
            (string-join
             '("root:65536:65536"
               "podman:16777216:65536")
              "\n"))
-        (plain-file "/etc/containers/policy.json"
+        #$(plain-file "/etc/containers/policy.json"
  "{\"default\": [{ \"type\": \"insecureAcceptAnything\" }],
    \"transports\": {
            \"docker-daemon\": {
