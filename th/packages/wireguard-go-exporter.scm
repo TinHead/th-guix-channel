@@ -39,7 +39,7 @@
            ; go-github-com-prometheus-client-model
            ; go-github-com-prometheus-common
            ; go-github-com-prometheus-procfs
-          go-github-com-prometheus-client-golang))
+           ;go-github-com-prometheus-client-golang))
            ; go-github-com-cespare-xxhash))
     (synopsis "Golang Wireguard exporter format Prometheus")
     (description "This package @code{promhttp} provides wireguard Prometheus metrics.")
