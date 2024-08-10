@@ -33,8 +33,8 @@
        ; (modify-phases %standard-phases
          ;; Source-only package
          ; (delete 'build))))
-    (propagated-inputs
-     (list ; go-github-com-beorn7-perks-quantile
+    ; (propagated-inputs
+     ; (list ; go-github-com-beorn7-perks-quantile
            ; go-github-com-golang-protobuf-proto
            ; go-github-com-prometheus-client-model
            ; go-github-com-prometheus-common
