@@ -7,6 +7,7 @@
   (guix build-system go)
   ((guix licenses) #:prefix license:)
   (gnu packages golang)
+  (gnu packages prometheus)
   ; (gnu packages crates-web)
   ; (gnu packages crates-graphics)
   (guix git-download)
@@ -33,13 +34,13 @@
        ; (modify-phases %standard-phases
          ;; Source-only package
          ; (delete 'build))))
-    ; (propagated-inputs
-     ; (list ; go-github-com-beorn7-perks-quantile
+    (propagated-inputs
+     (list ; go-github-com-beorn7-perks-quantile
            ; go-github-com-golang-protobuf-proto
            ; go-github-com-prometheus-client-model
            ; go-github-com-prometheus-common
            ; go-github-com-prometheus-procfs
-           ;go-github-com-prometheus-client-golang))
+           go-github-com-prometheus-client-golang))
            ; go-github-com-cespare-xxhash))
     (synopsis "Golang Wireguard exporter format Prometheus")
     (description "This package @code{promhttp} provides wireguard Prometheus metrics.")
