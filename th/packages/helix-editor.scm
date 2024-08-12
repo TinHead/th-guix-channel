@@ -2,11 +2,60 @@
   #:use-module (gnu packages base)
   #:use-module (gnu packages compression)
   #:use-module (gnu packages gcc)
+  #:use-module (gnu packages tls)
   #:use-module (guix download)
   #:use-module (guix packages)
-  #:use-module (guix licenses)
+  #:use-module (gnu packages libbsd)
+  ; #:use-module (guix licenses) #:prefix license: 
   #:use-module (guix gexp)
   #:use-module (nonguix build-system binary))
+
+(use-modules ((guix licenses) #:prefix license:) 
+              (gnu packages xorg)
+              (gnu packages linux)
+              (gnu packages xdisorg))
+
+(define-public zed-editor-bin
+  (package
+    (name "zed-editor-bin")
+    (version "latest")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (string-append
+             "https://zed.dev/api/releases/stable/latest/zed-linux-x86_64.tar.gz"))
+       (sha256
+        (base32
+         "14f87zbcskixsnca9x3i4x9sk3kdqkf9psllp17jgasgmmhdyqkz"))))
+    
+    (inputs
+     (list `(,gcc "lib") glibc libbsd openssl-1.1 libxcb libxau libxdmcp zlib `(,zstd "lib") libxkbcommon alsa-lib))
+    (native-inputs
+     (list gzip libbsd))
+;    (let hx (string-append  ("helix-" version "-x86_64-linux/hx")))
+    (build-system binary-build-system)
+    (arguments
+      `(#:install-plan
+        `(("./" "/"))
+        #:patchelf-plan
+        `(
+          ("lib/libXdmcp.so.6" ("libbsd"))
+          ("lib/libasound.so.2" ("libc"))
+          ("lib/libssl.so.1.1" ("openssl"))
+          ("lib/libxcb-xkb.so.1" ("libxcb"))
+          
+          ("lib/libxcb.so.1" ("libxau" "libxdmcp")) 
+          ("lib/libxkbcommon-x11.so.0" ("libxkbcommon" "libxcb")) 
+
+          ("libexec/zed-editor" ("alsa-lib" "libxcb" "libxkbcommon" "openssl" "zlib" "zstd" "libc" "libxau" "libxdmcp" "gcc"))
+          ("bin/zed" ("gcc")) 
+        )))
+    (synopsis "A post-modern text editor.")
+    (description "A post-modern text editor.")
+    (home-page "https://helix-editor.com/")
+    (license license:mpl2.0)
+))
+
 
 (define-public helix-editor-bin
   (package
@@ -72,7 +121,7 @@
     (synopsis "A post-modern text editor.")
     (description "A post-modern text editor.")
     (home-page "https://helix-editor.com/")
-    (license mpl2.0)
+    (license license:mpl2.0)
 ))
 
-helix-editor-bin
+zed-editor-bin
