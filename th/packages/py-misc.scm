@@ -6,13 +6,122 @@
 #:use-module (guix build-system pyproject)
 #:use-module (gnu packages python-build)
 #:use-module (gnu packages check)
+#:use-module (gnu packages python)
 #:use-module (gnu packages python-xyz)
 #:use-module (gnu packages python-web)
 #:use-module (gnu packages python-check)
 #:use-module (gnu packages django)
 #:use-module (gnu packages python-crypto)
 #:use-module (gnu packages openstack)
-#:use-module (guix licenses))
+#:use-module (gnu packages glib)
+#:use-module (gnu packages admin)
+#:use-module (gnu packages rust-apps)
+#:use-module (gnu packages rust)
+#:use-module (gnu packages crates-io)
+#:use-module (gnu packages ghostscript)
+#:use-module (gnu packages fontutils)
+#:use-module (gnu packages compression)
+
+#:use-module (gnu packages image)
+#:use-module (guix git-download)
+#:use-module ((guix licenses) #:prefix license:))
+
+(define-public python-pillow-11
+  (package
+    (name "python-pillow")
+    (version "11.0.0")
+    (source (origin
+              (method url-fetch)
+              (uri (pypi-uri "Pillow" version))
+              (sha256
+               (base32
+                "011wgm1mssjchpva9wsi2a07im9czyjvik137xlp5f0g7vykdrkm"))
+              (modules '((guix build utils)))
+              (snippet '(begin
+                          (delete-file-recursively "src/thirdparty")))
+              (patches
+               (search-patches "python-pillow-CVE-2022-45199.patch"
+                               ;; Included in 10.1.0.
+                               "python-pillow-use-zlib-1.3.patch"))))
+    (build-system python-build-system)
+    (native-inputs (list python-pytest))
+    (inputs (list freetype
+                  lcms
+                  libjpeg-turbo
+                  libtiff
+                  libwebp
+                  openjpeg
+                  zlib))
+    (propagated-inputs (list python-olefile))
+    (arguments
+     `(#:phases (modify-phases %standard-phases
+                  (add-after 'unpack 'patch-ldconfig
+                    (lambda _
+                      (substitute* "setup.py"
+                        (("\\['/sbin/ldconfig', '-p'\\]") "['true']"))))
+                  (replace 'check
+                    (lambda* (#:key outputs inputs tests? #:allow-other-keys)
+                      (when tests?
+                        (setenv "HOME"
+                                (getcwd))
+                        (add-installed-pythonpath inputs outputs)
+                        (invoke "python" "selftest.py" "--installed")
+                        (invoke "python" "-m" "pytest" "-vv")))))))
+    (home-page "https://python-pillow.org")
+    (synopsis "Fork of the Python Imaging Library")
+    (description
+     "The Python Imaging Library adds image processing capabilities to your
+Python interpreter.  This library provides extensive file format support, an
+efficient internal representation, and fairly powerful image processing
+capabilities.  The core image library is designed for fast access to data
+stored in a few basic pixel formats.  It should provide a solid foundation for
+a general image processing tool.")
+    (properties `((cpe-name . "pillow")))
+    (license #f)
+    ; (license (x11-style
+    ;           "http://www.pythonware.com/products/pil/license.htm"
+    ;           "The PIL Software License"))
+    ))
+(define-public python-ruff
+  (package
+    (name "python-ruff")
+    (version "0.6.5")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (pypi-uri "ruff" version))
+       (sha256
+        (base32 "1ywndddd1kgpbczmpmm1sxgy0fz6vba3ss63hpr0qg23mdzxhcjd"))))
+    (build-system pyproject-build-system)
+    (native-inputs (list maturin rust-cargo rust rust-lsp-types-0.95))
+    (home-page "https://docs.astral.sh/ruff")
+    (synopsis
+     "An extremely fast Python linter and code formatter, written in Rust.")
+    (description
+     "An extremely fast Python linter and code formatter, written in Rust.")
+    (license license:expat)))
+
+(define-public python-solaar
+  (package
+    (name "python-solaar")
+    (version "1.1.13")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (pypi-uri "solaar" version))
+       (sha256
+        (base32 "1pc9hdmgjlmh307xvajh2mkksx2m2jylykxkjry3bdqn2xmk8wnk"))))
+    (build-system pyproject-build-system)
+    (propagated-inputs (list python-psutil python-pygobject python-xlib
+                             python-pyudev python-pyyaml))
+    (native-inputs (list python-pytest python-pytest-cov python-pytest-mock
+                         python-ruff))
+    (home-page "http://pwr-solaar.github.io/Solaar/")
+    (synopsis
+     "Linux device manager for Logitech receivers, keyboards, mice, and tablets.")
+    (description
+     "Linux device manager for Logitech receivers, keyboards, mice, and tablets.")
+    (license #f)))
 
 (define-public python-sanic2
   (package
@@ -43,7 +152,7 @@
     (description
      "This package provides a Python JSON-RPC 2.0 protocol and server powered
 by asyncio.")
-    (license expat)))
+    (license license:expat)))
 ; (define-public python-sanic
 ;   (package
 ;     (name "python-sanic")
@@ -112,7 +221,7 @@ by asyncio.")
      "readme_renderer is a library for rendering readme descriptions for Warehouse")
     (description
      "readme_renderer is a library for rendering readme descriptions for Warehouse")
-    (license asl2.0)))
+    (license license:asl2.0)))
     
 (define-public python-build
   (package
@@ -161,7 +270,7 @@ by asyncio.")
     (home-page #f)
     (synopsis "Software releasing made easy and repeatable")
     (description "Software releasing made easy and repeatable")
-    (license gpl3)))
+    (license license:gpl3)))
 
 (define-public python-semantic-version
   (package
@@ -188,7 +297,7 @@ by asyncio.")
     (synopsis "A library implementing the 'SemVer' scheme.")
     (description
      "This package provides a library implementing the @code{SemVer} scheme.")
-    (license bsd-3)))
+    (license license:bsd-3)))
 
 (define-public python-platformio
   (package
@@ -242,7 +351,7 @@ methodologies, and modern toolchains for unrivaled success.")
   (home-page "https://github.com/josverl/micropython-stubs#micropython-stubs")
   (synopsis "MicroPython stubs")
   (description "@code{MicroPython} stubs")
-  (license expat))
+  (license license:expat))
 )
 (define-public python-atomicwrites-homeassistant 
 (package
@@ -258,7 +367,7 @@ methodologies, and modern toolchains for unrivaled success.")
   (home-page "https://github.com/untitaker/python-atomicwrites")
   (synopsis "Atomic file writes.")
   (description "Atomic file-name-separator-stringe writes.")
-  (license expat))
+  (license license:expat))
 )
 (define-public python-awesomeversion 
  (package
@@ -280,7 +389,7 @@ methodologies, and modern toolchains for unrivaled success.")
    (description
     "One version package to rule them all, One version package to find them, One
  version package to bring them all, and in the darkness bind them.")
-  (license expat))
+  (license license:expat))
 )
 (define-public python-home-assistant-bluetooth
 (package
@@ -317,7 +426,7 @@ methodologies, and modern toolchains for unrivaled success.")
   (home-page "https://github.com/amitdev/lru-dict")
   (synopsis "An Dict like LRU container.")
   (description "An Dict like LRU container.")
-  (license expat)))
+  (license license:expat)))
   
 (define-public python-ulid-transform
   (package
@@ -335,7 +444,7 @@ methodologies, and modern toolchains for unrivaled success.")
   (home-page "https://github.com/bdraco/ulid-transform")
   (synopsis "Create and transform ULIDs")
   (description "Create and-map transform ULIDs")
-  (license expat))
+  (license license:expat))
 )
 (define-public python-voluptuous-serialize
  (package
@@ -354,5 +463,70 @@ methodologies, and modern toolchains for unrivaled success.")
   (description "Convert voluptuous schemas to dictionaries")
   (license #f))
 )
+(define-public python-niimprint
+  (package
+    (name "python-niimprint")
+    (version "be39f68c16a5a7dc1b09bb173700d0ee1ec9cb66")
+    (source
+     (origin
+       (method git-fetch)
+       (uri (git-reference
+             (url "https://github.com/AndBondStyle/niimprint/")
+             (commit version)))
+       (file-name (git-file-name name version))
+       (sha256
+        (base32
+         "1lpm8zg7zfc9161cahg7r369wb97z74dj88dmm5fbaaxr1hi50pr"))))
+    (build-system pyproject-build-system)
+        (arguments
+     `(#:tests? #f
+       #:phases
+        (modify-phases %standard-phases
+         (delete 'sanity-check))))
 
-python-platformio
+    ; (arguments
+     ; (list #:tests? #f))
+    ;  `(#:phases
+    ;    (modify-phases %standard-phases
+    ;      (add-before 'build 'configure
+    ;        (lambda _
+    ;          (setenv "SKLEARN_BUILD_PARALLEL"
+    ;                  (number->string (parallel-job-count)))))
+    ;      (add-after 'build 'build-ext
+    ;        (lambda _ (invoke "python" "setup.py" "build_ext" "--inplace"
+    ;                          "-j" (number->string (parallel-job-count)))))
+    ;      (replace 'check
+    ;        (lambda* (#:key tests? #:allow-other-keys)
+    ;          (when tests?
+    ;            ;; Restrict OpenBLAS threads to prevent segfaults while testing!
+    ;            (setenv "OPENBLAS_NUM_THREADS" "1")
+
+    ;            ;; Some tests require write access to $HOME.
+    ;            (setenv "HOME" "/tmp")
+
+    ;            ;; Step out of the source directory to avoid interference;
+    ;            ;; we want to run the installed code with extensions etc.
+    ;            (with-directory-excursion "/tmp"
+    ;              (invoke "pytest" "-vv" "--pyargs" "sklearn"
+    ;                      "-m" "not network"
+    ;                      "-n" (number->string (parallel-job-count))
+    ;                      ;; This test tries to access the internet.
+    ;                      "-k" "not test_load_boston_alternative"))))))))
+    ; (inputs (list openblas))
+    (native-inputs
+     (list python-click
+           python-pillow-11
+           python-pyserial
+           poetry))
+    (propagated-inputs
+     (list python-pyserial python-pillow python-click))
+    (home-page "https://scikit-learn.org/")
+    (synopsis "Machine Learning in Python")
+    (description
+     "Scikit-learn provides simple and efficient tools for data mining and
+data analysis.")
+    (license #f)))
+
+python-niimprint
+; #:use-module (gnu packages crates-io)
+; python-pillow-11
