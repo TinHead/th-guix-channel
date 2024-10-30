@@ -466,17 +466,17 @@ methodologies, and modern toolchains for unrivaled success.")
 (define-public python-niimprint
   (package
     (name "python-niimprint")
-    (version "be39f68c16a5a7dc1b09bb173700d0ee1ec9cb66")
+    (version "")
     (source
      (origin
        (method git-fetch)
        (uri (git-reference
-             (url "https://github.com/AndBondStyle/niimprint/")
+             (url "https://github.com/TinHead/niimprint")
              (commit version)))
        (file-name (git-file-name name version))
        (sha256
         (base32
-         "1lpm8zg7zfc9161cahg7r369wb97z74dj88dmm5fbaaxr1hi50pr"))))
+         "1djkc50pgy60l86hy6frnzzxsav4cccglwq7z395i9z07b31jiva"))))
     (build-system pyproject-build-system)
         (arguments
      `(#:tests? #f
