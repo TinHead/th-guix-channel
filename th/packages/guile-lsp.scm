@@ -97,7 +97,35 @@ is not available for Guile 2.0.")
     (home-page "https://github.com/wingo/fibers")
     (properties '((upstream-name . "fibers")))
     (license license:lgpl3+)))
-
+(define-public guile-fibers-1.1
+  (package
+    (inherit guile-fibers)
+    (version "1.1.1")
+    (source (origin
+              (method git-fetch)
+              (uri (git-reference
+                    (url "https://github.com/wingo/fibers")
+                    (commit (string-append "v" version))))
+              (file-name (git-file-name "guile-fibers" version))
+              (sha256
+               (base32
+                "0ll63d7202clapg1k4bilbnlmfa4qvpjnsd7chbkka4kxf5klilc"))
+              (patches
+               (search-patches "guile-fibers-wait-for-io-readiness.patch"
+                               "guile-fibers-epoll-instance-is-dead.patch"
+                               "guile-fibers-fd-finalizer-leak.patch"))))
+    (native-inputs
+     (list texinfo pkg-config autoconf automake libtool
+           guile-3.0            ;for 'guild compile
+           ;; Gettext brings 'AC_LIB_LINKFLAGS_FROM_LIBS'
+           gettext-minimal))
+    (inputs
+     (list guile-3.0))                            ;for libguile-3.0.so
+    (supported-systems
+     ;; This version requires 'epoll' and is thus limited to Linux-based
+     ;; systems, which is fixed in 1.2.0:
+     ;; <https://github.com/wingo/fibers/pull/53>.
+     (filter (cut string-suffix? "-linux" <>) %supported-systems))))
 (define-public guile-json-rpc
   (let ((version "0.4.5")
         (revision "a")
