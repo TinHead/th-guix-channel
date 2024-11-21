@@ -23,7 +23,7 @@
 
 (define-public guile-fibers
   (package
-    (name "guile-fibers")
+    (name "guile-fibers-nopatch")
     (version "1.3.1")
     (source (origin
               (method git-fetch)
@@ -100,7 +100,7 @@ is not available for Guile 2.0.")
     (license license:lgpl3+)))
 (define-public guile-fibers-1.1
   (package
-    (inherit guile-fibers)
+    (inherit guile-fibers-nopatch)
     (version "1.1.1")
     (source (origin
               (method git-fetch)
