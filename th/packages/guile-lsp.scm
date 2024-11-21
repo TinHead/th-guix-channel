@@ -21,9 +21,9 @@
 
 (define %source-dir (getcwd))
 
-(define-public guile-fibers
+(define-public guile-fibers-nopatch
   (package
-    (name "guile-fibers-nopatch")
+    (name "guile-fibers")
     (version "1.3.1")
     (source (origin
               (method git-fetch)
