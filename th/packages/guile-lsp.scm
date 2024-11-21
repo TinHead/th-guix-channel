@@ -102,7 +102,7 @@ is not available for Guile 2.0.")
 (define-public guile-fibers
   (package
     (inherit guile-fibers-nopatch)
-    (version "1.1.1")
+    (version "1.1.2")
     (name "guile-fibers")
     (source (origin
               (method git-fetch)
