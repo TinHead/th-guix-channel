@@ -99,11 +99,11 @@ is not available for Guile 2.0.")
     (properties '((upstream-name . "fibers")))
     (license license:lgpl3+)))
   
-(define-public guile-fibers-1-1-nopatch
+(define-public guile-fibers
   (package
     (inherit guile-fibers-nopatch)
     (version "1.1.1")
-    (name "guix-fibers-11")
+    (name "guile-fibers")
     (source (origin
               (method git-fetch)
               (uri (git-reference
