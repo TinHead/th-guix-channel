@@ -16,7 +16,7 @@
   #:use-module (guix utils)
   #:use-module (ice-9 rdelim)
   #:use-module (ice-9 popen)
-  #:use-module (srfi srfi26)
+  #:use-module (srfi srfi-26)
   #:use-module (gnu packages guile-xyz))
 
 (define %source-dir (getcwd))
