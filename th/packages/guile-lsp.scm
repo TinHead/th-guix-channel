@@ -103,6 +103,7 @@ is not available for Guile 2.0.")
   (package
     (inherit guile-fibers-nopatch)
     (version "1.1.1")
+    (name "guix-fibers-11")
     (source (origin
               (method git-fetch)
               (uri (git-reference
