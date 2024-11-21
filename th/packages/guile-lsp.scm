@@ -23,7 +23,7 @@
 
 (define-public guile-fibers-nopatch
   (package
-    (name "guile-fibers")
+    (name "guile-fibers-nopatch")
     (version "1.3.1")
     (source (origin
               (method git-fetch)
@@ -98,6 +98,7 @@ is not available for Guile 2.0.")
     (home-page "https://github.com/wingo/fibers")
     (properties '((upstream-name . "fibers")))
     (license license:lgpl3+)))
+  
 (define-public guile-fibers-1.1
   (package
     (inherit guile-fibers-nopatch)
@@ -127,6 +128,7 @@ is not available for Guile 2.0.")
      ;; systems, which is fixed in 1.2.0:
      ;; <https://github.com/wingo/fibers/pull/53>.
      (filter (cut string-suffix? "-linux" <>) %supported-systems))))
+  
 (define-public guile-json-rpc
   (let ((version "0.4.5")
         (revision "a")
