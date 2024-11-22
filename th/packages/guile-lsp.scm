@@ -218,4 +218,4 @@ provide IDE functionality for Guile Scheme.")
      (home-page "https://codeberg.org/rgherdt/scheme-lsp-server")
      (license license:expat)))
 
-guile-fibers
+guile-fibers-1.1
