@@ -101,9 +101,9 @@ is not available for Guile 2.0.")
   
 (define-public guile-fibers-1.1
   (package
-    (inherit guile-fibers-nopatch)
+    (inherit guile-fibers)
     (version "1.1.1")
-    (name "guile-fibers-111")
+    (name "guile-fibers")
     (source (origin
               (method git-fetch)
               (uri (git-reference
