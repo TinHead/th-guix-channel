@@ -23,7 +23,7 @@
 
 (define-public guile-fibers-nopatch
   (package
-    (name "guile-fibers-nopatch")
+    (name "guile-fibers")
     (version "1.3.1")
     (source (origin
               (method git-fetch)
@@ -99,7 +99,7 @@ is not available for Guile 2.0.")
     (properties '((upstream-name . "fibers")))
     (license license:lgpl3+)))
   
-(define-public guile-fibers
+(define-public guile-fibers-1.1
   (package
     (inherit guile-fibers-nopatch)
     (version "1.1.1")
@@ -122,6 +122,13 @@ is not available for Guile 2.0.")
            guile-3.0            ;for 'guild compile
            ;; Gettext brings 'AC_LIB_LINKFLAGS_FROM_LIBS'
            gettext-minimal))
+    (arguments
+        (if (%current-target-system)
+         (substitute-keyword-arguments (package-arguments guile-fibers)
+           ((#:phases phases)
+            #~(modify-phases #$phases
+                (delete 'apply-cross-build-fix-patch))))
+         (package-arguments guile-fibers)))
     (inputs
      (list guile-3.0))                            ;for libguile-3.0.so
     (supported-systems
