@@ -3,5 +3,8 @@
  (dependencies
   (channel
    (name nonguix)
-   (url "https://gitlab.com/nonguix/nonguix")
-)))
+   (url "https://gitlab.com/nonguix/nonguix"))
+  (channel
+   (name PantherX)
+   (url "https://git.pantherx.org/development/panther.git"))
+))
