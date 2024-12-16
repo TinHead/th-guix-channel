@@ -12,7 +12,42 @@
   #:use-module (guix build-system trivial)
   #:use-module (gnu packages))
 
-
+(define-public lua-resty-core30
+  (package
+    (name "lua-resty-core30")
+    (version "0.1.30")
+    (source (origin
+              (method git-fetch)
+              (uri (git-reference
+                    (url "https://github.com/openresty/lua-resty-core")
+                    (commit (string-append "v" version))))
+              (file-name (git-file-name name version))
+              (sha256
+               (base32
+                "0lklm91hda7xx5j89bbqmn1i1van4dqgd33iiqhz3y960blwnb5s"))))
+    (build-system trivial-build-system)
+    (arguments
+     `(#:modules ((guix build utils))
+       #:builder
+       (begin
+         (use-modules (guix build utils))
+         (let* ((luajit-major+minor ,(version-major+minor (package-version lua)))
+                (package-lua-resty (lambda (input output)
+                                     (mkdir-p (string-append output "/lib/lua"))
+                                     (copy-recursively (string-append input "/lib/resty")
+                                                       (string-append output "/lib/lua/resty"))
+                                     (copy-recursively (string-append input "/lib/ngx")
+                                                       (string-append output "/lib/ngx"))
+                                     (symlink (string-append output "/lib/lua/resty")
+                                              (string-append output "/lib/resty")))))
+           (package-lua-resty (assoc-ref %build-inputs "source")
+                              (assoc-ref %outputs "out")))
+         #t)))
+    (home-page "https://github.com/openresty/lua-resty-core")
+    (synopsis "Lua API for NGINX")
+    (description "This package provides a FFI-based Lua API for
+@code{ngx_http_lua_module} or @code{ngx_stream_lua_module}.")
+    (license license:bsd-2)))
 
 (define-public lua-resty-openid
   (package
@@ -123,4 +158,5 @@
 
 ; lua-resty-openid
 ; lua-cjson
-lua-resty-http
+; lua-resty-http
+lua-resty-core30
