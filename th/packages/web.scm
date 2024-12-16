@@ -52,7 +52,7 @@
     (build-system gnu-build-system)
     (inputs
      `(("nginx-sources" ,(package-source nginx-socket-cloexec))
-       ("luajit" ,luajit)
+       ("luajit" ,luajit-lua52-openresty)
        ,@(package-inputs nginx)))
     (arguments
      (substitute-keyword-arguments
@@ -96,4 +96,4 @@
     (description "This NGINX module provides a scripting support with Lua
 programming language.")))
 
-nginx-lua-module
+nginx-lua-module-2
