@@ -35,10 +35,10 @@
        (inherit (package-source nginx))
        (patches (append (search-patches "nginx-socket-cloexec.patch")
                         (origin-patches (package-source nginx))))))))
-(define-public nginx-lua-module
+(define-public nginx-lua-module-2
   (package
     (inherit nginx)
-    (name "nginx-lua-module")
+    (name "nginx-lua-module-2")
     (version "0.10.27")
     (source
      (origin
