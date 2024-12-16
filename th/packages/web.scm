@@ -63,7 +63,7 @@
                       (ice-9 regex)
                       (ice-9 textual-ports))
            ,@(package-arguments nginx)
-           #:configure-flags '("--add-dynamic-module=."))
+           #:configure-flags '("--add-dynamic-module=." "--with-compat"))
        ((#:phases phases)
         #~(modify-phases #$phases
             (add-after 'unpack 'unpack-nginx-sources
