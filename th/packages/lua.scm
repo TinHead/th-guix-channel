@@ -126,37 +126,63 @@
     (name "lua-cjson")
     (version "2.1.0")
     (source (origin
-              (method git-fetch)
-              (uri (git-reference
-                    (url "https://github.com/mpx/lua-cjson")
-                    (commit (string-append "" version))))
-              (file-name (git-file-name name version))
+              (method url-fetch)
+              (uri (string-append
+                    "https://github.com/mpx/lua-cjson/archive/refs/tags/"
+                    version ".tar.gz"))
+              ; (file-name (git-file-name name version))
               (sha256
-               (base32
-                "1i0k5l0cwysgy77azr2y51fn0zz9v5pj6j9gb1w8k5qhw99im291"))))
-    (build-system trivial-build-system)
+               (base32 "1kfqfxhbhrlanazfqvrh420zcyvm4k9ib8ys32ijgpvfsnbgcjc4" ))))
+    (build-system gnu-build-system)
     (arguments
-     `(#:modules ((guix build utils))
-       #:builder
-       (begin
-         (use-modules (guix build utils))
-         (let* ((luajit-major+minor ,(version-major+minor (package-version lua)))
-                (package-lua-resty (lambda (input output)
-                                     (mkdir-p (string-append output "/lib/lua/" luajit-major+minor))
-                                     (copy-recursively (string-append input "/lua")
-                                                       (string-append output "/lib/lua/" luajit-major+minor ))
-                                     (symlink (string-append output "/lib/lua/" luajit-major+minor )
-                                              (string-append output "/lib/resty")))))
-           (package-lua-resty (assoc-ref %build-inputs "source")
-                              (assoc-ref %outputs "out")))
-         #t)))
-    (home-page "https://github.com/openresty/lua-resty-lrucache")
-    (synopsis "Lua LRU cache based on the LuaJIT FFI")
+     `(#:tests? #f
+       #:make-flags
+       (let* ((lua (assoc-ref %build-inputs "lua"))
+              (lua-include (string-append lua "/include/lua5.3")))
+         (list (string-append "CC=" ,(cc-for-target))
+               (string-append "LUA_INCLUDE_DIR=" lua-include)))
+       #:phases
+       (modify-phases %standard-phases
+         (delete 'configure)
+        (replace 'build
+           (lambda* (#:key inputs outputs #:allow-other-keys)
+             (let* ((lua (assoc-ref inputs "lua"))
+                    (lua-include (string-append lua "/include/lua5.3")))
+
+               ;; Move into the 'lua-cjson' directory where source files exist
+               ;; Compile the CJSON library into a shared object
+               (invoke "gcc" "-shared" "-fPIC" "-O2"
+                       (string-append "-I" lua-include)
+                       "-o" "cjson.so"
+                       "lua_cjson.c" "strbuf.c" "fpconv.c")
+               #t)))
+                      (replace 'install
+           (lambda* (#:key outputs #:allow-other-keys)
+             (let* ((out (assoc-ref outputs "out"))
+                    (lib-dir (string-append out "/lib/lua/5.3"))
+                    (share-dir (string-append out "/share/lua/5.3")))
+
+               ;; Move into the 'lua-cjson' directory
+                              ;; Create the directories
+               (mkdir-p lib-dir)
+               (mkdir-p share-dir)
+
+               ;; Install the compiled shared library
+               (install-file "cjson.so" lib-dir)
+               (invoke "ls" "-al" "lua/cjson")
+               ;; Install the Lua helper script
+               ; (install-file "lua/cjson.lua" share-dir)
+               #t))))))
+    (inputs
+     `(("lua" ,lua)))
+    (home-page "https://github.com/mpx/lua-cjson")
+    (synopsis "Fast JSON parsing and encoding support for Lua")
     (description
-     "This package provides Lua LRU cache based on the LuaJIT FFI.")
-    (license license:bsd-2)))
+     "Lua CJSON provides fast JSON parsing and encoding support for Lua,
+based on the cJSON library.")
+    (license license:expat)))
 
 ; lua-resty-openid
-; lua-cjson
+ lua-cjson
 ; lua-resty-http
-lua-resty-core30
+; lua-resty-core30
