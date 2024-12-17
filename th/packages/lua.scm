@@ -156,7 +156,7 @@
                        "-o" "cjson.so"
                        "lua_cjson.c" "strbuf.c" "fpconv.c")
                #t)))
-                      (replace 'install
+        (replace 'install
            (lambda* (#:key outputs #:allow-other-keys)
              (let* ((out (assoc-ref outputs "out"))
                     (lib-dir (string-append out "/lib/lua/5.3"))
@@ -172,7 +172,16 @@
                (invoke "ls" "-al" "lua/cjson")
                ;; Install the Lua helper script
                ; (install-file "lua/cjson.lua" share-dir)
-               #t))))))
+               #t)))
+        (add-after 'install 'set-lua-paths
+           (lambda* (#:key outputs #:allow-other-keys)
+             (let ((store-path (assoc-ref outputs "out")))
+            
+               ;; Add the lua-cjson paths to the default Lua search paths
+               ; (setenv "LUA_PATH" (string-append store-path "/share/lua/5.3/?.lua;;"))
+               (setenv "LUA_CPATH" (string-append store-path "/lib/lua/5.3/cjson.so;;"))
+               #t))))
+              ))
     (inputs
      `(("lua" ,lua)))
     (home-page "https://github.com/mpx/lua-cjson")
