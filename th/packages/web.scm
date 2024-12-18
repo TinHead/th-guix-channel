@@ -96,4 +96,45 @@
     (description "This NGINX module provides a scripting support with Lua
 programming language.")))
 
-nginx-lua-module-2
+(define-public nginx-auth
+  (package
+  (inherit nginx)
+  (arguments
+     (list
+      #:tests? #f                       ; no test target
+      #:configure-flags
+      #~(list "--with-http_ssl_module"
+              "--with-http_v2_module"
+              "--with-http_xslt_module"
+              "--with-http_gzip_static_module"
+              "--with-http_gunzip_module"
+              "--with-http_addition_module"
+              "--with-http_sub_module"
+              "--with-pcre-jit"
+              "--with-debug"
+              "--with-compat"
+              "--with-stream"
+              "--with-stream_ssl_module"
+              "--with-http_stub_status_module"
+              "--with-http_auth_request_module"
+              ;; Even when not cross-building, we pass the
+              ;; --crossbuild option to avoid customizing for the
+              ;; kernel version on the build machine.
+              #$(let ((system "Linux")  ; uname -s
+                      (release "3.2.0") ; uname -r
+                      ;; uname -m
+                      (machine (match (or (%current-target-system)
+                                          (%current-system))
+                                 ("x86_64-linux"   "x86_64")
+                                 ("i686-linux"     "i686")
+                                 ("mips64el-linux" "mips64")
+                                 ;; Prevent errors when querying
+                                 ;; this package on unsupported
+                                 ;; platforms, e.g. when running
+                                 ;; "guix package --search="
+                                 (_                "UNSUPPORTED"))))
+                  (string-append "--crossbuild="
+                                 system ":" release ":" machine)))
+))))
+
+nginx-auth
