@@ -10,7 +10,7 @@
   #:use-module (gnu packages crates-io)
   #:use-module (gnu packages crates-database)
   #:use-module (gnu packages tls)
-  #:use-module (px packages crates-io))
+  #:use-module (th packages crates-io))
 
 (define-public remote_syslog2
   (package
