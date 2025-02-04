@@ -106,3 +106,4 @@
     (description "This package provides Wireguard configuration manager.")
     (license license:gpl3+)))
 
+rust-wg-bond-0.2
