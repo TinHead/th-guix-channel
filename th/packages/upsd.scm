@@ -14,7 +14,7 @@
  #:use-module (guix download)
  #:use-module (guix utils)
  #:use-module (guix build-system gnu)
- #:use-module (guix licenses))
+ #:use-module ((guix licenses) #:prefix license:))
             
 (define-public upsd
   (package
@@ -47,7 +47,7 @@
            (lambda* (#:key inputs outputs #:allow-other-keys)
              (substitute* "configure"
                (("-L/usr/X11R6/lib")
-                ;; without --static, it won't find zlib and libjpeg
+                ;; without --static, it won't find-definition-insertion-locationd zlib and libjpeg
                 "$(pkg-config --static --libs gdlib)"))
              #t))
          (add-before 'build 'fix-search-paths
@@ -83,15 +83,15 @@
        ("openssl" ,openssl); -1.1)
        ("net-snmp" ,net-snmp)))
     (home-page "https://networkupstools.org")
-    (license
-     (list
-      ;; - most files under gpl2+
-      gpl2+
-      ;; - scripts/python/ under gpl3+
-      gpl3+
-      ;; - scripts/perl/Nut.pm same as perl (either gpl1+ or artistic)
-      gpl1+ 
-      artistic2.0))
+    (license #f)
+     ; (list
+     ;  ;; - most files under gpl2+
+     ;  license: gpl2+
+     ;  ;; - scripts/python/ under gpl3+
+     ;  license: gpl3+
+     ;  ;; - scripts/perl/Nut.pm same as perl (either gpl1+ or artistic)
+     ;  license: gpl1+ 
+     ;  license: artistic2.0.0))
     (synopsis "Collection of programs for monitoring and administering UPS")
     (description "Network @acronym{UPS, Uninterruptible Power Supply} Tools is
 a collection of programs which provide a common interface for monitoring and
@@ -99,3 +99,5 @@ administering @acronym{UPS} @acronym{PDU,Power Distribution Unit} and
 @acronym{SCD, Solar Controller Device} hardware.  It uses a layered approach
 to connect all of the parts.  Drivers are provided for a wide assortment of
 +equipment.")))
+
+upsd
