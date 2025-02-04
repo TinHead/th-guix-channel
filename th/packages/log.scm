@@ -1,4 +1,4 @@
-(define-module (tx packages log)
+(define-module (th packages log)
   #:use-module ((guix licenses)
                 #:prefix license:)
   #:use-module (guix build-system cargo)
