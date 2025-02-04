@@ -7,7 +7,7 @@
   #:use-module (gnu packages logging)
   #:use-module (gnu packages screen)
   #:use-module (gnu services shepherd)
-  #:use-module (px packages log)
+  #:use-module (th packages log)
   #:use-module (gnu system)
   #:use-module (gnu system shadow)
   #:use-module (guix gexp)
