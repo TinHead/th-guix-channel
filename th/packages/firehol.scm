@@ -4,10 +4,11 @@
 #:use-module (gnu packages base)
 #:use-module (gnu packages linux)
 #:use-module (gnu packages admin)
+#:use-module (gnu packages perl)
 #:use-module (gnu packages screen)
 #:use-module (gnu packages networking)
 #:use-module (guix download)
-#:use-module (th packages iprange)	
+#:use-module (th packages iprange)
 #:use-module (gnu packages curl)
 #:use-module (guix build-system gnu)
 #:use-module (guix licenses))
@@ -25,17 +26,20 @@
               "1xd8h8bnvybiarvpcxv1f3ijvhp5h8i5aarzcdlpgxy8chpwxlag")
               )
 
-            (patches 
+            (patches
              (search-patches "firehol-sysconfdir.patch"
-                             "firehol-uname.patch"))))  
+                             "firehol-uname.patch"))))
   (build-system gnu-build-system)
   (arguments
-  `(#:configure-flags '("--localstatedir=/var")))
+  `(  #:tests? #f
+      #:configure-flags '("--localstatedir=/var")
+      ))
   (inputs
     (list coreutils))
-  (propagated-inputs 
+  (propagated-inputs
 	(list util-linux
-        coreutils 
+	    perl
+        coreutils
 	      iproute
 	      iptables
 	      ipset
@@ -53,3 +57,5 @@
   (home-page "https://firehol.org/")
   (license gpl2))
 )
+
+firehol
