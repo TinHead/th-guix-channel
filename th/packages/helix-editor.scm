@@ -15,52 +15,10 @@
               (gnu packages linux)
               (gnu packages xdisorg))
 
-(define-public zed-editor-bin
-  (package
-    (name "zed-editor-bin")
-    (version "latest")
-    (source
-     (origin
-       (method url-fetch)
-       (uri (string-append
-             "https://zed.dev/api/releases/stable/latest/zed-linux-x86_64.tar.gz"))
-       (sha256
-        (base32
-         "14f87zbcskixsnca9x3i4x9sk3kdqkf9psllp17jgasgmmhdyqkz"))))
-    
-    (inputs
-     (list `(,gcc "lib") glibc libbsd openssl-1.1 libxcb libxau libxdmcp zlib `(,zstd "lib") libxkbcommon alsa-lib))
-    (native-inputs
-     (list gzip libbsd))
-;    (let hx (string-append  ("helix-" version "-x86_64-linux/hx")))
-    (build-system binary-build-system)
-    (arguments
-      `(#:install-plan
-        `(("./" "/"))
-        #:patchelf-plan
-        `(
-          ("lib/libXdmcp.so.6" ("libbsd"))
-          ("lib/libasound.so.2" ("libc"))
-          ("lib/libssl.so.1.1" ("openssl"))
-          ("lib/libxcb-xkb.so.1" ("libxcb"))
-          
-          ("lib/libxcb.so.1" ("libxau" "libxdmcp")) 
-          ("lib/libxkbcommon-x11.so.0" ("libxkbcommon" "libxcb")) 
-
-          ("libexec/zed-editor" ("alsa-lib" "libxcb" "libxkbcommon" "openssl" "zlib" "zstd" "libc" "libxau" "libxdmcp" "gcc"))
-          ("bin/zed" ("gcc")) 
-        )))
-    (synopsis "A post-modern text editor.")
-    (description "A post-modern text editor.")
-    (home-page "https://helix-editor.com/")
-    (license license:mpl2.0)
-))
-
-
 (define-public helix-editor-bin
   (package
     (name "helix-editor-bin")
-    (version "24.07")
+    (version "25.01.1")
     (source
      (origin
        (method url-fetch)
@@ -72,7 +30,7 @@
 	     "-x86_64-linux.tar.xz"))
        (sha256
         (base32
-         "0p5a23z094233qzfh9ixdkgmgsyivjzpbds1s780w269j1320n62"))))
+         "15iwc2gf10hxa0khw74a0qsqkpqlg4gs2lbmc7n7cq7405p9cmgr"))))
     
 ;    (let hx (string-append  ("helix-" version "-x86_64-linux/hx")))
     (build-system binary-build-system)
