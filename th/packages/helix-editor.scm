@@ -6,11 +6,11 @@
   #:use-module (guix download)
   #:use-module (guix packages)
   #:use-module (gnu packages libbsd)
-  ; #:use-module (guix licenses) #:prefix license: 
+  ; #:use-module (guix licenses) #:prefix license:
   #:use-module (guix gexp)
   #:use-module (nonguix build-system binary))
 
-(use-modules ((guix licenses) #:prefix license:) 
+(use-modules ((guix licenses) #:prefix license:)
               (gnu packages xorg)
               (gnu packages linux)
               (gnu packages xdisorg))
@@ -31,7 +31,7 @@
        (sha256
         (base32
          "15iwc2gf10hxa0khw74a0qsqkpqlg4gs2lbmc7n7cq7405p9cmgr"))))
-    
+
 ;    (let hx (string-append  ("helix-" version "-x86_64-linux/hx")))
     (build-system binary-build-system)
     (arguments
