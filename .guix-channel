@@ -5,4 +5,8 @@
    (name nonguix)
    (url "https://gitlab.com/nonguix/nonguix"))
   )
+  (channel
+   (name 'guix-rust-past-crates)
+   (url "https://codeberg.org/guix/guix-rust-past-crates.git")
+   (branch "trunk"))
 )
