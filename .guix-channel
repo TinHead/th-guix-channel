@@ -4,4 +4,13 @@
   (channel
    (name nonguix)
    (url "https://gitlab.com/nonguix/nonguix"))
+  (channel
+  (name 'guix-rust-past-crates)
+  (url "https://codeberg.org/guix/guix-rust-past-crates.git")
+  (branch "trunk")
+  (introduction
+   (make-channel-introduction
+    "1db24ca92c28255b28076792b93d533eabb3dc6a"
+    (openpgp-fingerprint
+     "F4C2D1DF3FDEEA63D1D30776ACC66D09CA528292"))))
 ))
