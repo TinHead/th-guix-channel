@@ -7,8 +7,8 @@
   #:use-module (guix git-download)
   #:use-module (guix build-system go)
   #:use-module (gnu packages)
-  #:use-module (gnu packages crates-io)
-  #:use-module (gnu packages crates-database)
+  #:use-module (past-crates packages crates-io)
+  #:use-module (past-crates packages crates-database)
   #:use-module (gnu packages tls)
   #:use-module (th packages crates-io))
 
