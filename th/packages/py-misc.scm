@@ -15,9 +15,9 @@
 #:use-module (gnu packages openstack)
 #:use-module (gnu packages glib)
 #:use-module (gnu packages admin)
-#:use-module (gnu packages rust-apps)
-#:use-module (gnu packages rust)
-#:use-module (gnu packages crates-io)
+; #:use-module (gnu packages rust-apps)
+; #:use-module (gnu packages rust)
+; #:use-module (gnu packages crates-io)
 #:use-module (gnu packages ghostscript)
 #:use-module (gnu packages fontutils)
 #:use-module (gnu packages compression)
@@ -82,46 +82,46 @@ a general image processing tool.")
     ;           "http://www.pythonware.com/products/pil/license.htm"
     ;           "The PIL Software License"))
     ))
-(define-public python-ruff
-  (package
-    (name "python-ruff")
-    (version "0.6.5")
-    (source
-     (origin
-       (method url-fetch)
-       (uri (pypi-uri "ruff" version))
-       (sha256
-        (base32 "1ywndddd1kgpbczmpmm1sxgy0fz6vba3ss63hpr0qg23mdzxhcjd"))))
-    (build-system pyproject-build-system)
-    (native-inputs (list maturin rust-cargo rust rust-lsp-types-0.95))
-    (home-page "https://docs.astral.sh/ruff")
-    (synopsis
-     "An extremely fast Python linter and code formatter, written in Rust.")
-    (description
-     "An extremely fast Python linter and code formatter, written in Rust.")
-    (license license:expat)))
+; (define-public python-ruff
+;   (package
+;     (name "python-ruff")
+;     (version "0.6.5")
+;     (source
+;      (origin
+;        (method url-fetch)
+;        (uri (pypi-uri "ruff" version))
+;        (sha256
+;         (base32 "1ywndddd1kgpbczmpmm1sxgy0fz6vba3ss63hpr0qg23mdzxhcjd"))))
+;     (build-system pyproject-build-system)
+;     (native-inputs (list maturin rust-cargo rust rust-lsp-types-0.95))
+;     (home-page "https://docs.astral.sh/ruff")
+;     (synopsis
+;      "An extremely fast Python linter and code formatter, written in Rust.")
+;     (description
+;      "An extremely fast Python linter and code formatter, written in Rust.")
+;     (license license:expat)))
 
-(define-public python-solaar
-  (package
-    (name "python-solaar")
-    (version "1.1.13")
-    (source
-     (origin
-       (method url-fetch)
-       (uri (pypi-uri "solaar" version))
-       (sha256
-        (base32 "1pc9hdmgjlmh307xvajh2mkksx2m2jylykxkjry3bdqn2xmk8wnk"))))
-    (build-system pyproject-build-system)
-    (propagated-inputs (list python-psutil python-pygobject python-xlib
-                             python-pyudev python-pyyaml))
-    (native-inputs (list python-pytest python-pytest-cov python-pytest-mock
-                         python-ruff))
-    (home-page "http://pwr-solaar.github.io/Solaar/")
-    (synopsis
-     "Linux device manager for Logitech receivers, keyboards, mice, and tablets.")
-    (description
-     "Linux device manager for Logitech receivers, keyboards, mice, and tablets.")
-    (license #f)))
+; (define-public python-solaar
+;   (package
+;     (name "python-solaar")
+;     (version "1.1.13")
+;     (source
+;      (origin
+;        (method url-fetch)
+;        (uri (pypi-uri "solaar" version))
+;        (sha256
+;         (base32 "1pc9hdmgjlmh307xvajh2mkksx2m2jylykxkjry3bdqn2xmk8wnk"))))
+;     (build-system pyproject-build-system)
+;     (propagated-inputs (list python-psutil python-pygobject python-xlib
+;                              python-pyudev python-pyyaml))
+;     (native-inputs (list python-pytest python-pytest-cov python-pytest-mock
+;                          python-ruff))
+;     (home-page "http://pwr-solaar.github.io/Solaar/")
+;     (synopsis
+;      "Linux device manager for Logitech receivers, keyboards, mice, and tablets.")
+;     (description
+;      "Linux device manager for Logitech receivers, keyboards, mice, and tablets.")
+;     (license #f)))
 
 (define-public python-sanic2
   (package
