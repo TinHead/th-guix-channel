@@ -463,70 +463,70 @@ methodologies, and modern toolchains for unrivaled success.")
   (description "Convert voluptuous schemas to dictionaries")
   (license #f))
 )
-(define-public python-niimprint
-  (package
-    (name "python-niimprint")
-    (version "")
-    (source
-     (origin
-       (method git-fetch)
-       (uri (git-reference
-             (url "https://github.com/TinHead/niimprint")
-             (commit version)))
-       (file-name (git-file-name name version))
-       (sha256
-        (base32
-         "1djkc50pgy60l86hy6frnzzxsav4cccglwq7z395i9z07b31jiva"))))
-    (build-system pyproject-build-system)
-        (arguments
-     `(#:tests? #f
-       #:phases
-        (modify-phases %standard-phases
-         (delete 'sanity-check))))
+; (define-public python-niimprint
+;   (package
+;     (name "python-niimprint")
+;     (version "")
+;     (source
+;      (origin
+;        (method git-fetch)
+;        (uri (git-reference
+;              (url "https://github.com/TinHead/niimprint")
+;              (commit version)))
+;        (file-name (git-file-name name version))
+;        (sha256
+;         (base32
+;          "1djkc50pgy60l86hy6frnzzxsav4cccglwq7z395i9z07b31jiva"))))
+;     (build-system pyproject-build-system)
+;         (arguments
+;      `(#:tests? #f
+;        #:phases
+;         (modify-phases %standard-phases
+;          (delete 'sanity-check))))
 
-    ; (arguments
-     ; (list #:tests? #f))
-    ;  `(#:phases
-    ;    (modify-phases %standard-phases
-    ;      (add-before 'build 'configure
-    ;        (lambda _
-    ;          (setenv "SKLEARN_BUILD_PARALLEL"
-    ;                  (number->string (parallel-job-count)))))
-    ;      (add-after 'build 'build-ext
-    ;        (lambda _ (invoke "python" "setup.py" "build_ext" "--inplace"
-    ;                          "-j" (number->string (parallel-job-count)))))
-    ;      (replace 'check
-    ;        (lambda* (#:key tests? #:allow-other-keys)
-    ;          (when tests?
-    ;            ;; Restrict OpenBLAS threads to prevent segfaults while testing!
-    ;            (setenv "OPENBLAS_NUM_THREADS" "1")
+;     ; (arguments
+;      ; (list #:tests? #f))
+;     ;  `(#:phases
+;     ;    (modify-phases %standard-phases
+;     ;      (add-before 'build 'configure
+;     ;        (lambda _
+;     ;          (setenv "SKLEARN_BUILD_PARALLEL"
+;     ;                  (number->string (parallel-job-count)))))
+;     ;      (add-after 'build 'build-ext
+;     ;        (lambda _ (invoke "python" "setup.py" "build_ext" "--inplace"
+;     ;                          "-j" (number->string (parallel-job-count)))))
+;     ;      (replace 'check
+;     ;        (lambda* (#:key tests? #:allow-other-keys)
+;     ;          (when tests?
+;     ;            ;; Restrict OpenBLAS threads to prevent segfaults while testing!
+;     ;            (setenv "OPENBLAS_NUM_THREADS" "1")
 
-    ;            ;; Some tests require write access to $HOME.
-    ;            (setenv "HOME" "/tmp")
+;     ;            ;; Some tests require write access to $HOME.
+;     ;            (setenv "HOME" "/tmp")
 
-    ;            ;; Step out of the source directory to avoid interference;
-    ;            ;; we want to run the installed code with extensions etc.
-    ;            (with-directory-excursion "/tmp"
-    ;              (invoke "pytest" "-vv" "--pyargs" "sklearn"
-    ;                      "-m" "not network"
-    ;                      "-n" (number->string (parallel-job-count))
-    ;                      ;; This test tries to access the internet.
-    ;                      "-k" "not test_load_boston_alternative"))))))))
-    ; (inputs (list openblas))
-    (native-inputs
-     (list python-click
-           python-pillow-11
-           python-pyserial
-           poetry))
-    (propagated-inputs
-     (list python-pyserial python-pillow python-click))
-    (home-page "https://scikit-learn.org/")
-    (synopsis "Machine Learning in Python")
-    (description
-     "Scikit-learn provides simple and efficient tools for data mining and
-data analysis.")
-    (license #f)))
+;     ;            ;; Step out of the source directory to avoid interference;
+;     ;            ;; we want to run the installed code with extensions etc.
+;     ;            (with-directory-excursion "/tmp"
+;     ;              (invoke "pytest" "-vv" "--pyargs" "sklearn"
+;     ;                      "-m" "not network"
+;     ;                      "-n" (number->string (parallel-job-count))
+;     ;                      ;; This test tries to access the internet.
+;     ;                      "-k" "not test_load_boston_alternative"))))))))
+;     ; (inputs (list openblas))
+;     (native-inputs
+;      (list python-click
+;            python-pillow-11
+;            python-pyserial
+;            poetry))
+;     (propagated-inputs
+;      (list python-pyserial python-pillow python-click))
+;     (home-page "https://scikit-learn.org/")
+;     (synopsis "Machine Learning in Python")
+;     (description
+;      "Scikit-learn provides simple and efficient tools for data mining and
+; data analysis.")
+;     (license #f)))
 
-python-niimprint
+; python-niimprint
 ; #:use-module (gnu packages crates-io)
 ; python-pillow-11
